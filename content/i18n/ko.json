@@ -1,0 +1,80 @@
+{
+  "languageName": "한국어",
+  "nav": {
+    "home": "홈",
+    "products": "제품",
+    "play": "플레이"
+  },
+  "home": {
+    "title": "Player Zero",
+    "description": "Player Zero는 앱과 인터랙티브 경험을 만드는 1인 소프트웨어 스튜디오입니다.",
+    "lead": "Player Zero는 앱과 인터랙티브 경험을 만드는 독립 소프트웨어 스튜디오입니다.",
+    "featured": "프로젝트",
+    "playTeaser": "브라우저에서 바로 플레이",
+    "playTeaserEmpty": "브라우저에서 즐길 수 있는 게임을 준비 중입니다.",
+    "seeAll": "제품 전체 보기"
+  },
+  "products": {
+    "title": "제품",
+    "description": "Player Zero가 만드는 앱과 게임.",
+    "lead": "Player Zero가 만들고 있는 것들.",
+    "groupApps": "앱",
+    "groupGames": "게임",
+    "empty": "아직 없습니다."
+  },
+  "play": {
+    "title": "플레이",
+    "description": "브라우저에서 바로 즐길 수 있는 작은 게임들.",
+    "lead": "브라우저에서 바로 즐길 수 있는 작은 게임들. 설치도 계정도 필요 없습니다.",
+    "empty": "아직 공개된 브라우저 게임이 없습니다.",
+    "controls": "조작법",
+    "launch": "플레이"
+  },
+  "legal": {
+    "title": "법적 고지",
+    "description": "Player Zero 제품의 개인정보처리방침과 법적 문서.",
+    "lead": "제품별 개인정보처리방침과 법적 문서.",
+    "backToProduct": "{product} 페이지로"
+  },
+  "detail": {
+    "about": "소개",
+    "platforms": "플랫폼",
+    "status": "상태",
+    "links": "링크",
+    "legal": "법적 고지",
+    "screenshots": "스크린샷",
+    "fallbackNotice": "이 제품 페이지는 아직 번역되지 않아 {language}로 표시합니다."
+  },
+  "status": {
+    "in-development": "개발 중",
+    "testing": "테스트 중",
+    "released": "출시됨",
+    "coming-soon": "출시 예정"
+  },
+  "kind": {
+    "app": "앱",
+    "game": "게임",
+    "webgame": "브라우저 게임"
+  },
+  "platform": {
+    "android": "Android",
+    "ios": "iOS",
+    "windows": "Windows",
+    "steam": "Steam",
+    "web": "브라우저"
+  },
+  "doc": {
+    "privacy": "개인정보처리방침",
+    "licenses": "라이선스",
+    "terms": "이용약관"
+  },
+  "notFound": {
+    "title": "페이지를 찾을 수 없습니다",
+    "description": "존재하지 않는 페이지입니다.",
+    "lead": "존재하지 않는 페이지입니다.",
+    "back": "홈으로 가기"
+  },
+  "footer": {
+    "contact": "문의"
+  }
+}

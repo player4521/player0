@@ -1,0 +1,5 @@
+# Build output. Cloudflare Pages runs `python tool/build.py` and serves dist/.
+dist/
+
+__pycache__/
+*.pyc

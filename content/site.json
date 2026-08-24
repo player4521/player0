@@ -1,0 +1,17 @@
+{
+  "brand": "Player Zero",
+  "domain": "https://player0.dev",
+  "contact": "contact@player0.dev",
+  "logo": "/assets/player_zero_logo_basic_on_light_512.png",
+
+  "_comment_languages": "Site chrome languages. A language listed here gets a full set of pages. Product and legal content declare their own languages separately, so a product may ship fewer languages than the site.",
+  "defaultLanguage": "en",
+  "languages": ["en", "ko"],
+
+  "_comment_analytics": "No analytics, no tracking, no external fonts or CDNs. Turning any of that on changes the privacy policy.",
+
+  "redirects": [
+    ["/privacy/", "/legal/meloom/privacy/", 301],
+    ["/privacy/ko/", "/ko/legal/meloom/privacy/", 301]
+  ]
+}

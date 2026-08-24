@@ -1,0 +1,35 @@
+{
+  "slug": "keycerto",
+  "kind": "game",
+  "status": "in-development",
+  "platforms": ["steam", "windows", "android"],
+  "order": 20,
+  "featured": true,
+
+  "images": {
+    "hero": "/assets/keycerto_keyboard.png",
+    "heroAlt": "A tenkeyless mechanical keyboard, rendered for KEYCERTO"
+  },
+
+  "links": [],
+  "legal": [],
+
+  "content": {
+    "en": {
+      "name": "KEYCERTO",
+      "tagline": "A rhythm game you play by typing.",
+      "description": [
+        "Press any key you like. KEYCERTO does not ask for a specific key, so you can drum across the whole keyboard with every finger while a prepared sentence types itself in time with the music.",
+        "In development for PC, with mobile planned. More details are coming."
+      ]
+    },
+    "ko": {
+      "name": "KEYCERTO",
+      "tagline": "타자를 치듯 즐기는 리듬 게임.",
+      "description": [
+        "아무 키나 눌러도 됩니다. KEYCERTO는 특정 키를 요구하지 않아서, 열 손가락으로 키보드 전체를 두드리는 동안 준비된 문장이 음악에 맞춰 저절로 타이핑됩니다.",
+        "PC용으로 개발 중이며 모바일도 계획하고 있습니다. 자세한 내용은 곧 공개합니다."
+      ]
+    }
+  }
+}

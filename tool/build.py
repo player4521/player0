@@ -1,0 +1,644 @@
+#!/usr/bin/env python3
+"""player0.dev static site generator.
+
+Registry driven: everything on the site comes from `content/`. Adding a product
+means adding one JSON file under `content/products/`; adding a browser game means
+adding one under `content/play/`. No page is written by hand.
+
+Python standard library only - no build system, no dependencies, no runtime server.
+
+    python tool/build.py            # write dist/
+    python tool/build.py --check    # fail if dist/ is stale
+"""
+
+from __future__ import annotations
+
+import argparse
+import html
+import json
+import re
+import shutil
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+CONTENT = ROOT / "content"
+DIST = ROOT / "dist"
+
+STATUS_ORDER = ("released", "testing", "in-development", "coming-soon")
+
+
+# --------------------------------------------------------------------- loading
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_registry(folder: Path) -> list[dict]:
+    if not folder.is_dir():
+        return []
+    items = [load_json(p) for p in sorted(folder.glob("*.json"))]
+    items.sort(key=lambda it: (it.get("order", 1000), it.get("slug", "")))
+    return items
+
+
+class Site:
+    def __init__(self) -> None:
+        self.config = load_json(CONTENT / "site.json")
+        self.default_lang: str = self.config["defaultLanguage"]
+        self.languages: list[str] = self.config["languages"]
+        self.strings = {
+            lang: load_json(CONTENT / "i18n" / f"{lang}.json")
+            for lang in self.languages
+        }
+        self.products = load_registry(CONTENT / "products")
+        self.playables = load_registry(CONTENT / "play")
+
+    def t(self, lang: str, dotted: str, **fmt) -> str:
+        """Look up a chrome string, falling back to the default language."""
+        for candidate in (lang, self.default_lang):
+            node = self.strings.get(candidate)
+            for part in dotted.split("."):
+                if not isinstance(node, dict) or part not in node:
+                    node = None
+                    break
+                node = node[part]
+            if isinstance(node, str):
+                return node.format(**fmt) if fmt else node
+        return dotted
+
+    def language_name(self, lang: str) -> str:
+        return self.strings.get(lang, {}).get("languageName", lang)
+
+    # URLs -----------------------------------------------------------------
+    def prefix(self, lang: str) -> str:
+        """The default language lives at the root; others get a folder."""
+        return "" if lang == self.default_lang else f"/{lang}"
+
+    def url(self, lang: str, *parts: str) -> str:
+        tail = "/".join(p.strip("/") for p in parts if p)
+        return f"{self.prefix(lang)}/{tail}/" if tail else f"{self.prefix(lang)}/"
+
+
+# ------------------------------------------------------------------- markdown
+_URL = re.compile(r"https?://[^\s<>()\[\]]+")
+_EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.-]+")
+_CODE = re.compile(r"`([^`]+)`")
+_STRONG = re.compile(r"\*\*([^*]+)\*\*")
+
+
+def render_inline(text: str) -> str:
+    out = html.escape(text, quote=False)
+    out = _CODE.sub(lambda m: f"<code>{m.group(1)}</code>", out)
+    out = _STRONG.sub(lambda m: f"<strong>{m.group(1)}</strong>", out)
+    out = _URL.sub(lambda m: f'<a href="{m.group(0)}">{m.group(0)}</a>', out)
+    out = _EMAIL.sub(lambda m: f'<a href="mailto:{m.group(0)}">{m.group(0)}</a>', out)
+    return out
+
+
+def render_markdown(source: str) -> str:
+    """The same markdown subset the Meloom app renders: headings, paragraphs,
+    bullets, inline code and bold. No tables, images or code blocks."""
+    blocks: list[str] = []
+    paragraph: list[str] = []
+    bullets: list[str] = []
+
+    def flush() -> None:
+        if paragraph:
+            blocks.append(f"<p>{render_inline(' '.join(paragraph))}</p>")
+            paragraph.clear()
+        if bullets:
+            items = "\n".join(f"    <li>{render_inline(i)}</li>" for i in bullets)
+            blocks.append(f"<ul>\n{items}\n  </ul>")
+            bullets.clear()
+
+    for raw in source.replace("\r\n", "\n").split("\n"):
+        stripped = raw.strip()
+        if not stripped:
+            flush()
+            continue
+        for marker, tag in (("### ", "h3"), ("## ", "h2"), ("# ", "h1")):
+            if stripped.startswith(marker):
+                flush()
+                blocks.append(f"<{tag}>{render_inline(stripped[len(marker):])}</{tag}>")
+                break
+        else:
+            if stripped.startswith("- "):
+                if paragraph:
+                    flush()
+                bullets.append(stripped[2:])
+            elif bullets:
+                bullets[-1] = f"{bullets[-1]} {stripped}"
+            else:
+                paragraph.append(stripped)
+    flush()
+    return "\n  ".join(blocks)
+
+
+# ---------------------------------------------------------------- page shell
+def esc(value: str) -> str:
+    return html.escape(value, quote=True)
+
+
+def shell(site: Site, *, lang: str, path: str, title: str, description: str,
+          body: str, alternates: dict[str, str] | None = None,
+          main_class: str = "page") -> str:
+    """Header, footer, meta and language switcher - shared by every page."""
+    brand = esc(site.config["brand"])
+    logo = site.config["logo"]
+    contact = site.config["contact"]
+    canonical = site.config["domain"].rstrip("/") + path
+
+    nav_items = [
+        (site.url(lang), site.t(lang, "nav.home")),
+        (site.url(lang, "products"), site.t(lang, "nav.products")),
+        (site.url(lang, "play"), site.t(lang, "nav.play")),
+    ]
+    nav = "\n      ".join(
+        f'<a href="{href}"{" aria-current=\"page\"" if href == path else ""}>{esc(label)}</a>'
+        for href, label in nav_items
+    )
+
+    alternates = alternates or {}
+    alt_tags = "\n  ".join(
+        f'<link rel="alternate" hreflang="{code}" href="{site.config["domain"].rstrip("/")}{href}">'
+        for code, href in sorted(alternates.items())
+    )
+    switcher = ""
+    others = [(c, h) for c, h in alternates.items() if c != lang]
+    if others:
+        links = " ".join(
+            f'<a href="{href}" hreflang="{code}">{esc(site.language_name(code))}</a>'
+            for code, href in sorted(others)
+        )
+        switcher = f'\n      <span class="lang-switch">{links}</span>'
+
+    legal_link = site.url(lang, "legal")
+
+    return f"""<!doctype html>
+<!-- Generated by tool/build.py from content/. Do not edit by hand. -->
+<html lang="{lang}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{esc(title)}</title>
+  <meta name="description" content="{esc(description)}">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="{canonical}">
+  {alt_tags}
+  <meta property="og:title" content="{esc(title)}">
+  <meta property="og:description" content="{esc(description)}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{canonical}">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="{logo}">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="{site.url(lang)}">
+      <img src="{logo}" alt="" width="32" height="32">
+      <span>{brand}</span>
+    </a>
+    <nav class="site-nav" aria-label="{esc(brand)}">
+      {nav}{switcher}
+    </nav>
+  </header>
+
+  <main id="main" class="{main_class}">
+{body}
+  </main>
+
+  <footer class="site-footer">
+    <p><a href="{legal_link}">{esc(site.t(lang, "legal.title"))}</a></p>
+    <p><a href="mailto:{contact}">{contact}</a></p>
+    <p>&copy; {brand}</p>
+  </footer>
+</body>
+</html>
+"""
+
+
+# -------------------------------------------------------------- product logic
+def product_content(site: Site, product: dict, lang: str) -> tuple[dict, str | None]:
+    """Product copy in `lang`, or the default language plus the language it fell
+    back to. Product languages are independent of the site's languages."""
+    blocks = product.get("content", {})
+    if lang in blocks:
+        return blocks[lang], None
+    fallback = site.default_lang if site.default_lang in blocks else next(iter(blocks))
+    return blocks[fallback], fallback
+
+
+def status_badge(site: Site, product: dict, lang: str) -> str:
+    status = product.get("status", "in-development")
+    return (f'<span class="badge badge-{esc(status)}">'
+            f'{esc(site.t(lang, f"status.{status}"))}</span>')
+
+
+def product_card(site: Site, product: dict, lang: str) -> str:
+    copy, _ = product_content(site, product, lang)
+    href = site.url(lang, "products", product["slug"])
+    kind = esc(site.t(lang, f'kind.{product.get("kind", "app")}'))
+    hero = product.get("images", {}).get("hero")
+    thumb = (f'<img class="card-thumb" src="{hero}" alt="" loading="lazy" '
+             f'width="640" height="360">') if hero else ""
+    tagline = copy.get("tagline", "")
+    return f"""      <li class="card product-card">
+        <a class="card-link" href="{href}">
+          {thumb}
+          <span class="card-meta">{kind} {status_badge(site, product, lang)}</span>
+          <h3>{esc(copy.get("name", product["slug"]))}</h3>
+          <p>{esc(tagline)}</p>
+        </a>
+      </li>"""
+
+
+def legal_docs_for(site: Site, product: dict, lang: str) -> list[tuple[str, str]]:
+    """(label, href) for each legal document a product registers."""
+    out = []
+    for entry in product.get("legal", []):
+        langs = entry.get("languages", [site.default_lang])
+        doc_lang = lang if lang in langs else (
+            site.default_lang if site.default_lang in langs else langs[0])
+        label = site.t(lang, f'doc.{entry["doc"]}')
+        if doc_lang != lang:
+            label = f'{label} ({site.language_name(doc_lang)})'
+        out.append((label, site.url(doc_lang, "legal", entry["path"])))
+    return out
+
+
+# ------------------------------------------------------------------- builders
+def build_home(site: Site, lang: str) -> str:
+    featured = [p for p in site.products if p.get("featured")] or site.products
+    cards = "\n".join(product_card(site, p, lang) for p in featured)
+
+    if site.playables:
+        play_items = "\n".join(play_card(site, g, lang) for g in site.playables)
+        play_block = f"""
+    <section class="section">
+      <h2>{esc(site.t(lang, "home.playTeaser"))}</h2>
+      <ul class="grid">
+{play_items}
+      </ul>
+    </section>"""
+    else:
+        play_block = f"""
+    <section class="section">
+      <h2>{esc(site.t(lang, "home.playTeaser"))}</h2>
+      <p class="muted">{esc(site.t(lang, "home.playTeaserEmpty"))}</p>
+    </section>"""
+
+    body = f"""    <section class="hero">
+      <img class="hero-logo" src="{site.config["logo"]}" alt="" width="128" height="128">
+      <h1>{esc(site.t(lang, "home.title"))}</h1>
+      <p class="lead">{esc(site.t(lang, "home.lead"))}</p>
+    </section>
+
+    <section class="section">
+      <h2>{esc(site.t(lang, "home.featured"))}</h2>
+      <ul class="grid">
+{cards}
+      </ul>
+      <p class="more"><a href="{site.url(lang, "products")}">{esc(site.t(lang, "home.seeAll"))}</a></p>
+    </section>
+{play_block}
+"""
+    return shell(site, lang=lang, path=site.url(lang),
+                 title=site.t(lang, "home.title"),
+                 description=site.t(lang, "home.description"),
+                 body=body,
+                 alternates={l: site.url(l) for l in site.languages})
+
+
+def build_products(site: Site, lang: str) -> str:
+    groups = [
+        ("products.groupApps", [p for p in site.products if p.get("kind") == "app"]),
+        ("products.groupGames", [p for p in site.products if p.get("kind") != "app"]),
+    ]
+    sections = []
+    for key, items in groups:
+        if not items:
+            continue
+        cards = "\n".join(product_card(site, p, lang) for p in items)
+        sections.append(f"""    <section class="section">
+      <h2>{esc(site.t(lang, key))}</h2>
+      <ul class="grid">
+{cards}
+      </ul>
+    </section>""")
+    if not sections:
+        sections.append(f'    <p class="muted">{esc(site.t(lang, "products.empty"))}</p>')
+
+    body = (f'    <header class="page-head">\n'
+            f'      <h1>{esc(site.t(lang, "products.title"))}</h1>\n'
+            f'      <p class="lead">{esc(site.t(lang, "products.lead"))}</p>\n'
+            f'    </header>\n\n' + "\n\n".join(sections) + "\n")
+
+    return shell(site, lang=lang, path=site.url(lang, "products"),
+                 title=f'{site.t(lang, "products.title")} | {site.config["brand"]}',
+                 description=site.t(lang, "products.description"),
+                 body=body,
+                 alternates={l: site.url(l, "products") for l in site.languages})
+
+
+def build_product_detail(site: Site, product: dict, lang: str) -> str:
+    copy, fallback = product_content(site, product, lang)
+    name = copy.get("name", product["slug"])
+    t = lambda k, **f: site.t(lang, k, **f)
+
+    rows = []
+    if product.get("platforms"):
+        values = ", ".join(esc(t(f"platform.{p}")) for p in product["platforms"])
+        rows.append(f'        <div><dt>{esc(t("detail.platforms"))}</dt><dd>{values}</dd></div>')
+    rows.append(f'        <div><dt>{esc(t("detail.status"))}</dt>'
+                f'<dd>{status_badge(site, product, lang)}</dd></div>')
+    facts = f'      <dl class="facts">\n' + "\n".join(rows) + "\n      </dl>"
+
+    notice = ""
+    if fallback:
+        notice = (f'      <p class="notice">'
+                  f'{esc(t("detail.fallbackNotice", language=site.language_name(fallback)))}'
+                  f'</p>\n')
+
+    hero = product.get("images", {}).get("hero")
+    hero_block = ""
+    if hero:
+        alt = esc(product.get("images", {}).get("heroAlt", ""))
+        hero_block = f'      <img class="hero-shot" src="{hero}" alt="{alt}" width="1600" height="900">\n'
+
+    paragraphs = "\n".join(f"      <p>{esc(p)}</p>" for p in copy.get("description", []))
+
+    sections = []
+    links = product.get("links", [])
+    if links:
+        items = "\n".join(
+            f'        <li><a href="{esc(l["url"])}">{esc(l.get("label", l.get("platform", "Link")))}</a></li>'
+            for l in links)
+        sections.append(f'    <section class="section">\n      <h2>{esc(t("detail.links"))}</h2>\n'
+                        f'      <ul class="link-list">\n{items}\n      </ul>\n    </section>')
+
+    shots = product.get("images", {}).get("screenshots", [])
+    if shots:
+        items = "\n".join(
+            f'        <li><img src="{s}" alt="" loading="lazy"></li>' for s in shots)
+        sections.append(f'    <section class="section">\n      <h2>{esc(t("detail.screenshots"))}</h2>\n'
+                        f'      <ul class="shots">\n{items}\n      </ul>\n    </section>')
+
+    docs = legal_docs_for(site, product, lang)
+    if docs:
+        items = "\n".join(f'        <li><a href="{href}">{esc(label)}</a></li>'
+                          for label, href in docs)
+        sections.append(f'    <section class="section">\n      <h2>{esc(t("detail.legal"))}</h2>\n'
+                        f'      <ul class="link-list">\n{items}\n      </ul>\n    </section>')
+
+    body = (f'    <article class="product">\n'
+            f'      <p class="crumb"><a href="{site.url(lang, "products")}">'
+            f'{esc(t("products.title"))}</a></p>\n'
+            f'      <h1>{esc(name)}</h1>\n'
+            f'      <p class="lead">{esc(copy.get("tagline", ""))}</p>\n'
+            f'{notice}{hero_block}{facts}\n'
+            f'      <div class="prose">\n{paragraphs}\n      </div>\n'
+            f'    </article>\n\n' + "\n\n".join(sections) + "\n")
+
+    return shell(site, lang=lang, path=site.url(lang, "products", product["slug"]),
+                 title=f'{name} | {site.config["brand"]}',
+                 description=copy.get("tagline", name),
+                 body=body,
+                 alternates={l: site.url(l, "products", product["slug"])
+                             for l in site.languages})
+
+
+def play_card(site: Site, game: dict, lang: str) -> str:
+    copy, _ = product_content(site, game, lang)
+    href = site.url(lang, "play", game["slug"])
+    thumb = game.get("images", {}).get("hero")
+    img = (f'<img class="card-thumb" src="{thumb}" alt="" loading="lazy" '
+           f'width="640" height="360">') if thumb else ""
+    return f"""      <li class="card product-card">
+        <a class="card-link" href="{href}">
+          {img}
+          <span class="card-meta">{esc(site.t(lang, "kind.webgame"))}</span>
+          <h3>{esc(copy.get("name", game["slug"]))}</h3>
+          <p>{esc(copy.get("tagline", ""))}</p>
+        </a>
+      </li>"""
+
+
+def build_play_index(site: Site, lang: str) -> str:
+    if site.playables:
+        cards = "\n".join(play_card(site, g, lang) for g in site.playables)
+        listing = f'    <ul class="grid">\n{cards}\n    </ul>'
+    else:
+        listing = f'    <p class="muted">{esc(site.t(lang, "play.empty"))}</p>'
+
+    body = (f'    <header class="page-head">\n'
+            f'      <h1>{esc(site.t(lang, "play.title"))}</h1>\n'
+            f'      <p class="lead">{esc(site.t(lang, "play.lead"))}</p>\n'
+            f'    </header>\n\n{listing}\n')
+
+    return shell(site, lang=lang, path=site.url(lang, "play"),
+                 title=f'{site.t(lang, "play.title")} | {site.config["brand"]}',
+                 description=site.t(lang, "play.description"),
+                 body=body,
+                 alternates={l: site.url(l, "play") for l in site.languages})
+
+
+def build_play_detail(site: Site, game: dict, lang: str) -> str:
+    copy, fallback = product_content(site, game, lang)
+    name = copy.get("name", game["slug"])
+    embed = game.get("embed", {})
+
+    frame = ""
+    if embed.get("src"):
+        frame = (f'      <div class="game-stage" style="--game-ratio: '
+                 f'{embed.get("width", 16)} / {embed.get("height", 9)}">\n'
+                 f'        <iframe src="{esc(embed["src"])}" title="{esc(name)}"\n'
+                 f'                allow="autoplay; fullscreen" loading="lazy"></iframe>\n'
+                 f'      </div>\n')
+
+    paragraphs = "\n".join(f"      <p>{esc(p)}</p>" for p in copy.get("description", []))
+
+    controls = ""
+    if copy.get("controls"):
+        items = "\n".join(f"        <li>{esc(c)}</li>" for c in copy["controls"])
+        controls = (f'    <section class="section">\n'
+                    f'      <h2>{esc(site.t(lang, "play.controls"))}</h2>\n'
+                    f'      <ul>\n{items}\n      </ul>\n    </section>\n')
+
+    body = (f'    <article class="product">\n'
+            f'      <p class="crumb"><a href="{site.url(lang, "play")}">'
+            f'{esc(site.t(lang, "play.title"))}</a></p>\n'
+            f'      <h1>{esc(name)}</h1>\n'
+            f'      <p class="lead">{esc(copy.get("tagline", ""))}</p>\n'
+            f'{frame}'
+            f'      <div class="prose">\n{paragraphs}\n      </div>\n'
+            f'    </article>\n\n{controls}')
+
+    return shell(site, lang=lang, path=site.url(lang, "play", game["slug"]),
+                 title=f'{name} | {site.config["brand"]}',
+                 description=copy.get("tagline", name),
+                 body=body,
+                 alternates={l: site.url(l, "play", game["slug"]) for l in site.languages})
+
+
+def build_legal_index(site: Site, lang: str) -> str:
+    sections = []
+    for product in site.products:
+        docs = legal_docs_for(site, product, lang)
+        if not docs:
+            continue
+        copy, _ = product_content(site, product, lang)
+        items = "\n".join(f'        <li><a href="{href}">{esc(label)}</a></li>'
+                          for label, href in docs)
+        sections.append(f'    <section class="section">\n'
+                        f'      <h2>{esc(copy.get("name", product["slug"]))}</h2>\n'
+                        f'      <ul class="link-list">\n{items}\n      </ul>\n    </section>')
+
+    body = (f'    <header class="page-head">\n'
+            f'      <h1>{esc(site.t(lang, "legal.title"))}</h1>\n'
+            f'      <p class="lead">{esc(site.t(lang, "legal.lead"))}</p>\n'
+            f'    </header>\n\n' + "\n\n".join(sections) + "\n")
+
+    return shell(site, lang=lang, path=site.url(lang, "legal"),
+                 title=f'{site.t(lang, "legal.title")} | {site.config["brand"]}',
+                 description=site.t(lang, "legal.description"),
+                 body=body,
+                 alternates={l: site.url(l, "legal") for l in site.languages})
+
+
+def build_legal_doc(site: Site, product: dict, entry: dict, doc_lang: str) -> str:
+    source = CONTENT / "legal" / f'{entry["path"]}.{doc_lang}.md'
+    copy, _ = product_content(site, product, doc_lang)
+    name = copy.get("name", product["slug"])
+    label = site.t(doc_lang, f'doc.{entry["doc"]}')
+
+    back = site.url(doc_lang, "products", product["slug"])
+    body = (f'    <p class="crumb"><a href="{back}">'
+            f'{esc(site.t(doc_lang, "legal.backToProduct", product=name))}</a></p>\n'
+            f'    <div class="prose">\n  {render_markdown(source.read_text(encoding="utf-8"))}\n    </div>\n')
+
+    alternates = {l: site.url(l, "legal", entry["path"])
+                  for l in entry.get("languages", [site.default_lang])}
+
+    return shell(site, lang=doc_lang, path=site.url(doc_lang, "legal", entry["path"]),
+                 title=f'{name} {label} | {site.config["brand"]}',
+                 description=f'{label} for {name}, an app by {site.config["brand"]}.',
+                 body=body, alternates=alternates, main_class="page")
+
+
+def build_404(site: Site) -> str:
+    lang = site.default_lang
+    body = (f'    <section class="hero">\n'
+            f'      <h1>{esc(site.t(lang, "notFound.title"))}</h1>\n'
+            f'      <p class="lead">{esc(site.t(lang, "notFound.lead"))}</p>\n'
+            f'      <p class="more"><a href="/">{esc(site.t(lang, "notFound.back"))}</a></p>\n'
+            f'    </section>\n')
+    return shell(site, lang=lang, path="/404.html",
+                 title=f'{site.t(lang, "notFound.title")} | {site.config["brand"]}',
+                 description=site.t(lang, "notFound.description"), body=body)
+
+
+# ----------------------------------------------------------------- collecting
+def build_all(site: Site) -> dict[str, str]:
+    """Every generated text file, keyed by its path inside dist/."""
+    pages: dict[str, str] = {}
+
+    def put(url: str, content: str) -> None:
+        rel = url.strip("/")
+        pages[f"{rel}/index.html" if rel else "index.html"] = content
+
+    for lang in site.languages:
+        put(site.url(lang), build_home(site, lang))
+        put(site.url(lang, "products"), build_products(site, lang))
+        put(site.url(lang, "play"), build_play_index(site, lang))
+        put(site.url(lang, "legal"), build_legal_index(site, lang))
+        for product in site.products:
+            put(site.url(lang, "products", product["slug"]),
+                build_product_detail(site, product, lang))
+        for game in site.playables:
+            put(site.url(lang, "play", game["slug"]),
+                build_play_detail(site, game, lang))
+
+    # Legal documents follow the document's own languages, not the site's.
+    for product in site.products:
+        for entry in product.get("legal", []):
+            for doc_lang in entry.get("languages", [site.default_lang]):
+                put(site.url(doc_lang, "legal", entry["path"]),
+                    build_legal_doc(site, product, entry, doc_lang))
+
+    pages["404.html"] = build_404(site)
+
+    redirects = "\n".join(f"{src}  {dst}  {code}"
+                          for src, dst, code in site.config.get("redirects", []))
+    pages["_redirects"] = redirects + "\n" if redirects else ""
+
+    urls = sorted({("/" + k[: -len("index.html")]).replace("//", "/")
+                   for k in pages if k.endswith("index.html")})
+    domain = site.config["domain"].rstrip("/")
+    pages["sitemap.xml"] = (
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        + "".join(f"  <url><loc>{domain}{u}</loc></url>\n" for u in urls)
+        + "</urlset>\n")
+    pages["robots.txt"] = f"User-agent: *\nAllow: /\nSitemap: {domain}/sitemap.xml\n"
+    return pages
+
+
+def copy_static(check_only: bool) -> list[str]:
+    """styles.css and assets/ are copied verbatim."""
+    problems: list[str] = []
+    pairs: list[tuple[Path, Path]] = [(ROOT / "styles.css", DIST / "styles.css")]
+    for src in sorted((ROOT / "assets").rglob("*")):
+        if src.is_file():
+            pairs.append((src, DIST / "assets" / src.relative_to(ROOT / "assets")))
+
+    for src, dst in pairs:
+        if check_only:
+            if not dst.exists() or dst.read_bytes() != src.read_bytes():
+                problems.append(f"{dst.relative_to(ROOT).as_posix()} is stale")
+        else:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(src, dst)
+    return problems
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true",
+                        help="do not write; fail if dist/ does not match content/")
+    args = parser.parse_args()
+
+    site = Site()
+    pages = build_all(site)
+    problems: list[str] = []
+
+    for rel, content in pages.items():
+        target = DIST / rel
+        if args.check:
+            if not target.exists():
+                problems.append(f"dist/{rel} is missing")
+            elif target.read_text(encoding="utf-8") != content:
+                problems.append(f"dist/{rel} is stale")
+        else:
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(content, encoding="utf-8", newline="\n")
+
+    problems += copy_static(args.check)
+
+    if problems:
+        for p in problems:
+            print(f"ERROR: {p}", file=sys.stderr)
+        return 1
+
+    if args.check:
+        print("check ok")
+    else:
+        print(f"built {len(pages)} pages + static files into dist/")
+        print(f"  languages : {', '.join(site.languages)}")
+        print(f"  products  : {', '.join(p['slug'] for p in site.products) or '-'}")
+        print(f"  playables : {', '.join(g['slug'] for g in site.playables) or '-'}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

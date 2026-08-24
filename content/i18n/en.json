@@ -1,0 +1,80 @@
+{
+  "languageName": "English",
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "play": "Play"
+  },
+  "home": {
+    "title": "Player Zero",
+    "description": "Player Zero is an independent software studio creating apps and interactive experiences.",
+    "lead": "Player Zero is an independent software studio creating apps and interactive experiences.",
+    "featured": "Projects",
+    "playTeaser": "Play in your browser",
+    "playTeaserEmpty": "Browser playables are on the way.",
+    "seeAll": "See all products"
+  },
+  "products": {
+    "title": "Products",
+    "description": "Apps and games by Player Zero.",
+    "lead": "Everything Player Zero is building.",
+    "groupApps": "Apps",
+    "groupGames": "Games",
+    "empty": "Nothing here yet."
+  },
+  "play": {
+    "title": "Play",
+    "description": "Small games you can play straight in the browser.",
+    "lead": "Small games you can play straight in the browser. No install, no account.",
+    "empty": "No browser games are published yet.",
+    "controls": "Controls",
+    "launch": "Play"
+  },
+  "legal": {
+    "title": "Legal",
+    "description": "Privacy policies and legal documents for Player Zero products.",
+    "lead": "Privacy policies and legal documents, grouped by product.",
+    "backToProduct": "Back to {product}"
+  },
+  "detail": {
+    "about": "About",
+    "platforms": "Platforms",
+    "status": "Status",
+    "links": "Links",
+    "legal": "Legal",
+    "screenshots": "Screenshots",
+    "fallbackNotice": "This product page is not translated yet, so it is shown in {language}."
+  },
+  "status": {
+    "in-development": "In development",
+    "testing": "In testing",
+    "released": "Released",
+    "coming-soon": "Coming soon"
+  },
+  "kind": {
+    "app": "App",
+    "game": "Game",
+    "webgame": "Browser game"
+  },
+  "platform": {
+    "android": "Android",
+    "ios": "iOS",
+    "windows": "Windows",
+    "steam": "Steam",
+    "web": "Browser"
+  },
+  "doc": {
+    "privacy": "Privacy Policy",
+    "licenses": "Licenses",
+    "terms": "Terms"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "That page does not exist.",
+    "lead": "That page does not exist.",
+    "back": "Go to the home page"
+  },
+  "footer": {
+    "contact": "Contact"
+  }
+}
