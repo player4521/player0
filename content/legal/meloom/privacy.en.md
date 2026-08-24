@@ -5,7 +5,7 @@ Effective date: 2026-08-18 (revised 2026-08-18: Android approximate-location onl
 App: Meloom (Android)
 Developer: Player Zero
 Privacy contact: contact@player0.dev
-Published at: https://player0.dev/privacy/ (Korean: https://player0.dev/privacy/ko/)
+Published at: https://player0.dev/legal/meloom/privacy/ (Korean: https://player0.dev/ko/legal/meloom/privacy/)
 
 Meloom shows your real-world location, weather, time and calendar inside a small
 virtual room. Meloom has no user accounts and no server of its own. This policy
@@ -189,5 +189,5 @@ updated policy arrives with an app update.
 
 Questions about privacy: contact@player0.dev
 
-This policy is published at https://player0.dev/privacy/ and is also included in
+This policy is published at https://player0.dev/legal/meloom/privacy/ and is also included in
 the app.

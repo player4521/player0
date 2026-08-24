@@ -5,7 +5,7 @@
 앱: Meloom (Android)
 개발자: Player Zero
 개인정보 문의: contact@player0.dev
-공개 주소: https://player0.dev/privacy/ko/ (영문: https://player0.dev/privacy/)
+공개 주소: https://player0.dev/ko/legal/meloom/privacy/ (영문: https://player0.dev/legal/meloom/privacy/)
 
 Meloom은 현실의 위치·날씨·시간·캘린더를 작은 방 안에서 보여주는 앱이다. 계정
 기능이 없고, 자체 서버도 운영하지 않는다. 이 방침은 앱이 기기에서 무엇에
@@ -166,4 +166,4 @@ Meloom은 나이나 생년월일을 묻지 않고, 광고나 분석 기능이 �
 
 개인정보 관련 문의: contact@player0.dev
 
-이 방침은 https://player0.dev/privacy/ko/ 에 공개돼 있고 앱에도 함께 실린다.
+이 방침은 https://player0.dev/ko/legal/meloom/privacy/ 에 공개돼 있고 앱에도 함께 실린다.
