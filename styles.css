@@ -35,6 +35,9 @@
   --sans: system-ui, -apple-system, "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   --serif: "Palatino Linotype", Palatino, "Book Antiqua", "Iowan Old Style", Georgia, serif;
 }
+/* Han characters need a font for their own language, or Japanese and Chinese render in Korean glyph forms. */
+:lang(ja) { --sans: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", Meiryo, "Noto Sans JP", sans-serif; }
+:lang(zh-TW) { --sans: system-ui, -apple-system, "Segoe UI", "PingFang TC", "Microsoft JhengHei UI", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -171,11 +174,26 @@ a:hover { color: var(--t-accent); }
   border: 1px solid var(--line); border-radius: var(--radius); padding: 5px 8px; min-height: 34px; cursor: pointer;
 }
 #appearance option { background: var(--surface); color: var(--ink); }
-.lang-switch { display: flex; margin-left: 6px; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; font-size: 13px; }
-.lang-switch a, .lang-switch span { display: block; padding: 7px 10px; text-decoration: none; line-height: 1.2; }
-.lang-switch a { color: var(--muted); }
-.lang-switch a:hover { color: var(--ink); background: var(--surface-2); }
-.lang-switch [aria-current] { background: var(--ink); color: var(--bg); font-weight: 600; }
+/* One compact language menu: the current language shows, the others open below it as plain links. */
+.lang-menu { position: relative; margin-left: 6px; font-size: 14px; }
+.lang-menu summary {
+  display: flex; align-items: center; gap: 8px; min-height: 34px; padding: 5px 10px;
+  border: 1px solid var(--line); border-radius: var(--radius); cursor: pointer; list-style: none; white-space: nowrap;
+}
+.lang-menu summary::-webkit-details-marker { display: none; }
+.lang-menu summary::after { content: ""; width: 6px; height: 6px; margin-top: -4px; border: solid var(--muted); border-width: 0 1.5px 1.5px 0; transform: rotate(45deg); }
+.lang-menu[open] summary::after { margin-top: 3px; transform: rotate(-135deg); }
+.lang-menu summary:hover, .lang-menu[open] summary { background: var(--surface-2); }
+.lang-menu ul {
+  position: absolute; right: 0; top: calc(100% + 6px); z-index: 6;
+  min-width: 11rem; margin: 0; padding: 6px; list-style: none;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgb(0 0 0 / .14);
+}
+.lang-menu li a, .lang-menu li span { display: flex; justify-content: space-between; gap: 16px; padding: 8px 12px; border-radius: 2px; color: var(--ink); text-decoration: none; white-space: nowrap; font-family: var(--sans); }
+.lang-menu li a:hover { background: var(--surface-2); color: var(--ink); }
+.lang-menu [aria-current] { font-weight: 600; }
+.lang-menu [aria-current]::after { content: "\2713"; color: var(--accent); }
 
 /* -------------------------------------------------------------- footer */
 
@@ -436,6 +454,7 @@ a:hover { color: var(--t-accent); }
 .page-head { padding: 48px 0 24px; }
 .page-head h1 { font-size: clamp(34px, 4vw, 48px); letter-spacing: -.03em; margin-bottom: 14px; }
 .page-head .lead { font-size: 18px; }
+.page-head .notice { margin: 20px 0 0; max-width: 46rem; }
 .section { margin: 32px 0; }
 .section > h2 { font-size: 22px; padding-bottom: 12px; margin-bottom: 12px; border-bottom: 1px solid var(--line); }
 .link-list { padding-left: 22px; }
@@ -499,8 +518,7 @@ a:hover { color: var(--t-accent); }
   .header-inner { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 10px; padding-bottom: 0; }
   .brand img { height: 42px; }
   .site-settings { gap: 8px; }
-  .lang-switch { margin-left: 0; }
-  .lang-switch a, .lang-switch span { padding: 7px 9px; }
+  .lang-menu { margin-left: 0; }
   .site-nav { order: 3; flex: 1 0 100%; gap: 0; margin-top: 10px; border-top: 1px solid var(--line); overflow-x: auto; }
   .site-nav a { padding: 11px 12px; font-size: 14.5px; }
   .site-nav a:first-child { padding-left: 0; }
@@ -538,7 +556,7 @@ a:hover { color: var(--t-accent); }
 @media (max-width: 370px) {
   .brand img { height: 38px; }
   .site-nav a { padding: 11px 9px; font-size: 14px; }
-  .lang-switch a, .lang-switch span { padding: 7px 7px; }
+  .lang-menu summary { padding: 5px 7px; gap: 6px; }
   #appearance { padding: 5px 4px; }
   .lineup-item a { grid-template-columns: 104px minmax(0, 1fr); gap: 12px; }
 }
@@ -550,3 +568,40 @@ a:hover { color: var(--t-accent); }
   *, *::before, *::after { transition: none !important; animation: none !important; }
   .lineup-item a:hover .lineup-art img { transform: none; }
 }
+
+/* Genuine app views, kept separate so every country can be inspected. */
+.country-showcase { padding-top: 36px; padding-bottom: 40px; }
+.country-showcase header { display:flex; align-items:end; justify-content:space-between; gap:24px; margin-bottom:24px; }
+.country-showcase header > div:first-child { max-width:760px; }
+.country-kicker { font-size:14px; font-weight:700; letter-spacing:.04em; margin:0 0 8px; }
+.country-showcase h2 { font-size:clamp(24px,3vw,34px); margin-bottom:12px; }
+.country-lead { margin:0; color:var(--t-muted); max-width:68ch; }
+.home-country-showcase { border-top:1px solid var(--line); padding-bottom:48px; }
+.country-grid { list-style:none; padding:0; margin:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:18px; }
+.country-grid li { min-width:0; }
+.country-grid a { display:block; border:1px solid var(--t-line); border-radius:10px; overflow:hidden; background:var(--surface); }
+.country-grid img { width:100%; height:auto; aspect-ratio:9/16; object-fit:contain; }
+.country-grid figcaption { margin-top:10px; display:flex; flex-wrap:wrap; column-gap:8px; align-items:baseline; font-size:14px; }
+.country-grid figcaption span { color:var(--t-muted); font-size:13px; }
+.country-note { margin:16px 0 0; font-size:13px; color:var(--t-muted); }
+.hero-country-showcase { padding-top:30px; padding-bottom:28px; }
+.hero-country-showcase .country-kicker { display:none; }
+.hero-country-showcase .country-lead { max-width:78ch; }
+.overview-video { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:40px; align-items:start; }
+.overview-video h2 { margin-bottom:20px; }
+.overview-video p { max-width:42ch; color:var(--muted); }
+.overview-video figure { max-width:360px; }
+.overview-video video { width:100%; height:auto; display:block; background:#111827; border-radius:6px; }
+.overview-video figcaption { margin-top:12px; font-size:13px; color:var(--muted); }
+@media(max-width:720px) {
+ .country-showcase header { display:block; }
+ .country-showcase header .actions { margin-top:20px; }
+ .country-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px 12px; }
+ .country-grid figcaption { display:block; }
+ .country-grid figcaption span { display:block; }
+ .overview-video { grid-template-columns:1fr; gap:24px; }
+ .overview-video figure { max-width:360px; margin:auto; }
+}
+
+.lineup-country-art { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2px; width:100%; height:100%; }
+.lineup-art .lineup-country-art img { object-fit:contain; }

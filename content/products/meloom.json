@@ -82,7 +82,18 @@
           "question": "How does Meloom handle my data?",
           "answer": "The Meloom privacy policy on this site explains what the app accesses. If anything is unclear, write to contact@player0.dev."
         }
-      ]
+      ],
+      "countryGallery": {
+        "title": "Five countries. A room of your own.",
+        "lead": "Different views beyond the same little room. Explore the scenery of Korea, Japan, Taiwan, the United States and France.",
+        "note": "Actual screens from the app in development, showing example scenery and weather."
+      },
+      "overviewVideo": {
+        "title": "A little world, in 20 seconds",
+        "lead": "Visit five countries, watch the weather turn, and look in on your pet. With Meloom’s original music.",
+        "link": "Watch the 20-second video",
+        "caption": "Actual screens from the app in development, showing example scenery and weather."
+      }
     },
     "ko": {
       "name": "Meloom",
@@ -146,7 +157,168 @@
           "question": "제 데이터는 어떻게 처리되나요?",
           "answer": "앱이 어떤 정보에 접근하는지는 이 사이트의 Meloom 개인정보처리방침에 정리되어 있습니다. 궁금한 점은 contact@player0.dev로 문의해 주세요."
         }
-      ]
+      ],
+      "countryGallery": {
+        "title": "다섯 나라의 풍경을, 나만의 방에서",
+        "lead": "같은 작은 방 너머로 서로 다른 풍경이 펼쳐집니다. 한국·일본·대만·미국·프랑스의 장면을 만나보세요.",
+        "note": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
+      },
+      "overviewVideo": {
+        "title": "20초로 만나는 작은 세계",
+        "lead": "다섯 나라의 풍경, 달라지는 날씨와 밤, 함께 지내는 펫을 Meloom의 오리지널 음악과 함께 만나보세요.",
+        "link": "20초 소개 영상 보기",
+        "caption": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
+      }
+    },
+    "ja": {
+      "name": "Meloom",
+      "summary": "いろいろな国の風景、目に見える天気、ペットと過ごすコンパニオンアプリ",
+      "tagline": "窓の外にはよその国の景色と今日の天気、部屋の中にはペット。",
+      "description": [
+        "Meloomは、窓の向こうに国ごとの風景と今日の天気が広がる部屋で、ペットと一緒に過ごすコンパニオンアプリです。韓国、日本、台湾、アメリカ、フランスの、それぞれ異なる背景に出会えます。実際の天気と現地時間に合わせて雨や雪が降り、景色は昼から夜へと移り変わります。",
+        "猫や犬と一緒に過ごしましょう。ペットが何をしているか、どれくらいお腹が空いているかを確かめて、ごはんをあげられます。お世話をしながら、成長していく姿を見守れます。",
+        "立ち寄るたびに、ギフトやカードパックを開けてカードを集めることもできます。Androidでは、必要に応じてカレンダーの予定も読み取り専用で表示できます。"
+      ],
+      "features": [
+        {
+          "title": "5つの国、5つの景色",
+          "body": "韓国、日本、台湾、アメリカ、フランスには、それぞれ異なる街の風景があります。位置情報を使うか自分で国を選んで、部屋の向こうに広がる景色を決めましょう。"
+        },
+        {
+          "title": "目に見える天気",
+          "body": "実際の天気と現地時間が景色に反映され、晴れや曇りの空から、雨、雪、雷まで描かれます。昼から夜へと移るにつれて、光や空の色も変わります。"
+        },
+        {
+          "title": "お世話して成長を見守るペット",
+          "body": "猫や犬と部屋で一緒に過ごしましょう。様子や空腹度を確かめてごはんをあげ、一緒に過ごす時間のなかで成長していく姿を見守れます。"
+        },
+        {
+          "title": "ギフト、カードパック、カード",
+          "body": "ギフトやカードパックを開けて、少しずつカードコレクションを充実させましょう。"
+        }
+      ],
+      "howTo": [
+        {
+          "title": "部屋を開く",
+          "body": "位置情報を使うか国を選んで、部屋を開きます。選んだ場所、天気、現地時間に合わせた景色が広がります。"
+        },
+        {
+          "title": "ペットの様子を見る",
+          "body": "ペットのカードを開いて様子を確かめ、お腹が空いていたらごはんをあげましょう。"
+        },
+        {
+          "title": "ギフトとカードを開ける",
+          "body": "ギフトやカードパックを開けて、新しいカードをコレクションに加えましょう。"
+        },
+        {
+          "title": "必要ならカレンダーを追加",
+          "body": "Androidでは、カレンダーへの読み取り専用アクセスを許可すると、今後の予定を表示できます。許可しなくてもMeloomは使えます。"
+        }
+      ],
+      "faq": [
+        {
+          "question": "Meloomはいつ使えるようになりますか？",
+          "answer": "MeloomはAndroidとWindows向けに開発中です。リリース日とストアページはまだ発表されていません。"
+        },
+        {
+          "question": "Meloomがカレンダーを変更することはありますか？",
+          "answer": "いいえ。カレンダーへのアクセスは任意で、Androidで利用でき、読み取り専用です。Meloomは予定を表示するだけで、作成・編集・削除は一切行いません。"
+        },
+        {
+          "question": "AndroidとWindowsで同じですか？",
+          "answer": "完全に同じではありません。カレンダーへのアクセスは現在Androidでのみ利用でき、その他のシステム連携もプラットフォームによって異なる場合があります。"
+        },
+        {
+          "question": "Meloomはデータをどのように扱いますか？",
+          "answer": "アプリがアクセスする情報については、このサイトに掲載しているMeloomのプライバシーポリシー（英語）で説明しています。ご不明な点があれば、contact@player0.devまでご連絡ください。"
+        }
+      ],
+      "countryGallery": {
+        "title": "5つの国の風景を、自分だけの部屋で。",
+        "lead": "同じ小さな部屋の向こうに、違う景色が広がります。韓国・日本・台湾・アメリカ・フランスの風景をご覧ください。",
+        "note": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
+      },
+      "overviewVideo": {
+        "title": "20秒でめぐる、小さな世界",
+        "lead": "5つの国の景色、移り変わる天気と夜、そばにいるペットを、Meloomのオリジナル音楽とともに。",
+        "link": "20秒の紹介動画を見る",
+        "caption": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
+      }
+    },
+    "zh-TW": {
+      "name": "Meloom",
+      "summary": "有各國風景、看得見的天氣與寵物相伴的陪伴型應用程式",
+      "tagline": "窗外是另一個國家的景色與今天的天氣，房間裡有寵物相伴。",
+      "description": [
+        "Meloom 是一款陪伴型應用程式，你會和寵物一起待在房間裡，窗外是各國風景與今天的天氣。探索韓國、日本、台灣、美國和法國各自不同的背景。依照實際天氣和當地時間，窗外會下雨、下雪，景色也會從白天轉為夜晚。",
+        "和貓或狗一起度過時光：看看寵物正在做什麼、肚子有多餓，再餵牠吃東西。在照顧的過程中，看著你的夥伴慢慢長大。",
+        "每次回來時，你也可以打開禮物和卡包，慢慢收集卡片。在 Android 上，你也可以選擇以唯讀方式顯示你的行事曆。"
+      ],
+      "features": [
+        {
+          "title": "五個國家，五種景色",
+          "body": "韓國、日本、台灣、美國和法國各有自己的城市風景。可以使用你的位置，或自行選擇國家，決定房間外的景色。"
+        },
+        {
+          "title": "看得見的天氣",
+          "body": "實際天氣和當地時間會反映在畫面中，從晴天、陰天到下雨、下雪和閃電。隨著白天轉為夜晚，光線和天空也會跟著變化。"
+        },
+        {
+          "title": "照顧寵物，看著牠長大",
+          "body": "和貓或狗一起待在房間裡。查看牠的狀態和飢餓程度、餵牠吃東西，在相處的時光中看著牠長大。"
+        },
+        {
+          "title": "禮物、卡包與卡片",
+          "body": "打開禮物和卡包，隨著時間慢慢完成你的卡片收藏。"
+        }
+      ],
+      "howTo": [
+        {
+          "title": "打開你的房間",
+          "body": "使用你的位置或選擇一個國家，打開你的房間。畫面會反映所選地點的風景、天氣和當地時間。"
+        },
+        {
+          "title": "看看你的寵物",
+          "body": "打開寵物卡片查看牠的狀況，肚子餓了就餵牠吃東西。"
+        },
+        {
+          "title": "打開禮物和卡片",
+          "body": "打開禮物和卡包，把新卡片加入你的收藏。"
+        },
+        {
+          "title": "需要的話，加入行事曆",
+          "body": "在 Android 上，你可以允許以唯讀方式存取行事曆，查看即將到來的行程。不開啟這項存取也能使用 Meloom。"
+        }
+      ],
+      "faq": [
+        {
+          "question": "Meloom 什麼時候推出？",
+          "answer": "Meloom 正在為 Android 和 Windows 開發中。推出日期和商店頁面尚未公布。"
+        },
+        {
+          "question": "Meloom 會更改我的行事曆嗎？",
+          "answer": "不會。行事曆存取是選用功能，在 Android 上提供，而且是唯讀的。Meloom 只會顯示你的行程，絕不會建立、編輯或刪除行程。"
+        },
+        {
+          "question": "Android 版和 Windows 版會一樣嗎？",
+          "answer": "不完全一樣。行事曆存取目前只在 Android 上提供，其他系統整合功能也可能因平台而異。"
+        },
+        {
+          "question": "Meloom 如何處理我的資料？",
+          "answer": "本網站上的 Meloom 隱私權政策（英文）說明了應用程式會存取哪些資訊。如有任何不清楚的地方，請寄信至 contact@player0.dev。"
+        }
+      ],
+      "countryGallery": {
+        "title": "在自己的小房間，看見五個國家的風景。",
+        "lead": "同一個小房間外，有著不同的風景。看看韓國、日本、台灣、美國和法國的景色。",
+        "note": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
+      },
+      "overviewVideo": {
+        "title": "用20秒，走進小小世界",
+        "lead": "隨著Meloom的原創音樂，看見五個國家的風景、變化的天氣與夜色，還有陪伴你的寵物。",
+        "link": "觀看20秒介紹影片",
+        "caption": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
+      }
     }
   },
   "images": {
@@ -198,6 +370,206 @@
         "src": "/assets/meloom/ko_04_pet.png",
         "caption": "펫 들여다보기",
         "alt": "Meloom Android 개발 중 화면: 고양이 펫의 배고픔 수치와 밥 주기 버튼이 있는 펫 카드"
+      }
+    ],
+    "ja": [
+      {
+        "src": "/assets/meloom/ja_01_day.webp",
+        "caption": "晴れた日のソウル",
+        "alt": "Meloom — 晴れた日のソウル"
+      },
+      {
+        "src": "/assets/meloom/ja_02_rain.webp",
+        "caption": "雨の日の同じ景色",
+        "alt": "Meloom — 雨の日の同じ景色"
+      },
+      {
+        "src": "/assets/meloom/ja_03_night.webp",
+        "caption": "夜の部屋",
+        "alt": "Meloom — 夜の部屋"
+      },
+      {
+        "src": "/assets/meloom/ja_04_pet.webp",
+        "caption": "ペットの様子を確認",
+        "alt": "Meloom — ペットの様子を確認"
+      }
+    ],
+    "zh-TW": [
+      {
+        "src": "/assets/meloom/zh-TW_01_day.webp",
+        "caption": "晴天的首爾",
+        "alt": "Meloom — 晴天的首爾"
+      },
+      {
+        "src": "/assets/meloom/zh-TW_02_rain.webp",
+        "caption": "下雨時的同一片景色",
+        "alt": "Meloom — 下雨時的同一片景色"
+      },
+      {
+        "src": "/assets/meloom/zh-TW_03_night.webp",
+        "caption": "入夜後的房間",
+        "alt": "Meloom — 入夜後的房間"
+      },
+      {
+        "src": "/assets/meloom/zh-TW_04_pet.webp",
+        "caption": "看看寵物的狀態",
+        "alt": "Meloom — 看看寵物的狀態"
+      }
+    ]
+  },
+  "countryGalleries": {
+    "en": [
+      {
+        "code": "KR",
+        "country": "Korea",
+        "src": "/assets/meloom/countries/en_kr.webp",
+        "alt": "Meloom — Korea"
+      },
+      {
+        "code": "JP",
+        "country": "Japan",
+        "src": "/assets/meloom/countries/en_jp.webp",
+        "alt": "Meloom — Japan"
+      },
+      {
+        "code": "TW",
+        "country": "Taiwan",
+        "src": "/assets/meloom/countries/en_tw.webp",
+        "alt": "Meloom — Taiwan"
+      },
+      {
+        "code": "US",
+        "country": "United States",
+        "src": "/assets/meloom/countries/en_us.webp",
+        "alt": "Meloom — United States"
+      },
+      {
+        "code": "FR",
+        "country": "France",
+        "src": "/assets/meloom/countries/en_fr.webp",
+        "alt": "Meloom — France"
+      }
+    ],
+    "ko": [
+      {
+        "code": "KR",
+        "country": "한국",
+        "src": "/assets/meloom/countries/ko_kr.webp",
+        "alt": "Meloom — 한국"
+      },
+      {
+        "code": "JP",
+        "country": "일본",
+        "src": "/assets/meloom/countries/ko_jp.webp",
+        "alt": "Meloom — 일본"
+      },
+      {
+        "code": "TW",
+        "country": "대만",
+        "src": "/assets/meloom/countries/ko_tw.webp",
+        "alt": "Meloom — 대만"
+      },
+      {
+        "code": "US",
+        "country": "미국",
+        "src": "/assets/meloom/countries/ko_us.webp",
+        "alt": "Meloom — 미국"
+      },
+      {
+        "code": "FR",
+        "country": "프랑스",
+        "src": "/assets/meloom/countries/ko_fr.webp",
+        "alt": "Meloom — 프랑스"
+      }
+    ],
+    "ja": [
+      {
+        "code": "KR",
+        "country": "韓国",
+        "src": "/assets/meloom/countries/ja_kr.webp",
+        "alt": "Meloom — 韓国"
+      },
+      {
+        "code": "JP",
+        "country": "日本",
+        "src": "/assets/meloom/countries/ja_jp.webp",
+        "alt": "Meloom — 日本"
+      },
+      {
+        "code": "TW",
+        "country": "台湾",
+        "src": "/assets/meloom/countries/ja_tw.webp",
+        "alt": "Meloom — 台湾"
+      },
+      {
+        "code": "US",
+        "country": "アメリカ",
+        "src": "/assets/meloom/countries/ja_us.webp",
+        "alt": "Meloom — アメリカ"
+      },
+      {
+        "code": "FR",
+        "country": "フランス",
+        "src": "/assets/meloom/countries/ja_fr.webp",
+        "alt": "Meloom — フランス"
+      }
+    ],
+    "zh-TW": [
+      {
+        "code": "KR",
+        "country": "韓國",
+        "src": "/assets/meloom/countries/zh-TW_kr.webp",
+        "alt": "Meloom — 韓國"
+      },
+      {
+        "code": "JP",
+        "country": "日本",
+        "src": "/assets/meloom/countries/zh-TW_jp.webp",
+        "alt": "Meloom — 日本"
+      },
+      {
+        "code": "TW",
+        "country": "台灣",
+        "src": "/assets/meloom/countries/zh-TW_tw.webp",
+        "alt": "Meloom — 台灣"
+      },
+      {
+        "code": "US",
+        "country": "美國",
+        "src": "/assets/meloom/countries/zh-TW_us.webp",
+        "alt": "Meloom — 美國"
+      },
+      {
+        "code": "FR",
+        "country": "法國",
+        "src": "/assets/meloom/countries/zh-TW_fr.webp",
+        "alt": "Meloom — 法國"
+      }
+    ]
+  },
+  "overviewVideo": {
+    "src": "/assets/meloom/intro.mp4",
+    "poster": "/assets/meloom/intro_poster.webp",
+    "tracks": [
+      {
+        "src": "/assets/meloom/intro_en.vtt",
+        "lang": "en",
+        "label": "English"
+      },
+      {
+        "src": "/assets/meloom/intro_ko.vtt",
+        "lang": "ko",
+        "label": "한국어"
+      },
+      {
+        "src": "/assets/meloom/intro_ja.vtt",
+        "lang": "ja",
+        "label": "日本語"
+      },
+      {
+        "src": "/assets/meloom/intro_zh-TW.vtt",
+        "lang": "zh-TW",
+        "label": "繁體中文"
       }
     ]
   }

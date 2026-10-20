@@ -1,9 +1,17 @@
 {
   "languageName": "English",
+  "languageNames": {
+    "en": "English",
+    "ko": "Korean",
+    "ja": "Japanese",
+    "zh-TW": "Traditional Chinese"
+  },
   "nav": {
     "home": "Home",
     "products": "Products",
-    "play": "Play"
+    "play": "Play",
+    "about": "About",
+    "contact": "Contact"
   },
   "home": {
     "title": "Player Zero — Games and apps",
@@ -45,7 +53,9 @@
     "title": "Legal",
     "description": "Privacy policies and legal documents for Player Zero products.",
     "lead": "Privacy policies and legal documents, grouped by product.",
-    "backToProduct": "Back to {product}"
+    "backToProduct": "Back to {product}",
+    "empty": "No documents are listed yet.",
+    "fallbackNotice": "Documents without an English version link to the original, in the language shown next to each link."
   },
   "detail": {
     "about": "About",
@@ -87,5 +97,67 @@
   },
   "footer": {
     "contact": "Contact"
+  },
+  "ui": {
+    "skipToContent": "Skip to content",
+    "homeLabel": "Player Zero home",
+    "mainNav": "Main navigation",
+    "footerNav": "Footer",
+    "language": "Language",
+    "appearance": "Appearance",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "social": "Social",
+    "email": "Email",
+    "emailNote": "Product questions and support",
+    "release": "Release",
+    "releaseTbd": "Date to be announced",
+    "howToPlay": "How to play",
+    "howToUse": "How to use",
+    "waysToPlay": "Ways to play",
+    "modes": "Modes",
+    "viewFeatured": "View {name}",
+    "viewProduct": "View {name}",
+    "aboutProduct": "About {name}",
+    "screenshotsGame": "Screenshots",
+    "screenshotsApp": "In the app",
+    "features": "Features",
+    "faqShort": "FAQ",
+    "faq": "Frequently asked questions",
+    "productQuestions": "Questions about {name}?",
+    "contactSupport": "Contact & support",
+    "link": "Link",
+    "video": {
+      "game": {
+        "link": "Gameplay video",
+        "watch": "Watch gameplay",
+        "label": "{name} gameplay video",
+        "open": "Open the gameplay video",
+        "caption": "Actual gameplay from the version in development"
+      },
+      "app": {
+        "link": "Product video",
+        "watch": "Watch video",
+        "label": "{name} product video",
+        "open": "Open the product video"
+      }
+    },
+    "company": "Company",
+    "whatWeMake": "What we make",
+    "gamesAndApps": "Games and apps",
+    "website": "Website",
+    "supportLead": "For questions about our games and apps, or to report a problem, write to one address.",
+    "emailAbout": "Email about {name}",
+    "productFaq": "{name} FAQ",
+    "reportTitle": "Reporting a problem",
+    "reportIntro": "These details help us understand what happened:",
+    "checklist": [
+      "Which product, and which platform or operating system",
+      "What you were doing when it happened",
+      "What you expected, and what happened instead",
+      "A screenshot, if you can take one"
+    ],
+    "docInLanguage": "{doc} ({language})"
   }
 }

@@ -1,0 +1,163 @@
+{
+  "languageName": "繁體中文",
+  "languageNames": {
+    "en": "英文",
+    "ko": "韓文",
+    "ja": "日文",
+    "zh-TW": "繁體中文"
+  },
+  "nav": {
+    "home": "首頁",
+    "products": "產品",
+    "play": "遊玩",
+    "about": "關於我們",
+    "contact": "聯絡我們"
+  },
+  "home": {
+    "title": "Player Zero — 遊戲與應用程式",
+    "description": "Player Zero 製作遊戲與應用程式。目前開發中的有：也能用自己的音樂遊玩的鍵盤節奏遊戲 KEYCERTO，以及有各國風景、看得見的天氣與寵物相伴的陪伴型應用程式 Meloom。",
+    "catalog": "遊戲與應用程式",
+    "catalogLink": "所有產品",
+    "aboutTitle": "公司簡介",
+    "about": "Player Zero 是一家製作遊戲與應用程式的獨立開發商。我們在意軟體玩起來的手感、打造專屬於自己作品的樂趣，以及每天都想留在身邊的自在感。",
+    "aboutLink": "認識 Player Zero",
+    "contactTitle": "聯絡我們"
+  },
+  "about": {
+    "title": "關於 Player Zero",
+    "description": "Player Zero 是一家製作遊戲與應用程式的獨立開發商，重視遊玩、創作以及與軟體共度時光的體驗。",
+    "lead": "Player Zero 是一家製作遊戲與應用程式的獨立開發商。",
+    "paragraphs": [
+      "我們關心的，是人們實際與軟體共度的時光：遊玩時想把事情做好的那份專注、親手打造屬於自己作品的樂趣，以及有個美好的應用程式陪在身邊時那段安靜的時光。",
+      "所以我們很在意使用起來的感受。一分鐘就能上手的操作。能放進自己東西的空間，不論是一首音樂、喜歡的顏色，還是想布置的一個角落。還有下次回來時，依然值得留意的小細節。"
+    ],
+    "productsLink": "看看我們正在製作的遊戲與應用程式"
+  },
+  "products": {
+    "title": "產品",
+    "description": "Player Zero 正在開發的遊戲 KEYCERTO 與應用程式 Meloom：支援平台、開發狀態，以及各自的運作方式。",
+    "lead": "Player Zero 正在製作的每一款遊戲與應用程式，以及各自開發中的平台。",
+    "groupApps": "應用程式",
+    "groupGames": "遊戲",
+    "empty": "目前尚未列出任何產品。"
+  },
+  "play": {
+    "title": "遊玩",
+    "description": "可以直接在瀏覽器中遊玩的小遊戲。",
+    "lead": "可以直接在瀏覽器中遊玩的小遊戲。無需安裝，也不需要帳號。",
+    "empty": "目前尚未公開任何瀏覽器遊戲。",
+    "controls": "操作方式",
+    "launch": "開始遊玩"
+  },
+  "legal": {
+    "title": "法律資訊",
+    "description": "Player Zero 產品的隱私權政策與法律文件。",
+    "lead": "依產品整理的隱私權政策與法律文件。",
+    "backToProduct": "返回 {product}",
+    "empty": "目前尚未列出任何文件。",
+    "fallbackNotice": "沒有繁體中文版本的文件，會連結至各連結旁標示語言的原文。"
+  },
+  "detail": {
+    "about": "簡介",
+    "platforms": "平台",
+    "status": "狀態",
+    "links": "連結",
+    "legal": "法律資訊",
+    "screenshots": "螢幕截圖",
+    "fallbackNotice": "此產品頁面尚未翻譯，因此以{language}顯示。"
+  },
+  "status": {
+    "in-development": "開發中",
+    "testing": "測試中",
+    "released": "已推出",
+    "coming-soon": "即將推出"
+  },
+  "kind": {
+    "app": "應用程式",
+    "game": "遊戲",
+    "webgame": "瀏覽器遊戲"
+  },
+  "platform": {
+    "android": "Android",
+    "ios": "iOS",
+    "windows": "Windows",
+    "steam": "Steam",
+    "web": "瀏覽器"
+  },
+  "doc": {
+    "privacy": "隱私權政策",
+    "licenses": "授權資訊",
+    "terms": "使用條款"
+  },
+  "notFound": {
+    "title": "找不到頁面",
+    "description": "此頁面不存在。",
+    "lead": "此頁面不存在。",
+    "back": "返回首頁"
+  },
+  "footer": {
+    "contact": "聯絡我們"
+  },
+  "ui": {
+    "skipToContent": "跳至主要內容",
+    "homeLabel": "Player Zero 首頁",
+    "mainNav": "主選單",
+    "footerNav": "頁尾選單",
+    "language": "語言",
+    "appearance": "外觀",
+    "themeSystem": "跟隨系統",
+    "themeLight": "淺色",
+    "themeDark": "深色",
+    "social": "社群",
+    "email": "電子郵件",
+    "emailNote": "產品問題與支援",
+    "release": "推出日期",
+    "releaseTbd": "尚未公布",
+    "howToPlay": "遊玩方式",
+    "howToUse": "使用方式",
+    "waysToPlay": "演奏方式",
+    "modes": "模式",
+    "viewFeatured": "查看 {name} 詳細介紹",
+    "viewProduct": "查看 {name}",
+    "aboutProduct": "關於 {name}",
+    "screenshotsGame": "遊戲畫面",
+    "screenshotsApp": "應用程式畫面",
+    "features": "主要特色",
+    "faqShort": "常見問題",
+    "faq": "常見問題",
+    "productQuestions": "對 {name} 有任何疑問嗎？",
+    "contactSupport": "聯絡與支援",
+    "link": "連結",
+    "video": {
+      "game": {
+        "link": "遊玩影片",
+        "watch": "觀看遊玩影片",
+        "label": "{name} 遊玩影片",
+        "open": "開啟遊玩影片",
+        "caption": "開發中版本的實際遊玩畫面"
+      },
+      "app": {
+        "link": "產品影片",
+        "watch": "觀看影片",
+        "label": "{name} 產品影片",
+        "open": "開啟產品影片"
+      }
+    },
+    "company": "公司",
+    "whatWeMake": "製作內容",
+    "gamesAndApps": "遊戲與應用程式",
+    "website": "網站",
+    "supportLead": "關於我們的遊戲與應用程式的任何問題，或是要回報問題，都請寄到同一個信箱。",
+    "emailAbout": "寄信詢問 {name}",
+    "productFaq": "{name} 常見問題",
+    "reportTitle": "回報問題時",
+    "reportIntro": "附上以下資訊，能幫助我們了解發生了什麼事：",
+    "checklist": [
+      "是哪一款產品，以及使用的平台或作業系統",
+      "問題發生時你正在做什麼",
+      "你原本預期的結果，以及實際發生的情況",
+      "如果可以，請附上螢幕截圖"
+    ],
+    "docInLanguage": "{doc}（{language}）"
+  }
+}

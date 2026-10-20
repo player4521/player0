@@ -1,0 +1,163 @@
+{
+  "languageName": "日本語",
+  "languageNames": {
+    "en": "英語",
+    "ko": "韓国語",
+    "ja": "日本語",
+    "zh-TW": "繁体字中国語"
+  },
+  "nav": {
+    "home": "ホーム",
+    "products": "製品",
+    "play": "プレイ",
+    "about": "会社概要",
+    "contact": "お問い合わせ"
+  },
+  "home": {
+    "title": "Player Zero — ゲームとアプリ",
+    "description": "Player Zeroはゲームとアプリをつくっています。自作曲でも遊べるキーボードリズムゲームKEYCERTOと、いろいろな国の風景、目に見える天気、ペットと過ごすコンパニオンアプリMeloomを開発中です。",
+    "catalog": "ゲームとアプリ",
+    "catalogLink": "すべての製品",
+    "aboutTitle": "会社概要",
+    "about": "Player Zeroは、ゲームとアプリをつくるインディーデベロッパーです。遊んだときの手ざわり、自分のものにしていく楽しさ、毎日そばに置いておきたくなる心地よさを大切にしています。",
+    "aboutLink": "Player Zeroについて",
+    "contactTitle": "お問い合わせ"
+  },
+  "about": {
+    "title": "Player Zeroについて",
+    "description": "Player Zeroは、ゲームとアプリをつくるインディーデベロッパーです。ソフトウェアで遊び、つくり、ともに過ごす体験を大切にしています。",
+    "lead": "Player Zeroは、ゲームとアプリをつくるインディーデベロッパーです。",
+    "paragraphs": [
+      "私たちが関心を寄せているのは、ソフトウェアと実際に過ごす時間です。遊びながら何かをうまくやり遂げようとするときの集中、自分だけのものをつくっていく楽しさ、そして、そばにあるだけでうれしいアプリと過ごす静かな時間。",
+      "だからこそ、使い心地を丁寧に見つめています。すぐに手になじむ操作。一曲の音楽や好きな色、飾りたいひとすみなど、自分のものを持ち込める余地。そして、また戻ってきたときにも気づける小さなディテール。"
+    ],
+    "productsLink": "開発中のゲームとアプリを見る"
+  },
+  "products": {
+    "title": "製品",
+    "description": "Player Zeroが開発中のゲームKEYCERTOとアプリMeloomについて、対応プラットフォーム、開発状況、それぞれの仕組みを紹介します。",
+    "lead": "Player Zeroがつくっているゲームとアプリを、それぞれ開発中のプラットフォームとあわせて紹介します。",
+    "groupApps": "アプリ",
+    "groupGames": "ゲーム",
+    "empty": "掲載中の製品はまだありません。"
+  },
+  "play": {
+    "title": "プレイ",
+    "description": "ブラウザですぐに遊べる小さなゲーム。",
+    "lead": "ブラウザですぐに遊べる小さなゲーム。インストールもアカウントも不要です。",
+    "empty": "公開中のブラウザゲームはまだありません。",
+    "controls": "操作方法",
+    "launch": "プレイ"
+  },
+  "legal": {
+    "title": "法的情報",
+    "description": "Player Zero製品のプライバシーポリシーと法的文書。",
+    "lead": "製品ごとのプライバシーポリシーと法的文書です。",
+    "backToProduct": "{product}に戻る",
+    "empty": "掲載中の文書はまだありません。",
+    "fallbackNotice": "日本語版がない文書は、各リンクに表示された言語の原文にリンクしています。"
+  },
+  "detail": {
+    "about": "概要",
+    "platforms": "プラットフォーム",
+    "status": "ステータス",
+    "links": "リンク",
+    "legal": "法的情報",
+    "screenshots": "スクリーンショット",
+    "fallbackNotice": "この製品ページはまだ翻訳されていないため、{language}で表示しています。"
+  },
+  "status": {
+    "in-development": "開発中",
+    "testing": "テスト中",
+    "released": "リリース済み",
+    "coming-soon": "近日公開"
+  },
+  "kind": {
+    "app": "アプリ",
+    "game": "ゲーム",
+    "webgame": "ブラウザゲーム"
+  },
+  "platform": {
+    "android": "Android",
+    "ios": "iOS",
+    "windows": "Windows",
+    "steam": "Steam",
+    "web": "ブラウザ"
+  },
+  "doc": {
+    "privacy": "プライバシーポリシー",
+    "licenses": "ライセンス",
+    "terms": "利用規約"
+  },
+  "notFound": {
+    "title": "ページが見つかりません",
+    "description": "お探しのページは存在しません。",
+    "lead": "お探しのページは存在しません。",
+    "back": "ホームに戻る"
+  },
+  "footer": {
+    "contact": "お問い合わせ"
+  },
+  "ui": {
+    "skipToContent": "本文へスキップ",
+    "homeLabel": "Player Zero ホーム",
+    "mainNav": "メインメニュー",
+    "footerNav": "フッターメニュー",
+    "language": "言語",
+    "appearance": "表示テーマ",
+    "themeSystem": "システム",
+    "themeLight": "ライト",
+    "themeDark": "ダーク",
+    "social": "SNS",
+    "email": "メール",
+    "emailNote": "製品に関するご質問とサポート",
+    "release": "発売日",
+    "releaseTbd": "未定",
+    "howToPlay": "遊び方",
+    "howToUse": "使い方",
+    "waysToPlay": "演奏モード",
+    "modes": "モード",
+    "viewFeatured": "{name}の詳細を見る",
+    "viewProduct": "{name}を見る",
+    "aboutProduct": "{name}について",
+    "screenshotsGame": "ゲーム画面",
+    "screenshotsApp": "アプリ画面",
+    "features": "主な特徴",
+    "faqShort": "よくある質問",
+    "faq": "よくある質問",
+    "productQuestions": "{name}についてご質問はありますか？",
+    "contactSupport": "お問い合わせ・サポート",
+    "link": "リンク",
+    "video": {
+      "game": {
+        "link": "プレイ動画",
+        "watch": "プレイ動画を見る",
+        "label": "{name}のプレイ動画",
+        "open": "プレイ動画を開く",
+        "caption": "開発中バージョンの実際のプレイ画面"
+      },
+      "app": {
+        "link": "製品動画",
+        "watch": "動画を見る",
+        "label": "{name}の製品動画",
+        "open": "製品動画を開く"
+      }
+    },
+    "company": "会社名",
+    "whatWeMake": "つくっているもの",
+    "gamesAndApps": "ゲームとアプリ",
+    "website": "ウェブサイト",
+    "supportLead": "ゲームとアプリに関するご質問や不具合のご報告は、ひとつのアドレスで受け付けています。",
+    "emailAbout": "{name}についてメールで問い合わせる",
+    "productFaq": "{name}のよくある質問",
+    "reportTitle": "不具合をご報告いただくとき",
+    "reportIntro": "次の内容をお知らせいただくと、状況の把握に役立ちます。",
+    "checklist": [
+      "どの製品か、どのプラットフォームまたはOSか",
+      "問題が起きたときに何をしていたか",
+      "本来期待していた動作と、実際に起きたこと",
+      "可能であれば、スクリーンショット"
+    ],
+    "docInLanguage": "{doc}（{language}）"
+  }
+}

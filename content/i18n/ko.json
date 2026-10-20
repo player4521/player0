@@ -1,9 +1,17 @@
 {
   "languageName": "한국어",
+  "languageNames": {
+    "en": "영어",
+    "ko": "한국어",
+    "ja": "일본어",
+    "zh-TW": "중국어 번체"
+  },
   "nav": {
     "home": "홈",
     "products": "제품",
-    "play": "플레이"
+    "play": "플레이",
+    "about": "회사 소개",
+    "contact": "문의"
   },
   "home": {
     "title": "Player Zero — 게임과 앱",
@@ -45,7 +53,9 @@
     "title": "법적 고지",
     "description": "Player Zero 제품의 개인정보처리방침과 법적 문서.",
     "lead": "제품별 개인정보처리방침과 법적 문서.",
-    "backToProduct": "{product} 페이지로"
+    "backToProduct": "{product} 페이지로",
+    "empty": "아직 등록된 문서가 없습니다.",
+    "fallbackNotice": "한국어 버전이 없는 문서는 각 링크 옆에 표시된 언어의 원문으로 연결됩니다."
   },
   "detail": {
     "about": "소개",
@@ -87,5 +97,67 @@
   },
   "footer": {
     "contact": "문의"
+  },
+  "ui": {
+    "skipToContent": "본문으로 이동",
+    "homeLabel": "Player Zero 홈",
+    "mainNav": "주요 메뉴",
+    "footerNav": "하단 메뉴",
+    "language": "언어",
+    "appearance": "화면 테마",
+    "themeSystem": "시스템",
+    "themeLight": "밝게",
+    "themeDark": "어둡게",
+    "social": "SNS",
+    "email": "이메일",
+    "emailNote": "제품 문의와 지원",
+    "release": "출시일",
+    "releaseTbd": "미정",
+    "howToPlay": "플레이 방법",
+    "howToUse": "사용 방법",
+    "waysToPlay": "연주 방식",
+    "modes": "모드",
+    "viewFeatured": "{name} 자세히 보기",
+    "viewProduct": "{name} 보기",
+    "aboutProduct": "{name} 소개",
+    "screenshotsGame": "게임 화면",
+    "screenshotsApp": "앱 화면",
+    "features": "주요 기능",
+    "faqShort": "자주 묻는 질문",
+    "faq": "자주 묻는 질문",
+    "productQuestions": "{name}에 대해 궁금한 점이 있나요?",
+    "contactSupport": "문의 및 지원",
+    "link": "링크",
+    "video": {
+      "game": {
+        "link": "플레이 영상",
+        "watch": "플레이 영상 보기",
+        "label": "{name} 플레이 영상",
+        "open": "플레이 영상 열기",
+        "caption": "개발 중인 버전의 실제 플레이 화면"
+      },
+      "app": {
+        "link": "제품 영상",
+        "watch": "영상 보기",
+        "label": "{name} 제품 영상",
+        "open": "제품 영상 열기"
+      }
+    },
+    "company": "회사",
+    "whatWeMake": "만드는 것",
+    "gamesAndApps": "게임과 앱",
+    "website": "웹사이트",
+    "supportLead": "게임과 앱에 관한 질문과 문제 제보는 모두 한 주소로 받습니다.",
+    "emailAbout": "{name} 문의 메일 쓰기",
+    "productFaq": "{name} 자주 묻는 질문",
+    "reportTitle": "문제를 알려주실 때",
+    "reportIntro": "다음 내용을 함께 적어주시면 상황을 이해하는 데 도움이 됩니다.",
+    "checklist": [
+      "어떤 제품인지, 어떤 기기와 운영체제인지",
+      "문제가 생겼을 때 무엇을 하고 있었는지",
+      "원래 기대한 동작과 실제로 일어난 일",
+      "가능하다면 화면 캡처"
+    ],
+    "docInLanguage": "{doc} ({language})"
   }
 }
