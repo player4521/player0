@@ -115,7 +115,7 @@
 /* ---------------------------------------------------------------- base */
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 24px; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 24px; scrollbar-gutter: stable; }
 body {
   margin: 0;
   background: var(--bg);
