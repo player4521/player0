@@ -185,17 +185,9 @@ def product_card(site: Site, product: dict, lang: str) -> str:
 
 
 def legal_docs_for(site: Site, product: dict, lang: str) -> list[tuple[str, str]]:
-    """(label, href) for each legal document a product registers."""
-    out = []
-    for entry in product.get("legal", []):
-        langs = entry.get("languages", [site.default_lang])
-        doc_lang = lang if lang in langs else (
-            site.default_lang if site.default_lang in langs else langs[0])
-        label = site.t(lang, f'doc.{entry["doc"]}')
-        if doc_lang != lang:
-            label = f'{label} ({site.language_name(doc_lang)})'
-        out.append((label, site.url(doc_lang, "legal", entry["path"])))
-    return out
+    """(label, href) for each legal document a product registers. Documents are
+    never translated here: a language without its own copy links to an existing one."""
+    return presentation.policy_docs(site, product, lang)
 
 
 # ------------------------------------------------------------------- builders
@@ -302,10 +294,18 @@ def build_legal_index(site: Site, lang: str) -> str:
         sections.append(f'    <section class="section">\n'
                         f'      <h2>{esc(copy.get("name", product["slug"]))}</h2>\n'
                         f'      <ul class="link-list">\n{items}\n      </ul>\n    </section>')
+    if not sections:
+        sections.append(f'    <p class="muted">{esc(site.t(lang, "legal.empty"))}</p>')
+
+    untranslated = any(presentation.doc_language(site, entry, lang) != lang
+                       for product in site.products for entry in product.get("legal", []))
+    notice = (f'      <p class="notice">{esc(site.t(lang, "legal.fallbackNotice"))}</p>\n'
+              if untranslated else "")
 
     body = (f'    <header class="page-head">\n'
             f'      <h1>{esc(site.t(lang, "legal.title"))}</h1>\n'
             f'      <p class="lead">{esc(site.t(lang, "legal.lead"))}</p>\n'
+            f'{notice}'
             f'    </header>\n\n' + "\n\n".join(sections) + "\n")
 
     return shell(site, lang=lang, path=site.url(lang, "legal"),
@@ -335,14 +335,15 @@ def build_legal_doc(site: Site, product: dict, entry: dict, doc_lang: str) -> st
                  body=body, alternates=alternates, main_class="page")
 
 
-def build_404(site: Site) -> str:
-    lang = site.default_lang
+def build_404(site: Site, lang: str | None = None) -> str:
+    """Each language gets a 404.html in its own folder; Pages serves the nearest one."""
+    lang = lang or site.default_lang
     body = (f'    <section class="hero">\n'
             f'      <h1>{esc(site.t(lang, "notFound.title"))}</h1>\n'
             f'      <p class="lead">{esc(site.t(lang, "notFound.lead"))}</p>\n'
-            f'      <p class="more"><a href="/">{esc(site.t(lang, "notFound.back"))}</a></p>\n'
+            f'      <p class="more"><a href="{site.url(lang)}">{esc(site.t(lang, "notFound.back"))}</a></p>\n'
             f'    </section>\n')
-    return shell(site, lang=lang, path="/404.html",
+    return shell(site, lang=lang, path=site.url(lang) + "404.html",
                  title=f'{site.t(lang, "notFound.title")} | {site.config["brand"]}',
                  description=site.t(lang, "notFound.description"), body=body)
 
@@ -377,7 +378,8 @@ def build_all(site: Site) -> dict[str, str]:
                 put(site.url(doc_lang, "legal", entry["path"]),
                     build_legal_doc(site, product, entry, doc_lang))
 
-    pages["404.html"] = build_404(site)
+    for lang in site.languages:
+        pages[site.url(lang).lstrip("/") + "404.html"] = build_404(site, lang)
 
     redirects = "\n".join(f"{src}  {dst}  {code}"
                           for src, dst, code in site.config.get("redirects", []))

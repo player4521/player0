@@ -10,7 +10,9 @@
   "defaultLanguage": "en",
   "languages": [
     "en",
-    "ko"
+    "ko",
+    "ja",
+    "zh-TW"
   ],
   "_comment_analytics": "No analytics, no tracking, no external fonts or CDNs. Turning any of that on changes the privacy policy.",
   "redirects": [
