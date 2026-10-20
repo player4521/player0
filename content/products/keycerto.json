@@ -19,66 +19,76 @@
   "content": {
     "en": {
       "name": "KEYCERTO",
-      "tagline": "Follow the music, and fill a page with a story.",
+      "summary": "A rhythm game played on your keyboard",
+      "tagline": "Keep time with the music, and the page fills with a story.",
       "description": [
-        "KEYCERTO is a rhythm game played on your keyboard. Tap along to classical melodies, lively ragtime and original pieces, and letters, reflections and short stories appear on paper in time with the beat.",
-        "Play with one key, two keys, or by typing the English text yourself. Earn points to collect keyboard parts, complete goals to unlock stage decorations, and keep a record of every song you play.",
-        "KEYCERTO is in development for Windows PC on Steam."
+        "KEYCERTO is a rhythm game played on your keyboard. Keep time with classical melodies, lively ragtime and original pieces, and letters, reflections and short stories appear on paper as you play.",
+        "Choose how you play each song: with one key, with two keys, or by typing the English text yourself. Points you earn collect keyboard parts, completed goals unlock stage decorations, and records and certificates keep track of how you did.",
+        "You can also make your own charts in the built-in editor, then import or export them as .keycerto files.",
+        "KEYCERTO is in development for Windows PC on Steam. The release date has not been announced."
       ],
       "features": [
         {
-          "title": "A page written by rhythm",
+          "title": "A story written by rhythm",
           "body": "Every input in time with the music adds to the page. By the end of a song, you have played your way through a letter or a short story."
         },
         {
-          "title": "A keyboard and stage of your own",
-          "body": "Spend points earned through play on housings and keycaps, then mix parts and colours. Complete goals to unlock decorations and arrange them on your stage."
+          "title": "Your keyboard, your stage",
+          "body": "Spend the points you earn on housings and keycaps, then mix parts and colours. Complete goals to unlock decorations and arrange them on your stage."
         },
         {
-          "title": "Records worth keeping",
+          "title": "Records and certificates",
           "body": "Collect certificates for each song and difficulty. In typing mode, wrong letters and missed inputs stay on the page as typos and gaps, so you can see exactly where to improve."
         },
         {
-          "title": "Make your own charts",
-          "body": "Create charts in the built-in editor, then import or export them as .keycerto files."
+          "title": "Charts of your own",
+          "body": "Make charts in the built-in editor, then import or export them as .keycerto files."
         }
       ],
       "howTo": [
         {
-          "title": "Choose a song",
-          "body": "Pick a song, an input mode and a difficulty."
+          "title": "Choose a song and a mode",
+          "body": "Pick a song, then choose one-key, two-key or typing mode and a difficulty."
         },
         {
-          "title": "Play along",
-          "body": "Follow the music and keep your inputs on the beat as the page fills in."
+          "title": "Play in time",
+          "body": "Keep your inputs on the beat as the music plays. In typing mode, type the English text in time. The page fills in as you go."
         },
         {
-          "title": "Look back and make it yours",
-          "body": "Review your result and try for a better record. Use earned points for keyboard parts and complete goals to unlock stage decorations."
+          "title": "Check your result",
+          "body": "See your score and accuracy, collect certificates and try again for a better record."
+        },
+        {
+          "title": "Make it yours",
+          "body": "Use your points to collect keyboard parts, and place the decorations you unlock through goals on your stage."
         }
       ],
       "modes": [
         {
           "title": "One-key",
-          "body": "Focus on the beat with a single input."
+          "body": "Play with a single input and put all of your attention on timing."
         },
         {
           "title": "Two-key",
-          "body": "Divide the rhythm between two inputs and keep both parts in time with the music."
+          "body": "Split the rhythm between two inputs and keep both parts in time with the music."
         },
         {
           "title": "Typing",
-          "body": "Enter the English text yourself, in time with the music. Typos and gaps stay on the page."
+          "body": "Type the English text yourself, in time with the music. Wrong letters stay on the page as typos, and missed inputs leave gaps."
         }
       ],
       "faq": [
         {
           "question": "Which platforms is KEYCERTO coming to?",
-          "answer": "We are focused on Windows PC via Steam. The release date and price have not been announced yet."
+          "answer": "KEYCERTO is in development for Windows PC on Steam. The release date and price have not been announced yet."
         },
         {
           "question": "Do I need to type in English?",
-          "answer": "Only in typing mode, where you enter the English text yourself. One-key and two-key modes are about rhythm, not spelling."
+          "answer": "Only in typing mode, where you type the English text yourself. One-key and two-key modes are about rhythm, not spelling."
+        },
+        {
+          "question": "What do points and goals unlock?",
+          "answer": "Points you earn by playing collect keyboard parts such as housings and keycaps. Completing goals unlocks decorations for your stage."
         },
         {
           "question": "Can I make my own charts?",
@@ -86,21 +96,23 @@
         },
         {
           "question": "Where can I follow development?",
-          "answer": "Follow Player Zero Dev on YouTube at @player0dev, or write to contact@player0.dev. We will add store links here when they are ready."
+          "answer": "On our YouTube channel, Player Zero Dev (@player0dev). You can also write to contact@player0.dev. Store links will be added to this page when they are available."
         }
       ]
     },
     "ko": {
       "name": "KEYCERTO",
-      "tagline": "음악을 따라, 한 장의 이야기를 완성하세요.",
+      "summary": "키보드로 연주하는 리듬 게임",
+      "tagline": "박자를 따라 치면, 종이 위에 이야기가 채워집니다.",
       "description": [
-        "KEYCERTO는 키보드로 즐기는 리듬 게임입니다. 클래식의 익숙한 선율부터 경쾌한 래그타임과 오리지널 곡까지, 박자에 맞춰 키보드를 두드리면 편지와 기록, 짧은 이야기가 종이 위에 펼쳐집니다.",
-        "한 키, 두 키, 또는 영문 문장을 직접 입력하는 방식으로 연주하세요. 포인트로 키보드 부품을 모으고, 목표를 달성해 무대 소품을 얻으며, 곡마다 연주 기록을 쌓아갈 수 있습니다.",
-        "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다."
+        "KEYCERTO는 키보드로 연주하는 리듬 게임입니다. 익숙한 클래식 선율과 경쾌한 래그타임, 오리지널 곡에 맞춰 박자를 지키면 편지와 기록, 짧은 이야기가 종이 위에 쓰여 나갑니다.",
+        "곡마다 연주 방식을 고를 수 있습니다. 한 키로, 두 키로, 또는 영문 문장을 직접 입력하며 연주하세요. 연주로 얻은 포인트로 키보드 부품을 모으고, 목표를 달성하면 무대 소품이 열리며, 기록과 증서로 연주 결과가 남습니다.",
+        "내장 편집기로 채보를 직접 만들고, .keycerto 파일로 가져오거나 내보낼 수도 있습니다.",
+        "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다. 출시일은 아직 발표되지 않았습니다."
       ],
       "features": [
         {
-          "title": "리듬으로 채워지는 한 장",
+          "title": "리듬으로 써 내려가는 이야기",
           "body": "음악에 맞춘 입력 하나하나가 종이를 채웁니다. 곡이 끝나면 편지 한 통, 짧은 이야기 한 편을 연주로 완성하게 됩니다."
         },
         {
@@ -108,8 +120,8 @@
           "body": "연주로 얻은 포인트로 하우징과 키캡을 모으고, 부품과 색상을 조합해 보세요. 목표를 달성해 얻은 소품으로 무대도 꾸밀 수 있습니다."
         },
         {
-          "title": "남겨두고 싶은 기록",
-          "body": "곡과 난이도별로 증서를 모아보세요. 타이핑 모드에서는 잘못 친 글자와 놓친 자리가 오타와 빈칸으로 남아, 어디를 다시 연습하면 좋을지 한눈에 보입니다."
+          "title": "기록과 증서",
+          "body": "곡과 난이도별로 증서를 모아보세요. 타이핑 모드에서는 잘못 친 글자와 놓친 입력이 오타와 빈칸으로 남아, 어디를 다시 연습하면 좋을지 한눈에 보입니다."
         },
         {
           "title": "직접 만드는 채보",
@@ -118,40 +130,48 @@
       ],
       "howTo": [
         {
-          "title": "곡 고르기",
-          "body": "곡과 입력 방식, 난이도를 선택하세요."
+          "title": "곡과 방식 고르기",
+          "body": "곡을 고른 다음 원키, 투키, 타이핑 중 입력 방식과 난이도를 선택하세요."
         },
         {
-          "title": "음악에 맞춰 연주하기",
-          "body": "음악을 따라 박자에 맞춰 입력하면 종이가 채워집니다."
+          "title": "박자에 맞춰 연주하기",
+          "body": "음악이 흐르는 동안 박자에 맞춰 입력하세요. 타이핑 모드에서는 영문 문장을 박자에 맞춰 입력합니다. 연주할수록 종이가 채워집니다."
         },
         {
-          "title": "돌아보고 꾸미기",
-          "body": "결과를 확인하고 기록 갱신에 도전하세요. 포인트로 키보드 부품을 모으고, 목표를 달성해 무대 소품을 얻을 수 있습니다."
+          "title": "결과 확인하기",
+          "body": "점수와 정확도를 확인하고, 증서를 모으며 더 좋은 기록에 도전하세요."
+        },
+        {
+          "title": "나만의 방식으로 꾸미기",
+          "body": "포인트로 키보드 부품을 모으고, 목표를 달성해 얻은 소품을 무대에 배치하세요."
         }
       ],
       "modes": [
         {
           "title": "원키",
-          "body": "하나의 입력으로 박자에 집중합니다."
+          "body": "하나의 입력으로 연주하며 타이밍에만 집중합니다."
         },
         {
           "title": "투키",
-          "body": "두 키로 리듬을 나눠 입력합니다. 두 입력을 음악에 맞춰 이어가세요."
+          "body": "리듬을 두 입력으로 나누고, 두 파트를 모두 음악에 맞춰 이어갑니다."
         },
         {
           "title": "타이핑",
-          "body": "음악에 맞춰 영문 문장을 직접 입력합니다. 오타와 빈칸은 종이 위에 그대로 남습니다."
+          "body": "음악에 맞춰 영문 문장을 직접 입력합니다. 잘못 친 글자는 오타로, 놓친 입력은 빈칸으로 종이 위에 남습니다."
         }
       ],
       "faq": [
         {
           "question": "어떤 플랫폼으로 출시되나요?",
-          "answer": "현재 Steam을 통한 Windows PC에 집중하고 있습니다. 출시일과 가격은 아직 발표되지 않았습니다."
+          "answer": "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다. 출시일과 가격은 아직 발표되지 않았습니다."
         },
         {
           "question": "영어로 타자를 쳐야 하나요?",
           "answer": "타이핑 모드에서만 영문 문장을 직접 입력합니다. 원키와 투키 모드는 철자가 아니라 리듬에 집중하는 방식입니다."
+        },
+        {
+          "question": "포인트와 목표로 무엇을 얻나요?",
+          "answer": "연주로 얻은 포인트로 하우징, 키캡 같은 키보드 부품을 모을 수 있습니다. 목표를 달성하면 무대를 꾸밀 소품이 열립니다."
         },
         {
           "question": "채보를 직접 만들 수 있나요?",
@@ -159,7 +179,7 @@
         },
         {
           "question": "개발 소식은 어디서 볼 수 있나요?",
-          "answer": "YouTube @player0dev을 구독하시거나 contact@player0.dev로 연락해 주세요. 스토어 링크는 준비되는 대로 이곳에 추가하겠습니다."
+          "answer": "YouTube 채널 Player Zero Dev(@player0dev)에서 보실 수 있고, contact@player0.dev로 연락하셔도 됩니다. 스토어 링크는 준비되는 대로 이 페이지에 추가하겠습니다."
         }
       ]
     }

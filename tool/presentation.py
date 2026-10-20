@@ -5,6 +5,10 @@ import html
 from urllib.parse import quote
 
 
+YOUTUBE_NAME = 'Player Zero Dev'
+YOUTUBE_HANDLE = '@player0dev'
+
+
 def e(value):
     return html.escape(str(value), quote=True)
 
@@ -13,23 +17,86 @@ def text(lang, english, korean):
     return korean if lang == 'ko' else english
 
 
+def strings(site, lang, *keys):
+    """A non-string chrome value (a list of paragraphs, say), with language fallback."""
+    for candidate in (lang, site.default_lang):
+        node = site.strings.get(candidate, {})
+        for key in keys:
+            node = node.get(key) if isinstance(node, dict) else None
+        if node:
+            return node
+    return None
+
+
+def ordered(products):
+    return sorted(products, key=lambda p: (p.get('order', 1000), p['slug']))
+
+
+def copy_for(site, product, lang):
+    blocks = product.get('content', {})
+    return blocks.get(lang) or blocks.get(site.default_lang) or next(iter(blocks.values()), {})
+
+
+def platforms(site, lang, product):
+    return ' · '.join(site.t(lang, 'platform.' + value) for value in product.get('platforms', []))
+
+
+def status(site, lang, product):
+    return site.t(lang, 'status.' + product.get('status', 'in-development'))
+
+
+def summary(copy):
+    return copy.get('summary') or copy.get('tagline', '')
+
+
+def how_label(lang, product):
+    if product.get('kind') == 'game':
+        return text(lang, 'How to play', '플레이 방법')
+    return text(lang, 'How to use', '사용 방법')
+
+
+def gallery(site, product, lang, name):
+    galleries = product.get('galleries', {})
+    shots = galleries.get(lang) or galleries.get(site.default_lang) or next(iter(galleries.values()), [])
+    if not shots:
+        shots = [{'src': src, 'alt': name} for src in product.get('images', {}).get('screenshots', [])]
+    return shots
+
+
+def policy_docs(site, product, lang):
+    """(label, href) for each legal document, in the closest language it exists in."""
+    out = []
+    for entry in product.get('legal', []):
+        langs = entry.get('languages', [site.default_lang])
+        doc_lang = lang if lang in langs else (site.default_lang if site.default_lang in langs else langs[0])
+        label = site.t(lang, 'doc.' + entry['doc'])
+        if doc_lang != lang:
+            label += f' ({site.language_name(doc_lang)})'
+        out.append((label, site.url(doc_lang, 'legal', entry['path'])))
+    return out
+
+
 def shell(site, *, lang, path, title, description, body, alternates=None, main_class='page'):
     cfg = site.config
     domain = cfg['domain'].rstrip('/')
     canonical = domain + path
-    nav = []
-    nav_items = [('products', text(lang, 'Projects', '제품')), ('about', text(lang, 'About', '회사 소개')), ('support', text(lang, 'Contact', '문의'))]
+    nav_items = [('products', text(lang, 'Products', '제품')), ('about', text(lang, 'About', '회사 소개')), ('support', text(lang, 'Contact', '문의'))]
     if site.playables:
         nav_items.insert(1, ('play', site.t(lang, 'nav.play')))
+    nav = []
     for slug, label in nav_items:
         href = site.url(lang, slug)
         current = ' aria-current="page"' if path.startswith(href) else ''
-        nav.append(f'<a href="{href}"{current}>{label}</a>')
+        nav.append(f'<a href="{href}"{current}>{e(label)}</a>')
     alternates = alternates or {}
     switches = []
     for code, href in alternates.items():
         label = 'EN' if code == 'en' else site.language_name(code)
-        switches.append(f'<span class="current" aria-current="true">{e(label)}</span>' if code == lang else f'<a href="{e(href)}" hreflang="{e(code)}">{e(label)}</a>')
+        if code == lang:
+            switches.append(f'<span aria-current="true">{e(label)}</span>')
+        else:
+            switches.append(f'<a href="{e(href)}" hreflang="{e(code)}" lang="{e(code)}">{e(label)}</a>')
+    switch_html = f'<div class="lang-switch" role="group" aria-label="{text(lang, "Language", "언어")}">{"".join(switches)}</div>' if switches else ''
     alternates_html = '\n'.join(f'<link rel="alternate" hreflang="{e(code)}" href="{e(domain + href)}">' for code, href in alternates.items())
     image = cfg['logo']
     for product in site.products:
@@ -45,8 +112,8 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <meta name="description" content="{e(description)}">
   <meta name="robots" content="index,follow">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f7f8fa" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0d111a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f6f5f1" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121216" media="(prefers-color-scheme: dark)">
   <script>(()=>{{let t='system';try{{const s=localStorage.getItem('player0-theme');if(s==='light'||s==='dark')t=s;}}catch{{}}document.documentElement.dataset.theme=t;}})();</script>
   <link rel="canonical" href="{e(canonical)}">
   {alternates_html}
@@ -61,19 +128,24 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <link rel="icon" href="{e(cfg['logo'])}">
 </head>
 <body>
-  <a class="skip-link" href="#main">{text(lang,'Skip to content','본문으로 이동')}</a>
+  <a class="skip-link" href="#main">{text(lang, 'Skip to content', '본문으로 이동')}</a>
   <header class="site-header">
-    <a class="brand" href="{site.url(lang)}" aria-label="{text(lang,'Player Zero home','Player Zero 홈')}">
-      <img src="{e(cfg['logo'])}" alt="" width="50" height="50">
-      <span class="brand-name">PLAYER ZERO</span>
-    </a>
-    <nav class="site-nav" aria-label="{text(lang,'Main navigation','주요 메뉴')}">{''.join(nav)}<span class="nav-settings"><select id="appearance" aria-label="{text(lang,'Appearance','화면 테마')}"><option value="system">{text(lang,'System','시스템')}</option><option value="light">{text(lang,'Light','밝게')}</option><option value="dark">{text(lang,'Dark','어둡게')}</option></select><span class="lang-switch">{''.join(switches)}</span></span></nav>
+    <div class="header-inner">
+      <a class="brand" href="{site.url(lang)}" aria-label="{text(lang, 'Player Zero home', 'Player Zero 홈')}"><img src="{e(cfg['logo'])}" alt="" width="40" height="40"><span class="brand-name">Player Zero</span></a>
+      <nav class="site-nav" aria-label="{text(lang, 'Main navigation', '주요 메뉴')}">{''.join(nav)}</nav>
+      <div class="site-settings">
+        <select id="appearance" aria-label="{text(lang, 'Appearance', '화면 테마')}"><option value="system">{text(lang, 'System', '시스템')}</option><option value="light">{text(lang, 'Light', '밝게')}</option><option value="dark">{text(lang, 'Dark', '어둡게')}</option></select>
+        {switch_html}
+      </div>
+    </div>
   </header>
   <main id="main" class="{e(main_class)}">{body}</main>
   <footer class="site-footer">
-    <div><p class="footer-brand">Player Zero</p><p class="footer-tagline">{text(lang,'Games & apps.','게임과 앱을 만듭니다.')}</p></div>
-    <div class="footer-links"><a href="{site.url(lang,'products')}">{text(lang,'Projects','제품')}</a><a href="{site.url(lang,'support')}">{text(lang,'Contact','문의')}</a><a href="{e(cfg['youtube'])}">YouTube</a><a href="{site.url(lang,'legal')}">{site.t(lang,'legal.title')}</a></div>
-    <div class="footer-bottom"><p>© 2026 Player Zero</p><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><p>PLAYER0.DEV</p></div>
+    <div class="footer-inner">
+      <div class="footer-id"><p class="footer-brand">Player Zero</p><p>{text(lang, 'Games and apps', '게임과 앱')}</p></div>
+      <nav class="footer-links" aria-label="{text(lang, 'Footer', '하단 메뉴')}"><a href="{site.url(lang, 'products')}">{text(lang, 'Products', '제품')}</a><a href="{site.url(lang, 'about')}">{text(lang, 'About', '회사 소개')}</a><a href="{site.url(lang, 'support')}">{text(lang, 'Contact', '문의')}</a><a href="{e(cfg['youtube'])}">YouTube</a><a href="{site.url(lang, 'legal')}">{e(site.t(lang, 'legal.title'))}</a></nav>
+      <div class="footer-bottom"><p>© 2026 Player Zero</p><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a></div>
+    </div>
   </footer>
   <script>(()=>{{const s=document.getElementById('appearance');const r=document.documentElement;s.value=r.dataset.theme||'system';s.addEventListener('change',()=>{{r.dataset.theme=s.value;try{{if(s.value==='system')localStorage.removeItem('player0-theme');else localStorage.setItem('player0-theme',s.value);}}catch{{}}}});}})();</script>
 </body>
@@ -95,175 +167,329 @@ def paragraphs(values, cls='body-copy'):
     return '<div class="' + cls + '">' + ''.join(f'<p>{e(v)}</p>' for v in values) + '</div>'
 
 
-def project_row(site, product, lang, content):
-    slug = product['slug']
-    copy, _ = content(site, product, lang)
-    name = copy.get('name', slug)
-    image = product.get('images', {}).get('cover', product.get('images', {}).get('hero'))
-    alt = product.get('images', {}).get('coverAlt', product.get('images', {}).get('heroAlt', name))
-    media = (f'<img src="{e(image)}" alt="{e(alt)}" width="1280" height="720" loading="lazy">'
-             if image else f'<span class="project-placeholder">{e(name)}</span>')
-    detail = site.url(lang, 'products', slug)
-    kind = site.t(lang, f'kind.{product.get("kind", "app")}')
-    return f'''<article class="project-row project-{e(slug)}">
-      <a class="project-art" href="{detail}" aria-label="{e(name)}">
-        {media}
+def meta_line(site, lang, product):
+    parts = [site.t(lang, 'kind.' + product.get('kind', 'app')), platforms(site, lang, product)]
+    items = ''.join(f'<span>{e(part)}</span>' for part in parts if part)
+    return f'<p class="meta">{items}<span class="status">{e(status(site, lang, product))}</span></p>'
 
-      </a>
-      <div class="project-copy">
-      <div class="project-meta"><span>{e(kind)}</span><span class="status-dot">{e(site.t(lang, 'status.' + product.get('status', 'in-development')))}</span></div>
-        <h2><a href="{detail}">{e(name)}</a></h2>
-        <p class="project-tagline">{e(copy['tagline'])}</p>
-        <p class="project-summary">{e(copy['description'][0])}</p>
-        {button(detail, text(lang, 'Explore ' + name, name + ' 살펴보기'), True)}
-      </div>
-    </article>'''
+
+def facts(site, lang, product):
+    rows = [(site.t(lang, 'detail.platforms'), platforms(site, lang, product)),
+            (site.t(lang, 'detail.status'), status(site, lang, product))]
+    if product.get('status') != 'released':
+        rows.append((text(lang, 'Release', '출시'), text(lang, 'Date to be announced', '출시일 미정')))
+    return '<dl class="facts">' + ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in rows if v) + '</dl>'
+
+
+def channels(site, lang):
+    cfg = site.config
+    return f'''<ul class="channels">
+        <li><span class="channel-label">{text(lang, 'Email', '이메일')}</span><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><span class="channel-note">{text(lang, 'Product support, press and business enquiries', '제품 문의, 취재, 협업 제안')}</span></li>
+        <li><span class="channel-label">YouTube</span><a href="{e(cfg['youtube'])}">{YOUTUBE_NAME}<span class="handle">{YOUTUBE_HANDLE}</span></a><span class="channel-note">{text(lang, 'Development updates', '개발 소식')}</span></li>
+      </ul>'''
 
 
 def contact_block(site, lang):
-    return f'''<section class="contact-band">
-      <div><h2>{text(lang, 'Contact', '문의')}</h2><p>{text(lang, 'Product support, press and business enquiries.', '제품 문의, 취재 및 협업 연락을 받습니다.')}</p></div>
-      <div class="contact-actions"><a class="contact-email" href="mailto:{e(site.config['contact'])}">{e(site.config['contact'])}</a><a class="text-link" href="{e(site.config['youtube'])}">YouTube</a></div>
+    return f'''<section class="contact-block">
+      <div><h2>{text(lang, 'Get in touch', '연락하기')}</h2><p>{text(lang, 'Questions, feedback and enquiries all go to the same inbox.', '질문, 의견, 각종 문의는 모두 같은 메일로 받습니다.')}</p></div>
+      {channels(site, lang)}
+    </section>'''
+
+
+# ------------------------------------------------------------------ home
+
+
+def index_row(site, product, lang, copy):
+    slug, name = product['slug'], copy.get('name', product['slug'])
+    images = product.get('images', {})
+    thumb = images.get('cover') or images.get('hero')
+    art = (f'<img src="{e(thumb)}" alt="" width="160" height="90">' if thumb
+           else f'<span class="index-initial" aria-hidden="true">{e(name[:1])}</span>')
+    where = ' · '.join(part for part in (platforms(site, lang, product), status(site, lang, product)) if part)
+    return f'''<li class="index-item index-{e(slug)}"><a href="{site.url(lang, 'products', slug)}">
+          <span class="index-art">{art}</span>
+          <span class="index-text"><span class="index-name">{e(name)}</span><span class="index-summary">{e(summary(copy))}</span><span class="index-meta">{e(where)}</span></span>
+        </a></li>'''
+
+
+def spotlight(site, product, lang, copy):
+    """One product, presented with its own imagery and how it is played or used."""
+    slug, name = product['slug'], copy.get('name', product['slug'])
+    detail = site.url(lang, 'products', slug)
+    images = product.get('images', {})
+    game = product.get('kind') == 'game'
+    shots = gallery(site, product, lang, name)
+    hero = images.get('hero') or images.get('cover')
+    upright = not game and bool(shots)
+    if upright:
+        media = '<div class="phones">' + ''.join(
+            f'<figure class="phone"><img src="{e(shot["src"])}" alt="{e(shot.get("alt", name))}" width="540" height="960" loading="lazy">'
+            + (f'<figcaption>{e(shot["caption"])}</figcaption>' if shot.get('caption') else '') + '</figure>'
+            for shot in shots[:3]) + '</div>'
+    elif hero:
+        media = f'<img class="spotlight-shot" src="{e(hero)}" alt="{e(images.get("heroAlt", name))}" width="1600" height="900" loading="lazy">'
+    else:
+        media = f'<span class="placeholder">{e(name)}</span>'
+
+    modes, steps = copy.get('modes') or [], copy.get('howTo') or []
+    points_html = ''
+    if modes or steps:
+        points = modes or steps
+        pictured = game and modes and len(shots) >= len(modes)
+        heading = text(lang, 'Ways to play', '연주 방식') if modes else how_label(lang, product)
+        items = []
+        for i, point in enumerate(points):
+            pic = (f'<img src="{e(shots[i]["src"])}" alt="{e(shots[i].get("alt", point["title"]))}" width="1280" height="720" loading="lazy">' if pictured else '')
+            items.append(f'<li class="point">{pic}<h4>{e(point["title"])}</h4><p>{e(point["body"])}</p></li>')
+        cls = 'points points-pictured' if pictured else 'points points-numbered'
+        points_html = f'<div class="spotlight-points"><h3>{e(heading)}</h3><ol class="{cls}">{"".join(items)}</ol></div>'
+
+    actions = []
+    if steps:
+        actions.append(button(detail + '#how-to', how_label(lang, product)))
+    else:
+        actions.append(button(detail, text(lang, 'View ' + name, name + ' 보기')))
+    if product.get('video'):
+        actions.append(button(detail + '#gameplay', text(lang, 'Watch gameplay', '플레이 영상 보기'), True))
+    if steps:
+        actions.append(f'<a class="text-link" href="{detail}">{e(text(lang, "More about " + name, name + " 자세히 보기"))}</a>')
+    lead = (copy.get('description') or [''])[0]
+    kind = 'spotlight-app' if upright else 'spotlight-game'
+    return f'''<section class="spotlight {kind} tone tone-{e(slug)}" id="{e(slug)}" aria-labelledby="{e(slug)}-name">
+      <div class="wrap">
+        <div class="spotlight-main">
+          <div class="spotlight-title">{meta_line(site, lang, product)}<h2 id="{e(slug)}-name"><a href="{detail}">{e(name)}</a></h2><p class="spotlight-tagline">{e(copy.get('tagline', ''))}</p></div>
+          <div class="spotlight-media">{media}</div>
+          <div class="spotlight-body"><p>{e(lead)}</p><div class="actions">{''.join(actions)}</div></div>
+        </div>
+        {points_html}
+      </div>
     </section>'''
 
 
 def home(site, lang, shell, content):
-    products = sorted(site.products, key=lambda p: (p.get('order', 1000), p['slug']))
-    cards = []
+    products = ordered(site.products)
+    rows, spotlights = [], []
     for product in products:
         copy, _ = content(site, product, lang)
-        slug, name = product['slug'], copy['name']
-        detail = site.url(lang, 'products', slug)
-        images = product.get('images', {})
-        image = images.get('hero') or images.get('cover')
-        media = (f'<img src="{e(image)}" alt="{e(images.get("heroAlt", name))}" width="1280" height="720" fetchpriority="high">'
-                 if image else f'<span class="project-placeholder">{e(name)}</span>')
-        kind = site.t(lang, 'kind.' + product.get('kind', 'app'))
-        platforms = ' · '.join(site.t(lang, 'platform.' + value) for value in product.get('platforms', []))
-        extra = (f'<a class="text-link" href="{detail}#gameplay">{text(lang,"Gameplay video","플레이 영상")}</a>' if product.get('video') else '')
-        cards.append(f'''<article class="showcase showcase-{e(slug)}">
-          <a class="showcase-media" href="{detail}" aria-label="{e(name)}">{media}</a>
-          <div class="showcase-body"><div class="showcase-meta"><span>{e(kind)} · {e(platforms)}</span><span class="status-dot">{e(site.t(lang,'status.' + product.get('status','in-development')))}</span></div>
-          <h2><a href="{detail}">{e(name)}</a></h2><p>{e(copy['tagline'])}</p>
-          <div class="showcase-actions">{button(detail,text(lang,'View project','제품 소개'))}{extra}</div></div>
-        </article>''')
+        rows.append(index_row(site, product, lang, copy))
+        spotlights.append(spotlight(site, product, lang, copy))
+    listing = (f'<ul class="index-list">{"".join(rows)}</ul>' if rows
+               else f'<p class="muted">{e(site.t(lang, "products.empty"))}</p>')
     lead = site.t(lang, 'home.lead')
-    body = f'''<section class="company-intro"><div><h1>Player Zero</h1><p>{e(lead)}</p></div><a class="text-link" href="{site.url(lang,'about')}">{text(lang,'About us','회사 소개')}</a></section>
-      <section class="home-showcase" id="projects" aria-label="{text(lang,'Our products','제품')}">{''.join(cards) if cards else '<p>' + e(site.t(lang,'products.empty')) + '</p>'}</section>
-      {contact_block(site,lang)}'''
-    return shell(site,lang=lang,path=site.url(lang),title='Player Zero — '+text(lang,'Games & apps','게임과 앱'),description=lead,body=body,alternates={l:site.url(l) for l in site.languages},main_class='page page-home')
+    body = f'''<section class="home-intro wrap">
+      <div class="home-intro-copy"><h1>Player Zero</h1><p class="lead">{e(lead)}</p></div>
+      <div class="home-index"><h2>{e(site.t(lang, 'home.current'))}</h2>{listing}</div>
+    </section>
+    {''.join(spotlights)}
+    <section class="studio wrap">
+      <div class="studio-about"><h2>{e(site.t(lang, 'home.aboutTitle'))}</h2><p>{e(site.t(lang, 'home.about'))}</p><a class="text-link" href="{site.url(lang, 'about')}">{e(site.t(lang, 'home.aboutLink'))}</a></div>
+      <div class="studio-contact"><h2>{text(lang, 'Get in touch', '연락하기')}</h2>{channels(site, lang)}</div>
+    </section>'''
+    return shell(site, lang=lang, path=site.url(lang), title=site.t(lang, 'home.title'), description=site.t(lang, 'home.description'), body=body, alternates={l: site.url(l) for l in site.languages}, main_class='page-wide page-home')
+
+
+# -------------------------------------------------------------- products
+
+
+def project_row(site, product, lang, content):
+    slug = product['slug']
+    copy, _ = content(site, product, lang)
+    name = copy.get('name', slug)
+    images = product.get('images', {})
+    image = images.get('cover') or images.get('hero')
+    alt = images.get('coverAlt') or images.get('heroAlt') or name
+    detail = site.url(lang, 'products', slug)
+    media = (f'<img src="{e(image)}" alt="{e(alt)}" width="1232" height="706" loading="lazy">' if image
+             else f'<span class="placeholder">{e(name)}</span>')
+    links = []
+    if copy.get('howTo'):
+        links.append((how_label(lang, product), detail + '#how-to'))
+    if product.get('video'):
+        links.append((text(lang, 'Gameplay video', '플레이 영상'), detail + '#gameplay'))
+    if copy.get('faq'):
+        links.append((text(lang, 'FAQ', '자주 묻는 질문'), detail + '#faq'))
+    links += policy_docs(site, product, lang)
+    links += [(link.get('label', link.get('platform', 'Link')), link['url']) for link in product.get('links', [])]
+    link_html = ''.join(f'<a class="text-link" href="{e(href)}">{e(label)}</a>' for label, href in links)
+    return f'''<article class="catalog-item catalog-{e(slug)}">
+      <a class="catalog-art" href="{detail}" tabindex="-1">{media}</a>
+      <div class="catalog-copy">
+        <p class="catalog-summary">{e(summary(copy))}</p>
+        <h2><a href="{detail}">{e(name)}</a></h2>
+        <p class="catalog-tagline">{e(copy.get('tagline', ''))}</p>
+        {paragraphs(copy.get('description', [])[:2])}
+        {facts(site, lang, product)}
+        <div class="actions">{button(detail, text(lang, 'View ' + name, name + ' 보기'))}{link_html}</div>
+      </div>
+    </article>'''
 
 
 def products(site, lang, shell, content):
-    rows = ''.join(project_row(site, p, lang, content) for p in sorted(site.products, key=lambda p: p.get('order', 1000)))
-    body = f'''<header class="page-intro">{eyebrow(text(lang, 'OUR PROJECTS', '우리가 만드는 것들'))}<h1>{text(lang, 'Our products', '제품')}</h1>
-      <p class="hero-lead">{text(lang, 'Games and apps from Player Zero.', 'Player Zero가 만들고 있는 게임과 앱입니다.')}</p></header>
-      <section class="projects-section">{rows}</section>{contact_block(site, lang)}'''
-    return shell(site, lang=lang, path=site.url(lang, 'products'), title=text(lang, 'Projects', '제품') + ' | Player Zero', description=site.t(lang, 'products.description'), body=body, alternates={l: site.url(l, 'products') for l in site.languages})
+    rows = ''.join(project_row(site, p, lang, content) for p in ordered(site.products))
+    if not rows:
+        rows = f'<p class="muted">{e(site.t(lang, "products.empty"))}</p>'
+    body = f'''<header class="page-intro"><h1>{e(site.t(lang, 'products.title'))}</h1><p class="lead">{e(site.t(lang, 'products.lead'))}</p></header>
+      <section class="catalog">{rows}</section>
+      {contact_block(site, lang)}'''
+    return shell(site, lang=lang, path=site.url(lang, 'products'), title=site.t(lang, 'products.title') + ' | Player Zero', description=site.t(lang, 'products.description'), body=body, alternates={l: site.url(l, 'products') for l in site.languages})
+
+
+# ---------------------------------------------------------------- detail
 
 
 def feature_list(items):
-    return '<div class="feature-grid">' + ''.join(f'<article class="feature"><span class="feature-index">{i:02d}</span><div><h3>{e(item["title"])}</h3><p>{e(item["body"])}</p></div></article>' for i, item in enumerate(items, 1)) + '</div>'
+    return '<ul class="feature-list">' + ''.join(f'<li><h3>{e(item["title"])}</h3><p>{e(item["body"])}</p></li>' for item in items) + '</ul>'
 
 
 def steps_list(items):
-    return '<ol class="steps">' + ''.join(f'<li><span class="step-number">{i:02d}</span><h3>{e(item["title"])}</h3><p>{e(item["body"])}</p></li>' for i, item in enumerate(items, 1)) + '</ol>'
+    return '<ol class="steps">' + ''.join(f'<li><h3>{e(item["title"])}</h3><p>{e(item["body"])}</p></li>' for item in items) + '</ol>'
 
 
 def detail(site, product, lang, shell, content, legal_docs):
     copy, fallback = content(site, product, lang)
-    slug, name = product['slug'], copy['name']
+    slug = product['slug']
+    name = copy.get('name', slug)
     game = product.get('kind') == 'game'
-    title_how = text(lang, 'How to play', '플레이 방법') if game else text(lang, 'How to use', '사용 방법')
-    kind = site.t(lang, 'kind.' + product['kind'])
-    platform_text = ' · '.join(site.t(lang, 'platform.' + p) for p in product.get('platforms', []))
+    how = how_label(lang, product)
     docs = legal_docs(site, product, lang)
-    actions = button('#how-to', title_how) if copy.get('howTo') else ''
-    if product.get('video'):
-        actions += button('#gameplay', text(lang, 'Watch gameplay', '플레이 영상 보기'), True)
-    if docs:
-        actions += button(docs[0][1], docs[0][0], True)
-    actions += ''.join(button(link['url'], link.get('label', link.get('platform', 'Link')), True) for link in product.get('links', []))
     images = product.get('images', {})
-    alt = images.get('heroAlt', name)
+    shots = gallery(site, product, lang, name)
+    modes, steps = copy.get('modes') or [], copy.get('howTo') or []
+    pictured = bool(game and modes and len(shots) == len(modes))
+
+    actions = []
+    if steps:
+        actions.append(button('#how-to', how))
+    if product.get('video'):
+        actions.append(button('#gameplay', text(lang, 'Watch gameplay', '플레이 영상 보기'), bool(actions)))
+    actions += [button(href, label, True) for label, href in docs[:1]]
+    actions += [button(link['url'], link.get('label', link.get('platform', 'Link')), True) for link in product.get('links', [])]
+    notice = f'<p class="notice">{e(site.t(lang, "detail.fallbackNotice", language=site.language_name(fallback)))}</p>' if fallback else ''
+
     media = ''
+    hero = images.get('hero')
     if product.get('video'):
         video = e(product['video'])
-        media = f'''<figure class="product-media" id="gameplay"><video controls playsinline preload="none" poster="{e(images.get('hero',''))}" aria-label="{e(name + text(lang, ' gameplay trailer', ' 실제 플레이 영상'))}"><source src="{video}" type="video/mp4"><a href="{video}">{text(lang, 'Open the gameplay video', '플레이 영상 열기')}</a></video><figcaption>{text(lang, 'Actual gameplay · Development build', '개발 중인 게임의 실제 플레이 화면')}</figcaption></figure>'''
-    elif images.get('hero'):
-        media = f'<figure class="product-media meloom-media"><img src="{e(images["hero"])}" alt="{e(alt)}" width="1024" height="500" fetchpriority="high"><figcaption>{e(name)} · {text(lang, "In development", "개발 중")}</figcaption></figure>'
-    modes = ''
-    if copy.get('modes'):
-        modes = f'''<section class="detail-section" id="modes">
-        <h2>{text(lang, 'Play modes', '연주 방식')}</h2>
-        <div class="mode-grid">''' + ''.join(f'<article class="mode"><span class="mode-symbol" aria-hidden="true">{["●", "● ●", "Aa"][i]}</span><h3>{e(m["title"])}</h3><p>{e(m["body"])}</p></article>' for i, m in enumerate(copy['modes'])) + '</div></section>'
-    galleries = product.get('galleries', {})
-    gallery = galleries.get(lang, galleries.get(site.default_lang, []))
-    if not gallery:
-        gallery = [{'src': src, 'alt': name, 'caption': name} for src in images.get('screenshots', [])]
-    gallery_block = ''
-    if gallery:
-        gallery_block = f'<section class="detail-section"><h2>{text(lang, "Screenshots", "제품 화면")}</h2><div class="screenshot-grid {"phone-gallery" if not game else ""}">'
-        for shot in gallery:
-            gallery_block += f'<figure><a href="{e(shot["src"])}" target="_blank" rel="noopener" aria-label="{e(text(lang, "Open image: ", "이미지 크게 보기: ") + shot["caption"])}"><img src="{e(shot["src"])}" alt="{e(shot["alt"])}" loading="lazy" width="{1280 if game else 540}" height="{720 if game else 960}"></a><figcaption>{e(shot["caption"])}</figcaption></figure>'
-        gallery_block += '</div></section>'
-    faq = ''.join(f'<details><summary>{e(q["question"])}</summary><p>{e(q["answer"])}</p></details>' for q in copy.get('faq', []))
-    policy_links = ''.join(f'<a class="text-link" href="{e(href)}">{e(label)}</a>' for label, href in docs)
-    legal_block = f'<section class="detail-section product-legal"><h2>{e(site.t(lang,"detail.legal"))}</h2>{policy_links}</section>' if docs else ''
-    notice = f'<p class="notice">{e(site.t(lang,"detail.fallbackNotice",language=site.language_name(fallback)))}</p>' if fallback else ''
-    how_block = (f'<section class="detail-section" id="how-to"><h2>{e(title_how)}</h2>{steps_list(copy["howTo"])}</section>' if copy.get('howTo') else '')
-    features_block = (f'<section class="detail-section"><h2>{text(lang,"Features","주요 기능")}</h2>{feature_list(copy["features"])}</section>' if copy.get('features') else '')
-    faq_block = (f'<section class="detail-section faq-section" id="faq"><div><h2>{text(lang,"Frequently asked questions","자주 묻는 질문")}</h2></div><div class="faq-list">{faq}</div></section>' if faq else '')
-    support_slug = slug if slug in {'keycerto', 'meloom'} else ''
-    support_url = site.url(lang, 'support') + ('#' + support_slug if support_slug else '')
-    body = f'''<article class="product-page product-page-{slug}">
-      <header class="product-intro"><p class="crumb"><a href="{site.url(lang, 'products')}">{text(lang, 'Projects', '제품')}</a><span aria-hidden="true">/</span>{e(name)}</p>
-      <div class="product-title-row"><div>{eyebrow(kind)}<h1>{e(name)}</h1><p class="product-lead">{e(copy['tagline'])}</p></div>
-      <aside class="product-facts"><span class="status-dot">{e(site.t(lang, 'status.' + product.get('status', 'in-development')))}</span><span>{e(platform_text)}</span><span>{text(lang, 'Release date to be announced', '출시일 미정') if product.get('status') != 'released' else ''}</span></aside></div>
-      <div class="product-actions">{actions}</div>{notice}</header>
-      {media}
-      <section class="product-story"><h2>{text(lang, 'Meet ' + name, name + ' 소개')}</h2>{paragraphs(copy['description'])}</section>
-      {modes}
-      {how_block}
-      {features_block}
-      {gallery_block}
-      {faq_block}
-      {legal_block}
-      <section class="product-contact"><h2>{text(lang, 'A question about ' + name + '?', name + '에 대해 궁금한가요?')}</h2><p>{text(lang, 'We’d love to hear from you.', '문의와 피드백을 기다리고 있어요.')}</p>{button(support_url, text(lang, 'Contact & support', '문의 및 지원'), True)}</section>
+        poster = f' poster="{e(hero)}"' if hero else ''
+        media = f'''<figure class="hero-media" id="gameplay"><video controls playsinline preload="none"{poster} aria-label="{e(name + text(lang, ' gameplay video', ' 플레이 영상'))}"><source src="{video}" type="video/mp4"><a href="{video}">{text(lang, 'Open the gameplay video', '플레이 영상 열기')}</a></video><figcaption>{text(lang, 'Actual gameplay from the version in development', '개발 중인 버전의 실제 플레이 화면')}</figcaption></figure>'''
+    elif hero:
+        media = f'<figure class="hero-media hero-art"><img src="{e(hero)}" alt="{e(images.get("heroAlt", name))}" width="1024" height="500" fetchpriority="high"></figure>'
+
+    blocks = [f'<section class="block block-split"><h2>{e(text(lang, "About " + name, name + " 소개"))}</h2>{paragraphs(copy.get("description", []))}</section>']
+
+    if shots and not pictured:
+        heading = text(lang, 'Screenshots', '게임 화면') if game else text(lang, 'In the app', '앱 화면')
+        cls = 'gallery' if game else 'gallery gallery-portrait'
+        figures = ''.join(
+            f'<figure><a href="{e(shot["src"])}"><img src="{e(shot["src"])}" alt="{e(shot.get("alt", name))}" loading="lazy" width="{1280 if game else 540}" height="{720 if game else 960}"></a>'
+            + (f'<figcaption>{e(shot["caption"])}</figcaption>' if shot.get('caption') else '') + '</figure>'
+            for shot in shots)
+        blocks.append(f'<section class="block"><h2>{heading}</h2><div class="{cls}">{figures}</div></section>')
+
+    if modes:
+        items = []
+        for i, mode in enumerate(modes):
+            pic = (f'<img src="{e(shots[i]["src"])}" alt="{e(shots[i].get("alt", mode["title"]))}" width="1280" height="720" loading="lazy">' if pictured else '')
+            items.append(f'<li class="mode">{pic}<h3>{e(mode["title"])}</h3><p>{e(mode["body"])}</p></li>')
+        cls = 'mode-list mode-list-pictured' if pictured else 'mode-list'
+        blocks.append(f'<section class="block" id="modes"><h2>{text(lang, "Ways to play", "연주 방식")}</h2><ol class="{cls}">{"".join(items)}</ol></section>')
+
+    if steps:
+        blocks.append(f'<section class="block" id="how-to"><h2>{e(how)}</h2>{steps_list(steps)}</section>')
+
+    if copy.get('features'):
+        blocks.append(f'<section class="block"><h2>{text(lang, "Features", "주요 기능")}</h2>{feature_list(copy["features"])}</section>')
+
+    if copy.get('faq'):
+        faq = ''.join(f'<details><summary>{e(q["question"])}</summary><p>{e(q["answer"])}</p></details>' for q in copy['faq'])
+        blocks.append(f'<section class="block block-split" id="faq"><h2>{text(lang, "Frequently asked questions", "자주 묻는 질문")}</h2><div class="faq-list">{faq}</div></section>')
+
+    if docs:
+        policy = ''.join(f'<a class="text-link" href="{e(href)}">{e(label)}</a>' for label, href in docs)
+        blocks.append(f'<section class="block block-split"><h2>{e(site.t(lang, "detail.legal"))}</h2><div class="link-row">{policy}</div></section>')
+
+    contact = site.config['contact']
+    subject = quote(name)
+    support_url = site.url(lang, 'support') + '#' + slug
+    blocks.append(f'''<section class="block product-contact"><div><h2>{e(text(lang, 'Questions about ' + name + '?', name + '에 대해 궁금한 점이 있나요?'))}</h2><p>{text(lang, 'Write to us. Feedback is welcome too.', '메일로 보내주세요. 의견도 언제든 환영합니다.')}</p></div>
+        <div class="actions"><a class="button button-secondary" href="mailto:{e(contact)}?subject={e(subject)}">{e(contact)}</a><a class="text-link" href="{support_url}">{text(lang, 'Contact & support', '문의 및 지원')}</a></div></section>''')
+
+    body = f'''<article class="product-page product-page-{e(slug)}">
+      <header class="product-hero tone tone-{e(slug)}">
+        <div class="wrap">
+          <p class="crumb"><a href="{site.url(lang, 'products')}">{text(lang, 'Products', '제품')}</a><span aria-hidden="true">/</span><span>{e(name)}</span></p>
+          <div class="product-hero-top">
+            <div><p class="product-summary">{e(summary(copy))}</p><h1>{e(name)}</h1><p class="product-lead">{e(copy.get('tagline', ''))}</p></div>
+            <div class="product-hero-side">{facts(site, lang, product)}<div class="actions">{''.join(actions)}</div></div>
+          </div>
+          {notice}
+          {media}
+        </div>
+      </header>
+      <div class="wrap">{''.join(blocks)}</div>
     </article>'''
-    return shell(site, lang=lang, path=site.url(lang, 'products', slug), title=f'{name} | Player Zero', description=copy['tagline'], body=body, alternates={l: site.url(l, 'products', slug) for l in site.languages})
+    return shell(site, lang=lang, path=site.url(lang, 'products', slug), title=f'{name} | Player Zero', description=copy.get('tagline', name), body=body, alternates={l: site.url(l, 'products', slug) for l in site.languages}, main_class='page-wide page-product')
+
+
+# ------------------------------------------------------- about & support
 
 
 def about(site, lang, shell):
-    intro = text(lang, 'Player Zero is an independent developer of games and apps. We are currently developing KEYCERTO and Meloom.', 'Player Zero는 게임과 앱을 만드는 독립 개발사입니다. 현재 KEYCERTO와 Meloom을 개발하고 있습니다.')
-    points = [
-        {'title':text(lang,'KEYCERTO','KEYCERTO'),'body':text(lang,'KEYCERTO began with a simple connection: the rhythm of music and the motion of typing. A page of words gives every performance something to leave behind.','KEYCERTO는 음악의 박자와 타자를 치는 움직임을 연결합니다. 한 곡의 연주가 끝나면, 종이 위에 편지와 이야기 한 장이 남습니다.')},
-        {'title':text(lang,'Meloom','Meloom'),'body':text(lang,'Meloom brings weather, time and a companion into a room. It is a different way to spend a quiet moment with your day.','Meloom은 날씨와 시간, 작은 동반자를 하나의 방에 담습니다. 하루의 정보를 확인하는 일에 잠시 머무를 수 있는 공간을 더합니다.')},
+    lead = site.t(lang, 'about.lead')
+    cfg = site.config
+    rows = [
+        (text(lang, 'Company', '회사'), 'Player Zero'),
+        (text(lang, 'What we make', '만드는 것'), text(lang, 'Games and apps', '게임과 앱')),
+        (text(lang, 'Website', '웹사이트'), cfg['domain'].split('//')[-1].rstrip('/')),
     ]
-    body = f'''<header class="page-intro about-intro">{eyebrow('PLAYER ZERO')}<h1>{text(lang, 'About Player Zero', 'Player Zero 소개')}</h1><p class="hero-lead">{e(intro)}</p></header>
-      <section class="about-principles">{feature_list(points)}</section>
-      <section class="about-project-links"><h2>{text(lang, 'Products', '제품')}</h2>{button(site.url(lang,'products'),text(lang,'Meet our projects','제품 둘러보기'))}</section>{contact_block(site,lang)}'''
-    return shell(site,lang=lang,path=site.url(lang,'about'),title=text(lang,'About','회사 소개')+' | Player Zero',description=intro,body=body,alternates={l:site.url(l,'about') for l in site.languages})
+    fact_rows = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in rows)
+    fact_rows += f'<div><dt>{text(lang, "Email", "이메일")}</dt><dd><a href="mailto:{e(cfg["contact"])}">{e(cfg["contact"])}</a></dd></div>'
+    fact_rows += f'<div><dt>YouTube</dt><dd><a href="{e(cfg["youtube"])}">{YOUTUBE_NAME}</a> <span class="handle">{YOUTUBE_HANDLE}</span></dd></div>'
+    cards = []
+    for product in ordered(site.products):
+        copy = copy_for(site, product, lang)
+        slug, name = product['slug'], copy.get('name', product['slug'])
+        detail = site.url(lang, 'products', slug)
+        images = product.get('images', {})
+        thumb = images.get('cover') or images.get('hero')
+        art = f'<a class="about-art" href="{detail}" tabindex="-1"><img src="{e(thumb)}" alt="" width="1232" height="706" loading="lazy"></a>' if thumb else ''
+        cards.append(f'''<li class="about-product catalog-{e(slug)}">{art}<div><h3><a href="{detail}">{e(name)}</a></h3><p>{e(summary(copy))}</p><p class="muted">{e(platforms(site, lang, product))} · {e(status(site, lang, product))}</p></div></li>''')
+    body = f'''<header class="page-intro"><h1>{e(site.t(lang, 'about.title'))}</h1><p class="lead">{e(lead)}</p></header>
+      <section class="about-body">{paragraphs(strings(site, lang, 'about', 'paragraphs') or [])}<dl class="about-facts">{fact_rows}</dl></section>
+      <section class="about-products"><h2>{e(site.t(lang, 'about.making'))}</h2><ul>{''.join(cards)}</ul></section>
+      {contact_block(site, lang)}'''
+    return shell(site, lang=lang, path=site.url(lang, 'about'), title=site.t(lang, 'about.title') + ' | Player Zero', description=site.t(lang, 'about.description'), body=body, alternates={l: site.url(l, 'about') for l in site.languages})
 
 
 def support(site, lang, shell):
-    lead = text(lang,'Contact us with product questions, feedback or business enquiries.','제품 관련 질문, 피드백, 협업 문의를 보내주세요.')
+    cfg = site.config
+    lead = text(lang, 'Write to us about a product, a problem you ran into, press or business. Everything goes to one inbox.', '제품 문의, 사용 중 문제, 취재와 협업 제안까지 모두 한 메일로 받습니다.')
     blocks = []
-    for p in sorted(site.products,key=lambda p:p.get('order',1000)):
+    for p in ordered(site.products):
         slug = p['slug']
-        blocks_by_language = p['content']
-        copy = blocks_by_language.get(lang) or blocks_by_language.get(site.default_lang) or next(iter(blocks_by_language.values()))
-        name = copy['name']
+        copy = copy_for(site, p, lang)
+        name = copy.get('name', slug)
         subject = quote(name + ' support')
-        has_faq = bool(copy.get('faq'))
-        product_url = site.url(lang, 'products', slug) + ('#faq' if has_faq else '')
-        product_label = text(lang,'Read the product FAQ','제품의 자주 묻는 질문') if has_faq else text(lang,'Explore the project','제품 살펴보기')
-        blocks.append(f'''<article class="support-product" id="{e(slug)}"><h2>{e(name)}</h2><p>{text(lang,'Questions about the project or help with a problem.','제품이 궁금하거나 사용 중 문제가 생겼다면 연락해 주세요.')}</p>
-        <a class="text-link" href="mailto:{e(site.config['contact'])}?subject={e(subject)}">{e(site.config['contact'])}</a>
-        <a class="text-link" href="{e(product_url)}">{e(product_label)}</a></article>''')
-    body = f'''<header class="page-intro">{eyebrow(text(lang,'LET’S TALK','문의 및 지원'))}<h1>{text(lang,'Contact & support','문의 및 지원')}</h1><p class="hero-lead">{e(lead)}</p></header>
-      <section class="support-grid">{''.join(blocks)}</section>
-      <section class="support-note"><h2>{text(lang,'Help us understand what happened.','이렇게 알려주시면 도움이 돼요.')}</h2><p>{text(lang,'For a technical problem, include the product name, your platform, what you were doing and what happened. A screenshot can help show the issue.','문제가 생겼다면 제품 이름, 사용 기기와 운영체제, 문제가 발생한 상황과 증상을 적어주세요. 화면 캡처가 있으면 상황을 이해하는 데 도움이 됩니다.')}</p></section>
-      <section class="support-note"><h2>{text(lang,'Press & other enquiries','취재 및 그 밖의 문의')}</h2><p>{text(lang,'For press, collaboration or a general hello, use the same email.','취재와 협업 제안, 일반 문의도 같은 이메일로 보내주세요.')}</p><a class="text-link" href="mailto:{site.config['contact']}">{site.config['contact']}</a></section>
-      {contact_block(site,lang)}'''
-    return shell(site,lang=lang,path=site.url(lang,'support'),title=text(lang,'Support & contact','문의 및 지원')+' | Player Zero',description=lead,body=body,alternates={l:site.url(l,'support') for l in site.languages})
+        detail = site.url(lang, 'products', slug)
+        links = [f'<a class="text-link" href="mailto:{e(cfg["contact"])}?subject={e(subject)}">{e(text(lang, "Email about " + name, name + " 문의 메일 쓰기"))}</a>']
+        if copy.get('faq'):
+            links.append(f'<a class="text-link" href="{detail}#faq">{e(text(lang, name + " FAQ", name + " 자주 묻는 질문"))}</a>')
+        else:
+            links.append(f'<a class="text-link" href="{detail}">{e(text(lang, "About " + name, name + " 소개"))}</a>')
+        links += [f'<a class="text-link" href="{e(href)}">{e(label)}</a>' for label, href in policy_docs(site, p, lang)]
+        blocks.append(f'''<article class="support-product" id="{e(slug)}"><h2>{e(name)}</h2><p>{e(summary(copy))} · {e(platforms(site, lang, p))}</p><div class="link-stack">{''.join(links)}</div></article>''')
+    checklist = [text(lang, 'Which product, and which platform or operating system', '어떤 제품인지, 어떤 기기와 운영체제인지'),
+                 text(lang, 'What you were doing when it happened', '문제가 생겼을 때 무엇을 하고 있었는지'),
+                 text(lang, 'What you expected, and what happened instead', '원래 기대한 동작과 실제로 일어난 일'),
+                 text(lang, 'A screenshot, if you can take one', '가능하다면 화면 캡처')]
+    body = f'''<header class="page-intro"><h1>{text(lang, 'Contact & support', '문의 및 지원')}</h1><p class="lead">{e(lead)}</p></header>
+      <section class="support-main">
+        <div class="support-mail"><p class="muted">{text(lang, 'Email', '이메일')}</p><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><p>{text(lang, 'For development updates, follow', '개발 소식은 YouTube')} <a href="{e(cfg['youtube'])}">{YOUTUBE_NAME}</a> {text(lang, 'on YouTube (' + YOUTUBE_HANDLE + ').', '(' + YOUTUBE_HANDLE + ')에서 볼 수 있습니다.')}</p></div>
+        <div class="support-grid">{''.join(blocks)}</div>
+      </section>
+      <section class="support-notes">
+        <div><h2>{text(lang, 'Reporting a problem', '문제를 알려주실 때')}</h2><p>{text(lang, 'These details help us understand what happened:', '다음 내용을 함께 적어주시면 상황을 이해하는 데 도움이 됩니다.')}</p><ul class="checklist">{''.join(f'<li>{e(item)}</li>' for item in checklist)}</ul></div>
+        <div><h2>{text(lang, 'Press & business', '취재 및 협업')}</h2><p>{text(lang, 'For press, collaboration or anything else, use the same address.', '취재, 협업 제안, 그 밖의 문의도 같은 주소로 보내주세요.')}</p><a class="text-link" href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a></div>
+      </section>'''
+    return shell(site, lang=lang, path=site.url(lang, 'support'), title=text(lang, 'Contact & support', '문의 및 지원') + ' | Player Zero', description=lead, body=body, alternates={l: site.url(l, 'support') for l in site.languages})

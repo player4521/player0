@@ -6,27 +6,29 @@
     "play": "플레이"
   },
   "home": {
-    "title": "Player Zero",
-    "description": "게임과 일상의 앱을 만드는 독립 개발사 Player Zero. KEYCERTO와 Meloom을 만나보세요.",
-    "lead": "게임과 앱을 만듭니다.",
-    "featured": "프로젝트",
-    "playTeaser": "브라우저에서 바로 플레이",
-    "playTeaserEmpty": "브라우저에서 즐길 수 있는 게임을 준비 중입니다.",
-    "seeAll": "제품 전체 보기",
-    "eyebrow": "Player Zero",
-    "headline": "Player Zero",
+    "title": "Player Zero — 게임과 앱",
+    "description": "Player Zero는 게임과 앱을 만듭니다. 키보드로 연주하는 리듬 게임 KEYCERTO와 하루를 작은 방으로 보여주는 컴패니언 앱 Meloom을 소개합니다.",
+    "lead": "Player Zero는 게임과 앱을 만듭니다. 지금은 키보드로 연주하는 리듬 게임 KEYCERTO와, 하루를 작은 방으로 보여주는 컴패니언 앱 Meloom을 개발하고 있습니다.",
+    "current": "개발 중인 제품",
     "aboutTitle": "Player Zero 소개",
-    "aboutParagraphs": [
-      "Player Zero는 게임과 일상의 앱을 만드는 독립 개발사입니다. 작품마다 하나의 아이디어를 붙잡고, 손에 익을 때까지 다듬어 게임과 앱을 만듭니다.",
-      "KEYCERTO는 키보드를 종이 위에 편지와 이야기를 써 내려가는 악기로 바꿉니다. Meloom은 날씨와 시간, 하루의 일정을 작은 방 하나에 담습니다. 서로 다른 성격의 작품이고, 저희는 그 점이 좋습니다.",
-      "아직 두 작품 모두 출시일은 정해지지 않았습니다. 공개할 준비가 되면 이곳에서 가장 먼저 알려드리겠습니다."
+    "about": "Player Zero는 게임과 앱을 만드는 독립 개발사입니다. 두 제품 모두 개발 중이며 아직 출시일은 정해지지 않았습니다. 새로운 소식은 이 사이트에서 가장 먼저 알려드리고, 개발 과정은 YouTube 채널 Player Zero Dev에서 보실 수 있습니다.",
+    "aboutLink": "회사 소개 더 보기"
+  },
+  "about": {
+    "title": "Player Zero 소개",
+    "description": "Player Zero는 게임과 앱을 만드는 독립 개발사로, 현재 KEYCERTO와 Meloom을 개발하고 있습니다.",
+    "lead": "Player Zero는 게임과 앱을 만드는 독립 개발사입니다.",
+    "paragraphs": [
+      "지금은 두 가지 제품을 만들고 있습니다. KEYCERTO는 키보드로 연주하는 리듬 게임으로, Steam을 통한 Windows PC용으로 개발 중입니다. Meloom은 하루를 작은 방으로 보여주는 Android·Windows용 컴패니언 앱입니다.",
+      "두 제품은 성격이 꽤 다릅니다. KEYCERTO에서는 음악에 맞춰 박자를 지키면 종이 위에 편지와 짧은 이야기가 쓰이고, 한 키나 두 키로, 또는 영문 문장을 직접 입력하며 연주할 수 있습니다. Meloom에서는 날씨와 현재 시각, 원하면 캘린더 일정까지 작은 방 안에 나타나고, 그 방에서 선물과 카드 팩을 열며 카드를 모을 수 있습니다.",
+      "두 제품 모두 아직 출시일이 정해지지 않았습니다. 소식이 생기면 이 사이트에서 가장 먼저 알려드리겠습니다. 개발 과정은 YouTube 채널 Player Zero Dev(@player0dev)에서도 보실 수 있습니다."
     ],
-    "contactLead": "문의, 취재, 지원 요청은 contact@player0.dev로 보내주세요. YouTube @player0dev에서도 Player Zero Dev를 만나보실 수 있습니다."
+    "making": "만들고 있는 제품"
   },
   "products": {
     "title": "제품",
-    "description": "Player Zero에서 개발 중인 게임 KEYCERTO와 컴패니언 앱 Meloom을 소개합니다.",
-    "lead": "Player Zero가 만들고 있는 것들.",
+    "description": "Player Zero가 개발 중인 게임 KEYCERTO와 컴패니언 앱 Meloom의 플랫폼, 개발 현황, 사용 방법을 소개합니다.",
+    "lead": "Player Zero가 만들고 있는 게임과 앱입니다. 각 제품이 무엇인지, 어떤 플랫폼으로 개발 중인지 확인해 보세요.",
     "groupApps": "앱",
     "groupGames": "게임",
     "empty": "아직 없습니다."
