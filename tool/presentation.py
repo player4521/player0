@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import html
+import hashlib
+from pathlib import Path
 from urllib.parse import quote
 
 
@@ -82,6 +84,13 @@ def featured(products):
     return next((p for p in items if p.get('featured')), items[0] if items else None)
 
 
+def stylesheet_name():
+    """A content-addressed filename prevents old browser/CDN CSS from styling new HTML."""
+    source = Path(__file__).resolve().parents[1] / 'styles.css'
+    digest = hashlib.sha256(source.read_bytes()).hexdigest()[:12]
+    return f'styles.{digest}.css'
+
+
 def shell(site, *, lang, path, title, description, body, alternates=None, main_class='page'):
     cfg = site.config
     domain = cfg['domain'].rstrip('/')
@@ -130,7 +139,7 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <meta property="og:image" content="{e(domain + image)}">
   <meta property="og:site_name" content="Player Zero">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/{stylesheet_name()}">
   <link rel="icon" href="{e(cfg['logo'])}">
 </head>
 <body>

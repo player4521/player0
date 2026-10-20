@@ -398,7 +398,10 @@ def build_all(site: Site) -> dict[str, str]:
 def copy_static(check_only: bool) -> list[str]:
     """styles.css and assets/ are copied verbatim."""
     problems: list[str] = []
-    pairs: list[tuple[Path, Path]] = [(ROOT / "styles.css", DIST / "styles.css")]
+    pairs: list[tuple[Path, Path]] = [
+        (ROOT / "styles.css", DIST / "styles.css"),
+        (ROOT / "styles.css", DIST / presentation.stylesheet_name()),
+    ]
     for src in sorted((ROOT / "assets").rglob("*")):
         if src.is_file():
             pairs.append((src, DIST / "assets" / src.relative_to(ROOT / "assets")))
