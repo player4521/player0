@@ -93,3 +93,22 @@ Cloudflare Pages project `player0`, custom domain already attached.
 
 The Pages project currently builds from the `companion_app` repository. Pointing it
 at this project is a dashboard change; nothing here does deployment or DNS.
+
+
+## Product presentation
+
+`tool/presentation.py` renders the company, product, about and support pages.
+`tool/build.py` remains the entry point. Product facts and translated copy live
+in the registry; generated `dist/` files are never edited by hand.
+
+Product content may additionally include `features` and `howTo` arrays of
+`{title, body}`, `modes` with the same shape, and `faq` as
+`{question, answer}` objects. `video` is an optional local video URL.
+`galleries.<language>` is an array of `{src, alt, caption}` items.
+The existing privacy documents and both legacy privacy redirects are retained.
+
+Run `python tool/check_site.py` after the build to check internal links, anchor
+targets, media files, document language, canonical URLs and deployment size.
+
+Website artwork and gameplay are web derivatives of existing product media.
+The source repositories and original approved files remain unchanged.

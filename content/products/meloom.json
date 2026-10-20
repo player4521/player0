@@ -2,36 +2,183 @@
   "slug": "meloom",
   "kind": "app",
   "status": "in-development",
-  "platforms": ["android"],
-  "order": 10,
+  "platforms": [
+    "android",
+    "windows"
+  ],
+  "order": 20,
   "featured": true,
-
   "links": [],
-
   "legal": [
     {
       "doc": "privacy",
       "path": "meloom/privacy",
-      "languages": ["en", "ko"]
+      "languages": [
+        "en",
+        "ko"
+      ]
     }
   ],
-
   "content": {
     "en": {
       "name": "Meloom",
-      "tagline": "A calm companion app for your day.",
+      "tagline": "A small room that keeps you company through the day.",
       "description": [
-        "Meloom is a calm companion app that brings weather, time, schedules, and a virtual room together.",
-        "It is being prepared for release on Android."
+        "Meloom is a companion app that shows your day as a room. The weather outside, the local time and, if you choose, your calendar all come together in one calm place.",
+        "Spend a moment in the room, open gifts and card packs, and collect cards along the way.",
+        "Meloom is in development for Android and Windows. There is no release date yet."
+      ],
+      "features": [
+        {
+          "title": "Your day, shown as a room",
+          "body": "Weather and local time appear in the room itself, so a glance tells you what the day looks like."
+        },
+        {
+          "title": "Your calendar, if you want it",
+          "body": "On Android, you can choose to let Meloom read your calendar and show what is coming up. It only reads; it never changes your events."
+        },
+        {
+          "title": "A room to spend time in",
+          "body": "Explore the room, the changing scenery and the small details of your day."
+        },
+        {
+          "title": "Small things to collect",
+          "body": "Open gifts and card packs, and gather a collection of cards over time."
+        }
+      ],
+      "howTo": [
+        {
+          "title": "Open your room",
+          "body": "See the weather and local time reflected in the room."
+        },
+        {
+          "title": "Bring in your day",
+          "body": "On Android, connect your calendar if you like. Meloom works without it."
+        },
+        {
+          "title": "Stay a while",
+          "body": "Look around the room, open gifts and card packs, and gather your card collection."
+        }
+      ],
+      "faq": [
+        {
+          "question": "When will Meloom be available?",
+          "answer": "Meloom is in development for Android and Windows. We have not announced a release date or store page yet."
+        },
+        {
+          "question": "Does Meloom change my calendar?",
+          "answer": "No. Calendar access is optional, available on Android, and read-only. Meloom shows your events but does not create, edit or delete them."
+        },
+        {
+          "question": "Will Android and Windows be the same?",
+          "answer": "Calendar access is currently available on Android. Platform-specific integrations can differ."
+        },
+        {
+          "question": "How does Meloom handle my data?",
+          "answer": "Please read the Meloom privacy policy on this site. If anything is unclear, write to contact@player0.dev."
+        }
       ]
     },
     "ko": {
       "name": "Meloom",
-      "tagline": "하루를 조용히 함께하는 컴패니언 앱.",
+      "tagline": "하루를 곁에서 함께하는 작은 방.",
       "description": [
-        "Meloom은 날씨와 시간, 일정을 작은 방 안의 풍경으로 함께 보여주는 컴패니언 앱입니다.",
-        "현재 Android 출시를 준비하고 있습니다."
+        "Meloom은 하루를 하나의 방으로 보여주는 컴패니언 앱입니다. 창밖의 날씨와 현재 시각, 원한다면 캘린더 일정까지 차분한 공간 하나에 모입니다.",
+        "잠시 방에 머물며 선물과 카드 팩을 열고, 카드를 하나씩 모아보세요.",
+        "Meloom은 Android와 Windows용으로 개발 중이며, 출시일은 아직 정해지지 않았습니다."
+      ],
+      "features": [
+        {
+          "title": "방으로 보는 오늘",
+          "body": "날씨와 현재 시각이 방 안의 풍경으로 나타나, 한눈에 오늘의 분위기를 알 수 있습니다."
+        },
+        {
+          "title": "원할 때만 연결하는 캘린더",
+          "body": "Android에서는 원하는 경우 캘린더를 연결해 다가오는 일정을 볼 수 있습니다. 일정은 읽기만 하며, 절대 수정하지 않습니다."
+        },
+        {
+          "title": "머무르고 싶은 방",
+          "body": "방을 둘러보고, 달라지는 풍경과 하루의 작은 장면들을 만나보세요."
+        },
+        {
+          "title": "소소한 수집의 재미",
+          "body": "선물과 카드 팩을 열고, 시간을 두고 카드 컬렉션을 채워갈 수 있습니다."
+        }
+      ],
+      "howTo": [
+        {
+          "title": "방 열기",
+          "body": "방 안에 비친 날씨와 현재 시각을 확인하세요."
+        },
+        {
+          "title": "하루 불러오기",
+          "body": "Android에서는 원하면 캘린더를 연결할 수 있습니다. 연결하지 않아도 Meloom을 사용할 수 있습니다."
+        },
+        {
+          "title": "잠시 머물기",
+          "body": "방을 둘러보고 선물과 카드 팩을 열며, 카드를 모아보세요."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Meloom은 언제 출시되나요?",
+          "answer": "Meloom은 Android와 Windows용으로 개발 중입니다. 출시일과 스토어 페이지는 아직 공개되지 않았습니다."
+        },
+        {
+          "question": "Meloom이 제 캘린더를 바꾸나요?",
+          "answer": "아니요. 캘린더 연결은 선택 사항이며 Android에서만 제공되고, 읽기 전용입니다. 일정을 보여줄 뿐 만들거나 수정하거나 삭제하지 않습니다."
+        },
+        {
+          "question": "Android와 Windows 버전은 똑같나요?",
+          "answer": "캘린더 연결은 현재 Android에서 제공됩니다. 운영체제 연동 기능은 플랫폼에 따라 다를 수 있습니다."
+        },
+        {
+          "question": "제 데이터는 어떻게 처리되나요?",
+          "answer": "이 사이트의 Meloom 개인정보 처리방침을 확인해 주세요. 궁금한 점은 contact@player0.dev로 문의해 주세요."
+        }
       ]
     }
+  },
+  "images": {
+    "hero": "/assets/meloom/room-art.webp",
+    "heroAlt": "Meloom artwork: a window showing day and night, an armchair and a sleeping pet",
+    "cover": "/assets/meloom/room-art.webp",
+    "coverAlt": "Meloom illustrated room and companion artwork"
+  },
+  "galleries": {
+    "en": [
+      {
+        "src": "/assets/meloom/en_01_day.webp",
+        "caption": "Daytime in the room",
+        "alt": "Meloom Android development screenshot: Daytime in the room"
+      },
+      {
+        "src": "/assets/meloom/en_02_rain.webp",
+        "caption": "A rainy afternoon",
+        "alt": "Meloom Android development screenshot: A rainy afternoon"
+      },
+      {
+        "src": "/assets/meloom/en_03_night.webp",
+        "caption": "The room after dark",
+        "alt": "Meloom Android development screenshot: The room after dark"
+      }
+    ],
+    "ko": [
+      {
+        "src": "/assets/meloom/ko_01_day.webp",
+        "caption": "햇살이 들어오는 낮",
+        "alt": "Meloom Android development screenshot: Daytime in the room"
+      },
+      {
+        "src": "/assets/meloom/ko_02_rain.webp",
+        "caption": "비가 내리는 오후",
+        "alt": "Meloom Android development screenshot: A rainy afternoon"
+      },
+      {
+        "src": "/assets/meloom/ko_03_night.webp",
+        "caption": "밤이 찾아온 방",
+        "alt": "Meloom Android development screenshot: The room after dark"
+      }
+    ]
   }
 }

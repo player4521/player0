@@ -3,3 +3,6 @@ dist/
 
 __pycache__/
 *.pyc
+
+# Local design research, source receipts and browser QA.
+review/site_refresh_20261020/
