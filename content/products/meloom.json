@@ -89,10 +89,10 @@
         "note": "Actual screens from the app in development, showing example scenery and weather."
       },
       "overviewVideo": {
-        "title": "Meloom in 30 seconds",
-        "lead": "A character and their pet greet each other, then carry on in the same room as the time, scenery and weather around them keep changing.",
-        "link": "Watch the 30-second promo",
-        "caption": "Actual screens from Meloom in development. Characters and pets move at normal speed while time is accelerated. Varied weather across Korea, Japan, Taiwan, the United States and France, with original Meloom music."
+        "title": "A little life in 45 seconds",
+        "lead": "Meloom is a companion app in development: a small room that comes alive with scenery from Korea, Japan, Taiwan, the United States and France, changing weather and time of day, and a character and cat keeping each other company.",
+        "link": "Watch the 45-second Meloom film",
+        "caption": "Scenes from Meloom in development, filmed with menus hidden. The greeting is slowed and the day-to-night changes are accelerated. Weather is illustrative, with original Meloom music."
       }
     },
     "ko": {
@@ -164,10 +164,10 @@
         "note": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
       },
       "overviewVideo": {
-        "title": "30초로 보는 Meloom",
-        "lead": "캐릭터와 펫이 인사를 나눈 뒤, 주변의 시간과 풍경, 날씨가 계속 바뀌는 동안 같은 방에서 일상을 이어갑니다.",
-        "link": "30초 홍보 영상 보기",
-        "caption": "개발 중인 Meloom의 실제 앱 화면입니다. 캐릭터와 펫의 움직임은 그대로 두고, 시간의 흐름을 빠르게 보여줍니다. 한국·일본·대만·미국·프랑스의 여러 날씨 조합과 Meloom 오리지널 음악을 담았습니다."
+        "title": "작은 방의 하루, 45초",
+        "lead": "개발 중인 컴패니언 앱 멜룸. 한국, 일본, 대만, 미국, 프랑스의 풍경 속에서 날씨와 시간이 바뀌고, 캐릭터와 고양이가 함께 지내는 작은 방이 살아 움직입니다.",
+        "link": "멜룸 45초 영상 보기",
+        "caption": "개발 중인 멜룸의 실제 장면입니다. 메뉴를 감추고, 인사는 천천히, 낮과 밤의 변화는 빠르게 담았습니다. 날씨는 연출용 예시이며 음악은 멜룸 오리지널입니다."
       }
     },
     "ja": {
@@ -239,10 +239,10 @@
         "note": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
       },
       "overviewVideo": {
-        "title": "30秒でわかるMeloom",
-        "lead": "キャラクターとペットがあいさつを交わし、周りの時間や景色、天気が移り変わる中、同じ部屋で過ごし続けます。",
-        "link": "30秒のプロモーション動画を見る",
-        "caption": "開発中のMeloomの実際の画面です。キャラクターとペットの動きはそのまま、時間の流れを早めています。韓国・日本・台湾・アメリカ・フランスのさまざまな天気と、Meloomのオリジナル音楽を収録しています。"
+        "title": "小さな部屋の一日、45秒",
+        "lead": "開発中のコンパニオンアプリ「Meloom」。韓国、日本、台湾、アメリカ、フランスの景色の中で天気と時間が移ろい、キャラクターと猫が寄り添う小さな部屋が息づきます。",
+        "link": "Meloomの45秒フィルムを見る",
+        "caption": "開発中のMeloomの実際のシーンです。メニューを隠し、挨拶はゆっくり、昼と夜の移り変わりは早めて収録しました。天気は演出用の表示例、音楽はMeloomオリジナルです。"
       }
     },
     "zh-TW": {
@@ -314,10 +314,10 @@
         "note": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
       },
       "overviewVideo": {
-        "title": "30 秒認識 Meloom",
-        "lead": "角色和寵物互相打招呼後，在同一個房間裡繼續生活，周圍的時間、景色與天氣不斷變換。",
-        "link": "觀看 30 秒宣傳影片",
-        "caption": "畫面取自開發中的 Meloom。角色與寵物以正常速度活動，時間則加速流逝，展現韓國、日本、台灣、美國與法國的多種天氣組合，搭配 Meloom 原創音樂。"
+        "title": "小房間的一天，45 秒",
+        "lead": "開發中的陪伴型 App「Meloom」。在韓國、日本、台灣、美國與法國的風景裡，天氣與時間悄悄流轉，角色與貓咪彼此陪伴，讓小小的房間有了生命。",
+        "link": "觀看 Meloom 45 秒影片",
+        "caption": "取自開發中 Meloom 的實際場景，拍攝時隱藏選單。打招呼的片段放慢播放，日夜變化則加速呈現。天氣為示範情境，搭配 Meloom 原創音樂。"
       }
     }
   },
@@ -548,26 +548,26 @@
     ]
   },
   "overviewVideo": {
-    "src": "/assets/meloom/intro.3c0bd2ad6942.mp4",
-    "poster": "/assets/meloom/intro_poster.4bad187fe2a0.webp",
+    "src": "/assets/meloom/intro.fbef617456f7.mp4",
+    "poster": "/assets/meloom/intro_poster.4bf378414b14.webp",
     "tracks": [
       {
-        "src": "/assets/meloom/intro_en.e2a5b6b46fc6.vtt",
+        "src": "/assets/meloom/intro_en.a53f2aeca0c7.vtt",
         "lang": "en",
         "label": "English"
       },
       {
-        "src": "/assets/meloom/intro_ko.483fa88fd440.vtt",
+        "src": "/assets/meloom/intro_ko.9cfef5e2c182.vtt",
         "lang": "ko",
         "label": "한국어"
       },
       {
-        "src": "/assets/meloom/intro_ja.5a587a1adb3b.vtt",
+        "src": "/assets/meloom/intro_ja.e4c99281859c.vtt",
         "lang": "ja",
         "label": "日本語"
       },
       {
-        "src": "/assets/meloom/intro_zh-TW.44a01006a53e.vtt",
+        "src": "/assets/meloom/intro_zh-TW.82a628e2c28b.vtt",
         "lang": "zh-TW",
         "label": "繁體中文"
       }
