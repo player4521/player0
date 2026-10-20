@@ -89,7 +89,7 @@
         "note": "Actual screens from the app in development, showing example scenery and weather."
       },
       "overviewVideo": {
-        "title": "A little life in about 47 seconds",
+        "title": "A little life in about 48 seconds",
         "lead": "Meloom is a companion app in development: a small room that comes alive with scenery from Korea, Japan, Taiwan, the United States and France, changing weather and time of day, and a character and cat keeping each other company.",
         "link": "Watch the Meloom film",
         "caption": "Meloom in development, with its date, weather and bottom menu visible. Weather is illustrative and the passage of time is accelerated. Original Meloom music."
@@ -164,7 +164,7 @@
         "note": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
       },
       "overviewVideo": {
-        "title": "작은 방의 하루, 약 47초",
+        "title": "작은 방의 하루, 약 48초",
         "lead": "개발 중인 컴패니언 앱 멜룸. 한국, 일본, 대만, 미국, 프랑스의 풍경 속에서 날씨와 시간이 바뀌고, 캐릭터와 고양이가 함께 지내는 작은 방이 살아 움직입니다.",
         "link": "멜룸 홍보 영상 보기",
         "caption": "개발 중인 멜룸의 화면입니다. 날짜·날씨와 하단 메뉴가 있는 실제 화면에 예시 날씨와 빠른 시간 흐름을 담았습니다. 음악은 멜룸 오리지널입니다."
@@ -239,7 +239,7 @@
         "note": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
       },
       "overviewVideo": {
-        "title": "小さな部屋の一日、約47秒",
+        "title": "小さな部屋の一日、約48秒",
         "lead": "開発中のコンパニオンアプリ「Meloom」。韓国、日本、台湾、アメリカ、フランスの景色の中で天気と時間が移ろい、キャラクターと猫が寄り添う小さな部屋が息づきます。",
         "link": "Meloomの動画を見る",
         "caption": "開発中のMeloomの画面です。日付・天気・下部メニューを表示したまま、天気の表示例と早めた時間の流れを収録しています。音楽はMeloomオリジナルです。"
@@ -314,7 +314,7 @@
         "note": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
       },
       "overviewVideo": {
-        "title": "小房間的一天，約 47 秒",
+        "title": "小房間的一天，約 48 秒",
         "lead": "開發中的陪伴型 App「Meloom」。在韓國、日本、台灣、美國與法國的風景裡，天氣與時間悄悄流轉，角色與貓咪彼此陪伴，讓小小的房間有了生命。",
         "link": "觀看 Meloom 影片",
         "caption": "Meloom 開發中畫面，保留日期、天氣與下方選單。天氣為示範情境，時間變化加速呈現，搭配 Meloom 原創音樂。"
@@ -548,7 +548,7 @@
     ]
   },
   "overviewVideo": {
-    "src": "/assets/meloom/intro.f436ef0343a8.mp4",
+    "src": "/assets/meloom/intro.1ac1b81e82c7.mp4",
     "poster": "/assets/meloom/intro_poster.52acb91939b5.webp",
     "tracks": [
       {
