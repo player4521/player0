@@ -89,10 +89,10 @@
         "note": "Actual screens from the app in development, showing example scenery and weather."
       },
       "overviewVideo": {
-        "title": "A little world, in 20 seconds",
-        "lead": "Visit five countries, watch the weather turn, and look in on your pet. With Meloom’s original music.",
-        "link": "Watch the 20-second video",
-        "caption": "Actual screens from the app in development, showing example scenery and weather."
+        "title": "Meloom in 30 seconds",
+        "lead": "See a character and pet greet one another, feed your pet, and visit five countries through rain, snow, daylight and moonlight.",
+        "link": "Watch the 30-second promo",
+        "caption": "Real app screens with Meloom's original music. Time is sped up to show day turning into night. Meloom is in development."
       }
     },
     "ko": {
@@ -164,10 +164,10 @@
         "note": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
       },
       "overviewVideo": {
-        "title": "20초로 만나는 작은 세계",
-        "lead": "다섯 나라의 풍경, 달라지는 날씨와 밤, 함께 지내는 펫을 Meloom의 오리지널 음악과 함께 만나보세요.",
-        "link": "20초 소개 영상 보기",
-        "caption": "개발 중인 앱의 실제 화면이며, 풍경과 날씨 연출의 예시입니다."
+        "title": "30초로 보는 Meloom",
+        "lead": "다섯 나라의 풍경과 날씨·낮밤의 변화, 서로 반기는 캐릭터와 밥을 먹는 펫을 실제 화면으로 만나보세요.",
+        "link": "30초 홍보 영상 보기",
+        "caption": "실제 앱 화면과 Meloom 오리지널 음악으로 구성했습니다. 낮에서 밤으로 바뀌는 장면은 시간을 빠르게 돌려 보여 줍니다. Meloom은 개발 중입니다."
       }
     },
     "ja": {
@@ -239,10 +239,10 @@
         "note": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
       },
       "overviewVideo": {
-        "title": "20秒でめぐる、小さな世界",
-        "lead": "5つの国の景色、移り変わる天気と夜、そばにいるペットを、Meloomのオリジナル音楽とともに。",
-        "link": "20秒の紹介動画を見る",
-        "caption": "開発中のアプリの実際の画面です。風景と天気の演出例を表示しています。"
+        "title": "30秒でわかるMeloom",
+        "lead": "キャラクターとペットのあいさつやペットの食事、5つの国の景色と天気・昼夜の移り変わりを、実際の画面で紹介します。",
+        "link": "30秒のプロモーション動画を見る",
+        "caption": "実際のアプリ画面とMeloomのオリジナル音楽で構成しています。昼から夜への変化は早送りで表示しています。Meloomは開発中です。"
       }
     },
     "zh-TW": {
@@ -314,10 +314,10 @@
         "note": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
       },
       "overviewVideo": {
-        "title": "用20秒，走進小小世界",
-        "lead": "隨著Meloom的原創音樂，看見五個國家的風景、變化的天氣與夜色，還有陪伴你的寵物。",
-        "link": "觀看20秒介紹影片",
-        "caption": "畫面取自開發中的實際應用程式，展示風景與天氣演出的範例。"
+        "title": "30 秒認識 Meloom",
+        "lead": "透過實際畫面，看看角色與寵物互相打招呼、寵物吃飯，以及五個國家的風景、天氣與日夜變化。",
+        "link": "觀看 30 秒宣傳影片",
+        "caption": "使用實際 App 畫面，搭配 Meloom 原創音樂。白天到夜晚的變化為加速呈現。Meloom 仍在開發中。"
       }
     }
   },
@@ -548,26 +548,26 @@
     ]
   },
   "overviewVideo": {
-    "src": "/assets/meloom/intro.mp4",
-    "poster": "/assets/meloom/intro_poster.webp",
+    "src": "/assets/meloom/intro.5f43a5eecd6b.mp4",
+    "poster": "/assets/meloom/intro_poster.1532f2e10bf0.webp",
     "tracks": [
       {
-        "src": "/assets/meloom/intro_en.vtt",
+        "src": "/assets/meloom/intro_en.5d48df375373.vtt",
         "lang": "en",
         "label": "English"
       },
       {
-        "src": "/assets/meloom/intro_ko.vtt",
+        "src": "/assets/meloom/intro_ko.f5dc33c99e4f.vtt",
         "lang": "ko",
         "label": "한국어"
       },
       {
-        "src": "/assets/meloom/intro_ja.vtt",
+        "src": "/assets/meloom/intro_ja.28034496c137.vtt",
         "lang": "ja",
         "label": "日本語"
       },
       {
-        "src": "/assets/meloom/intro_zh-TW.vtt",
+        "src": "/assets/meloom/intro_zh-TW.269ebeebc2e4.vtt",
         "lang": "zh-TW",
         "label": "繁體中文"
       }
