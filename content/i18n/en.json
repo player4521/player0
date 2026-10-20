@@ -6,21 +6,32 @@
     "play": "Play"
   },
   "home": {
-    "title": "Player Zero",
-    "description": "Player Zero is an independent software studio creating apps and interactive experiences.",
-    "lead": "Player Zero is an independent software studio creating apps and interactive experiences.",
-    "featured": "Projects",
-    "playTeaser": "Play in your browser",
-    "playTeaserEmpty": "Browser playables are on the way.",
-    "seeAll": "See all products"
+    "title": "Player Zero — Games and apps",
+    "description": "Player Zero makes games and apps. In development: KEYCERTO, a rhythm game played on the keyboard, and Meloom, a companion app that shows your day as a room.",
+    "catalog": "Games and apps",
+    "catalogLink": "All products",
+    "aboutTitle": "Company",
+    "about": "Player Zero is an independent developer of games and apps.",
+    "aboutLink": "About Player Zero",
+    "contactTitle": "Contact"
+  },
+  "about": {
+    "title": "About Player Zero",
+    "description": "Player Zero is an independent developer of games and apps, currently making KEYCERTO and Meloom.",
+    "lead": "Player Zero is an independent developer of games and apps.",
+    "paragraphs": [
+      "KEYCERTO is a rhythm game played on the keyboard: keep time with the music, and letters and short stories appear on paper. Meloom is a companion app that shows the weather and local time in a small room, with gifts, card packs and cards to collect. On Android, it can also show your calendar, read-only, if you choose.",
+      "Each product page lists the platforms it is being developed for, its current status, how it works and answers to common questions."
+    ],
+    "making": "What we are making"
   },
   "products": {
     "title": "Products",
-    "description": "Apps and games by Player Zero.",
-    "lead": "Everything Player Zero is building.",
+    "description": "KEYCERTO and Meloom: the game and the app Player Zero is developing, with platforms, status and how each one works.",
+    "lead": "Every game and app Player Zero is making, with the platforms each one is being developed for.",
     "groupApps": "Apps",
     "groupGames": "Games",
-    "empty": "Nothing here yet."
+    "empty": "No products are listed yet."
   },
   "play": {
     "title": "Play",
