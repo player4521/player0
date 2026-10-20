@@ -120,7 +120,7 @@ def contact_block(site, lang):
     return f'''<section class="contact-band">
       <div>{eyebrow(text(lang, 'KEEP IN TOUCH', '개발 소식'))}<h2>{text(lang, 'There’s more in the making.', '다음 소식도 함께해요.')}</h2>
       <p>{text(lang, 'Follow our work, or tell us what’s on your mind.', '개발 소식이 궁금하거나 전하고 싶은 이야기가 있다면.')}</p></div>
-      <div class="contact-actions">{button(site.config['youtube'], 'YouTube @player0lab')}
+      <div class="contact-actions">{button(site.config['youtube'], 'YouTube @player0dev')}
       <a class="text-link" href="mailto:{e(site.config['contact'])}">{e(site.config['contact'])} <span aria-hidden="true">↗</span></a></div>
     </section>'''
 
