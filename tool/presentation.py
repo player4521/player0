@@ -388,7 +388,8 @@ def overview_video(site, product, lang):
     wording = copy.get('overviewVideo') or {}
     name = copy.get('name', product['slug'])
     tracks = ''.join(f'<track kind="subtitles" src="{e(track["src"])}" srclang="{e(track["lang"])}" label="{e(track["label"])}"' + (' default' if track['lang'] == lang else '') + '>' for track in media.get('tracks', []))
-    return f'<section class="block overview-video" id="overview-video"><div><h2>{e(wording.get("title") or video_text(site, lang, product, "link"))}</h2><p>{e(wording.get("lead", ""))}</p></div><figure><video controls playsinline muted preload="none" poster="{e(media.get("poster", ""))}" width="1080" height="1920" aria-label="{e(video_text(site, lang, product, "label", name=name))}"><source src="{e(media["src"])}" type="video/mp4">{tracks}<a href="{e(media["src"])}">{e(video_text(site, lang, product, "open"))}</a></video><figcaption>{e(wording.get("caption", ""))}</figcaption></figure></section>'
+    caption = f'<figcaption>{e(wording["caption"])}</figcaption>' if wording.get("caption") else ''
+    return f'<section class="block overview-video" id="overview-video"><div><h2>{e(wording.get("title") or video_text(site, lang, product, "link"))}</h2><p>{e(wording.get("lead", ""))}</p></div><figure><video controls playsinline muted preload="none" poster="{e(media.get("poster", ""))}" width="1080" height="1920" aria-label="{e(video_text(site, lang, product, "label", name=name))}"><source src="{e(media["src"])}" type="video/mp4">{tracks}<a href="{e(media["src"])}">{e(video_text(site, lang, product, "open"))}</a></video>{caption}</figure></section>'
 
 
 def home(site, lang, shell, content):
