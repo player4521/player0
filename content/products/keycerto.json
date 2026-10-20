@@ -19,16 +19,20 @@
   "content": {
     "en": {
       "name": "KEYCERTO",
-      "summary": "A rhythm game played on your keyboard",
-      "tagline": "Keep time with the music, and the page fills with a story.",
+      "summary": "A rhythm game for your keyboard and your music",
+      "tagline": "Play with one key, two keys or typing. Add rhythm and words to your own music to create a song you can play.",
       "description": [
-        "KEYCERTO is a rhythm game played on your keyboard. Keep time with classical melodies, lively ragtime and original pieces, and letters, reflections and short stories appear on paper as you play.",
-        "Choose how you play each song: one-key, two-key, or typing, where you type the English text yourself. Points you earn collect keyboard parts, completed goals unlock stage decorations, and records and certificates keep track of how you did.",
-        "You can also make your own charts in the built-in editor, then import or export them as .keycerto files."
+        "KEYCERTO is a rhythm game played on your keyboard. Choose one-key, two-key or typing for each song, keep time with classical melodies, lively ragtime and original pieces, and letters and short stories are written onto the page as you play.",
+        "Bring in your own audio, including your original songs, and turn it into a playable song by adding rhythm and words. Record and edit the timing while listening, try it out, then save your song or exchange it as a .keycerto file.",
+        "The rest is yours to shape too: collect keyboard parts with the points you earn, unlock decorations for your stage by completing goals, and keep a record of each performance with certificates."
       ],
       "features": [
         {
-          "title": "A story written by rhythm",
+          "title": "Play your own music",
+          "body": "Give your music its own rhythm and words. Record or edit the timing, try playing it, and refine it into a song of your own. Finished songs can be exchanged as .keycerto files."
+        },
+        {
+          "title": "A page that fills as you play",
           "body": "Every input in time with the music adds to the page. By the end of a song, you have played your way through a letter or a short story."
         },
         {
@@ -38,10 +42,6 @@
         {
           "title": "Records and certificates",
           "body": "Collect certificates for each song and difficulty. In typing mode, wrong letters and missed inputs stay on the page as typos and gaps, so you can see exactly where to improve."
-        },
-        {
-          "title": "Charts of your own",
-          "body": "Make charts in the built-in editor, then import or export them as .keycerto files."
         }
       ],
       "howTo": [
@@ -58,8 +58,8 @@
           "body": "See your score and accuracy, collect certificates and try again for a better record."
         },
         {
-          "title": "Make it yours",
-          "body": "Use your points to collect keyboard parts, and place the decorations you unlock through goals on your stage."
+          "title": "Add a song of your own",
+          "body": "Import your audio, add rhythm and words, and try playing it. Save the finished song or exchange it as a .keycerto file."
         }
       ],
       "modes": [
@@ -82,31 +82,35 @@
           "answer": "KEYCERTO is in development for Windows PC on Steam. The release date and price have not been announced yet."
         },
         {
+          "question": "Can I play my own music?",
+          "answer": "Yes. Import your own audio, including original songs, and add rhythm and words to make a playable song. Try it out as you work, then save it or import and export it as a .keycerto file."
+        },
+        {
           "question": "Do I need to type in English?",
           "answer": "Only in typing mode, where you type the English text yourself. One-key and two-key modes are about rhythm, not spelling."
         },
         {
           "question": "What do points and goals unlock?",
           "answer": "Points you earn by playing collect keyboard parts such as housings and keycaps. Completing goals unlocks decorations for your stage."
-        },
-        {
-          "question": "Can I make my own charts?",
-          "answer": "Yes. KEYCERTO has a built-in chart editor, and charts can be imported and exported as .keycerto files."
         }
       ]
     },
     "ko": {
       "name": "KEYCERTO",
-      "summary": "키보드로 연주하는 리듬 게임",
-      "tagline": "박자에 맞춰 치면 종이 위에 이야기가 채워집니다.",
+      "summary": "내 키보드, 내 음악으로 즐기는 리듬 게임",
+      "tagline": "원키부터 타이핑까지 음악을 연주하고, 자작곡에 리듬과 문장을 더해 나만의 플레이 곡도 만드세요.",
       "description": [
-        "KEYCERTO는 키보드로 연주하는 리듬 게임입니다. 익숙한 클래식 선율과 경쾌한 래그타임, 오리지널 곡에 맞춰 박자를 지키면 편지와 기록, 짧은 이야기가 종이 위에 쓰여 나갑니다.",
-        "곡마다 원키, 투키, 타이핑 중 연주 방식을 고를 수 있고, 타이핑에서는 영문 문장을 직접 입력합니다. 연주로 얻은 포인트로 키보드 부품을 모으고, 목표를 달성하면 무대 소품이 열리며, 기록과 증서로 연주 결과가 남습니다.",
-        "내장 편집기로 채보를 직접 만들고, .keycerto 파일로 가져오거나 내보낼 수도 있습니다."
+        "KEYCERTO는 키보드로 연주하는 리듬 게임입니다. 곡마다 원키, 투키, 타이핑 중 방식을 골라 익숙한 클래식 선율과 경쾌한 래그타임, 오리지널 곡에 맞춰 연주하면, 종이 위에 편지와 짧은 이야기가 쓰여 나갑니다.",
+        "자작곡이나 직접 준비한 음원으로도 연주할 수 있습니다. 내장 편집기에 음악을 불러와 리듬과 문장을 붙이고, 나만의 플레이 곡으로 만들어 보세요. 음악을 들으며 리듬을 기록하고 편집한 뒤 시험 연주할 수 있으며, 완성한 곡은 저장하고 .keycerto 파일로 주고받을 수 있습니다.",
+        "키보드와 무대도 취향대로 꾸밉니다. 연주로 얻은 포인트로 키보드 부품을 모으고, 목표를 달성해 무대 소품을 열며, 연주 결과는 기록과 증서로 남습니다."
       ],
       "features": [
         {
-          "title": "리듬으로 써 내려가는 이야기",
+          "title": "자작곡으로 만드는 플레이 곡",
+          "body": "내 음악에 어울리는 리듬과 문장을 직접 붙여 보세요. 음악을 들으며 리듬을 기록하거나 편집하고, 시험 연주하며 다듬어 나만의 플레이 곡을 완성합니다. 완성한 곡은 .keycerto 파일로 주고받을 수 있습니다."
+        },
+        {
+          "title": "연주할수록 채워지는 종이",
           "body": "음악에 맞춘 입력 하나하나가 종이를 채웁니다. 곡이 끝나면 편지 한 통, 짧은 이야기 한 편을 연주로 완성하게 됩니다."
         },
         {
@@ -116,10 +120,6 @@
         {
           "title": "기록과 증서",
           "body": "곡과 난이도별로 증서를 모아보세요. 타이핑 모드에서는 잘못 친 글자와 놓친 입력이 오타와 빈칸으로 남아, 어디를 다시 연습하면 좋을지 한눈에 보입니다."
-        },
-        {
-          "title": "직접 만드는 채보",
-          "body": "내장 편집기로 채보를 만들고, .keycerto 파일로 가져오거나 내보낼 수 있습니다."
         }
       ],
       "howTo": [
@@ -136,8 +136,8 @@
           "body": "점수와 정확도를 확인하고, 증서를 모으며 더 좋은 기록에 도전하세요."
         },
         {
-          "title": "나만의 방식으로 꾸미기",
-          "body": "포인트로 키보드 부품을 모으고, 목표를 달성해 얻은 소품을 무대에 배치하세요."
+          "title": "내 곡 추가하기",
+          "body": "내 음원을 불러와 리듬과 문장을 붙이고 시험 연주해 보세요. 완성한 곡은 저장하고 .keycerto 파일로 주고받을 수 있습니다."
         }
       ],
       "modes": [
@@ -160,16 +160,16 @@
           "answer": "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다. 출시일과 가격은 아직 발표되지 않았습니다."
         },
         {
+          "question": "제가 만든 곡으로 플레이할 수 있나요?",
+          "answer": "네. 자작곡이나 직접 준비한 음원을 불러와 리듬과 문장을 붙이면 플레이할 수 있는 나만의 곡이 됩니다. 시험 연주하며 다듬은 뒤 저장하고, .keycerto 파일로 가져오거나 내보낼 수 있습니다."
+        },
+        {
           "question": "영어로 타자를 쳐야 하나요?",
           "answer": "타이핑 모드에서만 영문 문장을 직접 입력합니다. 원키와 투키 모드는 철자가 아니라 리듬에 집중하는 방식입니다."
         },
         {
           "question": "포인트와 목표로 무엇을 얻나요?",
           "answer": "연주로 얻은 포인트로 하우징, 키캡 같은 키보드 부품을 모을 수 있습니다. 목표를 달성하면 무대를 꾸밀 소품이 열립니다."
-        },
-        {
-          "question": "채보를 직접 만들 수 있나요?",
-          "answer": "네. 내장 채보 편집기가 있으며, 채보를 .keycerto 파일로 가져오거나 내보낼 수 있습니다."
         }
       ]
     }

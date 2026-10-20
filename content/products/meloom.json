@@ -22,24 +22,25 @@
   "content": {
     "en": {
       "name": "Meloom",
-      "summary": "A companion app that shows your day as a room",
-      "tagline": "A small room that keeps you company through the day.",
+      "summary": "A companion app with scenery from different countries, weather you can see and a pet",
+      "tagline": "A view of another country outside, today's weather in the window, and a pet in the room.",
       "description": [
-        "Meloom is a companion app that shows your day as a room. The weather outside and the local time are reflected in the scene, and on Android you can choose to bring in your calendar as well.",
-        "Drop in whenever you like: look around the room, open gifts and card packs, and build up a collection of cards."
+        "Meloom is a companion app where you share a room with a pet, with country scenery and today’s weather beyond the window. Discover distinct backgrounds for Korea, Japan, Taiwan, the United States and France. Real weather and local time bring rain, snow and a view that changes from day to night.",
+        "Spend time with a cat or dog: check what your pet is doing, see how hungry it is, and give it food. Watch your companion grow as you care for it.",
+        "Whenever you drop by, you can also open gifts and card packs and build up a card collection. On Android, you can choose to show your calendar too, read-only."
       ],
       "features": [
         {
-          "title": "Weather and time, in the room",
-          "body": "The weather and local time show up in the room itself, so a glance tells you what the day looks like."
+          "title": "Five countries, five different views",
+          "body": "Korea, Japan, Taiwan, the United States and France each have their own city scenery. Use your location or choose a country yourself to set the view beyond your room."
         },
         {
-          "title": "Your calendar, only if you want it",
-          "body": "On Android, you can let Meloom read your calendar and show what is coming up. Access is optional and read-only: Meloom never creates, edits or deletes events."
+          "title": "Weather you can see",
+          "body": "Real weather and local time shape the scene, from clear and cloudy skies to rain, snow and lightning. The light and sky change as day turns to night."
         },
         {
-          "title": "A room to spend time in",
-          "body": "Look around, interact with the room and notice how the scenery changes through the day."
+          "title": "A pet to care for and watch grow",
+          "body": "Share your room with a cat or dog. Check its state and hunger, give it food, and watch it grow over the time you spend together."
         },
         {
           "title": "Gifts, card packs and cards",
@@ -49,15 +50,19 @@
       "howTo": [
         {
           "title": "Open your room",
-          "body": "Start Meloom to see the room with the current weather and local time."
+          "body": "Use your location or pick a country and open your room. Its scenery reflects the selected place, weather and local time."
+        },
+        {
+          "title": "Look in on your pet",
+          "body": "Open your pet's card to see how it is doing, and feed it when it is hungry."
+        },
+        {
+          "title": "Open gifts and cards",
+          "body": "Open gifts and card packs, and add new cards to your collection."
         },
         {
           "title": "Add your calendar, if you like",
           "body": "On Android, you can allow read-only calendar access to see upcoming events. Meloom works without it."
-        },
-        {
-          "title": "Stay a while",
-          "body": "Look around the room, open gifts and card packs, and add new cards to your collection."
         }
       ],
       "faq": [
@@ -81,24 +86,25 @@
     },
     "ko": {
       "name": "Meloom",
-      "summary": "하루를 작은 방으로 보여주는 컴패니언 앱",
-      "tagline": "하루를 함께 보내는 작은 방.",
+      "summary": "여러 나라의 풍경과 날씨, 펫이 함께하는 컴패니언 앱",
+      "tagline": "창밖에는 다른 나라의 풍경과 오늘의 날씨, 방 안에는 함께 지내는 펫.",
       "description": [
-        "Meloom은 하루를 하나의 방으로 보여주는 컴패니언 앱입니다. 창밖의 날씨와 현재 시각이 방의 풍경에 그대로 나타나고, Android에서는 원하면 캘린더 일정도 함께 볼 수 있습니다.",
-        "생각날 때 잠시 들러 방을 둘러보고, 선물과 카드 팩을 열며 카드를 하나씩 모아보세요."
+        "Meloom은 나라별 풍경과 오늘의 날씨가 펼쳐지는 방에서 펫과 함께 지내는 컴패니언 앱입니다. 한국·일본·대만·미국·프랑스, 다섯 나라의 서로 다른 배경을 만나보세요. 실제 날씨와 현지 시각에 따라 비와 눈이 내리고, 해가 지면 창밖 풍경도 밤으로 바뀝니다.",
+        "고양이나 강아지와 함께 지내며 지금 무엇을 하는지, 배가 얼마나 고픈지 살펴보세요. 먹이를 챙겨 주고, 조금씩 자라는 모습을 지켜보는 즐거움도 있습니다.",
+        "들를 때마다 선물과 카드 팩을 열며 카드를 모을 수도 있습니다. Android에서는 원하면 캘린더 일정도 읽기 전용으로 함께 볼 수 있습니다."
       ],
       "features": [
         {
-          "title": "방 안에 담긴 날씨와 시간",
-          "body": "날씨와 현재 시각이 방 안의 풍경으로 나타나, 한눈에 오늘의 분위기를 알 수 있습니다."
+          "title": "다섯 나라, 다섯 가지 풍경",
+          "body": "한국·일본·대만·미국·프랑스마다 서로 다른 도시 풍경을 만납니다. 위치를 바탕으로 사용하거나 직접 나라를 골라 방 너머의 배경을 바꿀 수 있습니다."
         },
         {
-          "title": "원할 때만 연결하는 캘린더",
-          "body": "Android에서는 원하는 경우 Meloom이 캘린더를 읽어 다가오는 일정을 보여줍니다. 연결은 선택 사항이며 읽기 전용이라, 일정을 만들거나 수정하거나 삭제하지 않습니다."
+          "title": "날씨에 반응하는 풍경",
+          "body": "실제 날씨와 현지 시각을 풍경에 담습니다. 맑고 흐린 하늘부터 비, 눈, 번개까지 날씨에 맞는 연출이 더해지고, 낮과 밤에 따라 빛과 하늘도 달라집니다."
         },
         {
-          "title": "머무르고 싶은 방",
-          "body": "방을 둘러보고 상호작용하며, 하루 동안 달라지는 풍경을 만나보세요."
+          "title": "돌보며 함께 자라는 펫",
+          "body": "고양이와 강아지가 방에서 함께 지냅니다. 펫의 상태와 배고픔을 살피고 먹이를 챙겨 주세요. 함께 지내는 동안 조금씩 자라는 모습도 만날 수 있습니다."
         },
         {
           "title": "선물, 카드 팩, 카드",
@@ -108,15 +114,19 @@
       "howTo": [
         {
           "title": "방 열기",
-          "body": "Meloom을 실행하면 현재 날씨와 시각이 반영된 방이 나타납니다."
+          "body": "위치를 사용하거나 나라를 골라 방을 열어보세요. 선택한 곳의 배경과 날씨, 현지 시각에 맞는 풍경이 나타납니다."
+        },
+        {
+          "title": "펫 들여다보기",
+          "body": "펫 카드를 열어 상태를 확인하고, 배가 고프면 밥을 주세요."
+        },
+        {
+          "title": "선물과 카드 열기",
+          "body": "선물과 카드 팩을 열고, 새 카드를 컬렉션에 더해보세요."
         },
         {
           "title": "원하면 캘린더 연결하기",
           "body": "Android에서는 읽기 전용 캘린더 접근을 허용해 다가오는 일정을 볼 수 있습니다. 연결하지 않아도 Meloom을 사용할 수 있습니다."
-        },
-        {
-          "title": "잠시 머물기",
-          "body": "방을 둘러보고 선물과 카드 팩을 열며, 새 카드를 컬렉션에 더해보세요."
         }
       ],
       "faq": [
@@ -149,35 +159,45 @@
     "en": [
       {
         "src": "/assets/meloom/en_01_day.webp",
-        "caption": "Daytime in the room",
-        "alt": "Meloom Android development screenshot: Daytime in the room"
+        "caption": "Seoul on a clear day",
+        "alt": "Meloom Android development screenshot: the room in front of a Seoul backdrop on a clear day"
       },
       {
         "src": "/assets/meloom/en_02_rain.webp",
-        "caption": "A rainy afternoon",
-        "alt": "Meloom Android development screenshot: A rainy afternoon"
+        "caption": "The same view in the rain",
+        "alt": "Meloom Android development screenshot: rain falling over the Seoul backdrop behind the room"
       },
       {
         "src": "/assets/meloom/en_03_night.webp",
-        "caption": "The room after dark",
-        "alt": "Meloom Android development screenshot: The room after dark"
+        "caption": "After dark",
+        "alt": "Meloom Android development screenshot: the room and the Seoul backdrop at night"
+      },
+      {
+        "src": "/assets/meloom/en_04_pet.png",
+        "caption": "Looking in on your pet",
+        "alt": "Meloom Android development screenshot: a pet cat's card showing its hunger and a Feed button"
       }
     ],
     "ko": [
       {
         "src": "/assets/meloom/ko_01_day.webp",
-        "caption": "햇살이 들어오는 낮",
-        "alt": "Meloom Android development screenshot: Daytime in the room"
+        "caption": "맑은 날의 서울",
+        "alt": "Meloom Android 개발 중 화면: 맑은 날 서울 풍경을 배경으로 한 방"
       },
       {
         "src": "/assets/meloom/ko_02_rain.webp",
-        "caption": "비가 내리는 오후",
-        "alt": "Meloom Android development screenshot: A rainy afternoon"
+        "caption": "비가 내리는 같은 풍경",
+        "alt": "Meloom Android 개발 중 화면: 방 뒤 서울 풍경에 비가 내리는 모습"
       },
       {
         "src": "/assets/meloom/ko_03_night.webp",
         "caption": "밤이 찾아온 방",
-        "alt": "Meloom Android development screenshot: The room after dark"
+        "alt": "Meloom Android 개발 중 화면: 밤이 된 방과 서울 풍경"
+      },
+      {
+        "src": "/assets/meloom/ko_04_pet.png",
+        "caption": "펫 들여다보기",
+        "alt": "Meloom Android 개발 중 화면: 고양이 펫의 배고픔 수치와 밥 주기 버튼이 있는 펫 카드"
       }
     ]
   }

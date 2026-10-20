@@ -7,23 +7,23 @@
   },
   "home": {
     "title": "Player Zero — Games and apps",
-    "description": "Player Zero makes games and apps. In development: KEYCERTO, a rhythm game played on the keyboard, and Meloom, a companion app that shows your day as a room.",
+    "description": "Player Zero makes games and apps. In development: KEYCERTO, a keyboard rhythm game you can also play with your own music, and Meloom, a companion app with scenery from different countries, weather you can see and a pet.",
     "catalog": "Games and apps",
     "catalogLink": "All products",
     "aboutTitle": "Company",
-    "about": "Player Zero is an independent developer of games and apps.",
+    "about": "Player Zero is an independent maker of games and apps. We care about how software feels to play, to make your own, and to keep around from day to day.",
     "aboutLink": "About Player Zero",
     "contactTitle": "Contact"
   },
   "about": {
     "title": "About Player Zero",
-    "description": "Player Zero is an independent developer of games and apps, currently making KEYCERTO and Meloom.",
-    "lead": "Player Zero is an independent developer of games and apps.",
+    "description": "Player Zero is an independent maker of games and apps, built around the experience of playing, making and spending time with software.",
+    "lead": "Player Zero is an independent maker of games and apps.",
     "paragraphs": [
-      "KEYCERTO is a rhythm game played on the keyboard: keep time with the music, and letters and short stories appear on paper. Meloom is a companion app that shows the weather and local time in a small room, with gifts, card packs and cards to collect. On Android, it can also show your calendar, read-only, if you choose.",
-      "Each product page lists the platforms it is being developed for, its current status, how it works and answers to common questions."
+      "What interests us is the time you actually spend with software: the focus of getting something right while you play, the pleasure of making something your own, and the quieter time with an app that is simply good to have around.",
+      "So we pay attention to how things feel to use. Controls you can pick up in a minute. Room to bring in something of yours, whether that is a piece of music, a choice of colour or a corner to arrange. Small details that are still there to notice the next time you come back."
     ],
-    "making": "What we are making"
+    "productsLink": "See the games and apps we are making"
   },
   "products": {
     "title": "Products",
