@@ -8,20 +8,20 @@
   "home": {
     "title": "Player Zero",
     "description": "게임과 일상의 앱을 만드는 독립 개발사 Player Zero. KEYCERTO와 Meloom을 만나보세요.",
-    "lead": "키보드로 연주하는 리듬 게임, 하루를 곁에서 함께하는 조용한 방. 자꾸 다시 찾게 되는 것들을 만들고 있습니다. 두 작품 모두 개발 중입니다.",
+    "lead": "게임과 앱을 만듭니다.",
     "featured": "프로젝트",
     "playTeaser": "브라우저에서 바로 플레이",
     "playTeaserEmpty": "브라우저에서 즐길 수 있는 게임을 준비 중입니다.",
     "seeAll": "제품 전체 보기",
     "eyebrow": "Player Zero",
-    "headline": "정성껏 만드는 작은 게임과 일상의 앱.",
+    "headline": "Player Zero",
     "aboutTitle": "Player Zero 소개",
     "aboutParagraphs": [
       "Player Zero는 게임과 일상의 앱을 만드는 독립 개발사입니다. 작품마다 하나의 아이디어를 붙잡고, 손에 익을 때까지 다듬어 게임과 앱을 만듭니다.",
       "KEYCERTO는 키보드를 종이 위에 편지와 이야기를 써 내려가는 악기로 바꿉니다. Meloom은 날씨와 시간, 하루의 일정을 작은 방 하나에 담습니다. 서로 다른 성격의 작품이고, 저희는 그 점이 좋습니다.",
       "아직 두 작품 모두 출시일은 정해지지 않았습니다. 공개할 준비가 되면 이곳에서 가장 먼저 알려드리겠습니다."
     ],
-    "contactLead": "문의, 취재, 지원 요청은 contact@player0.dev로 보내주세요. YouTube @player0dev에서도 Player Zero Dev을 만나보실 수 있습니다."
+    "contactLead": "문의, 취재, 지원 요청은 contact@player0.dev로 보내주세요. YouTube @player0dev에서도 Player Zero Dev를 만나보실 수 있습니다."
   },
   "products": {
     "title": "제품",
