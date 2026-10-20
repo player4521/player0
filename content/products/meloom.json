@@ -90,9 +90,9 @@
       },
       "overviewVideo": {
         "title": "Meloom in 30 seconds",
-        "lead": "See a character and pet greet one another, feed your pet, and visit five countries through rain, snow, daylight and moonlight.",
+        "lead": "A character and their pet greet each other, then carry on in the same room as the time, scenery and weather around them keep changing.",
         "link": "Watch the 30-second promo",
-        "caption": "Real app screens with Meloom's original music. Time is sped up to show day turning into night. Meloom is in development."
+        "caption": "Actual screens from Meloom in development. Characters and pets move at normal speed while time is accelerated. Varied weather across Korea, Japan, Taiwan, the United States and France, with original Meloom music."
       }
     },
     "ko": {
@@ -165,9 +165,9 @@
       },
       "overviewVideo": {
         "title": "30초로 보는 Meloom",
-        "lead": "다섯 나라의 풍경과 날씨·낮밤의 변화, 서로 반기는 캐릭터와 밥을 먹는 펫을 실제 화면으로 만나보세요.",
+        "lead": "캐릭터와 펫이 인사를 나눈 뒤, 주변의 시간과 풍경, 날씨가 계속 바뀌는 동안 같은 방에서 일상을 이어갑니다.",
         "link": "30초 홍보 영상 보기",
-        "caption": "실제 앱 화면과 Meloom 오리지널 음악으로 구성했습니다. 낮에서 밤으로 바뀌는 장면은 시간을 빠르게 돌려 보여 줍니다. Meloom은 개발 중입니다."
+        "caption": "개발 중인 Meloom의 실제 앱 화면입니다. 캐릭터와 펫의 움직임은 그대로 두고, 시간의 흐름을 빠르게 보여줍니다. 한국·일본·대만·미국·프랑스의 여러 날씨 조합과 Meloom 오리지널 음악을 담았습니다."
       }
     },
     "ja": {
@@ -240,9 +240,9 @@
       },
       "overviewVideo": {
         "title": "30秒でわかるMeloom",
-        "lead": "キャラクターとペットのあいさつやペットの食事、5つの国の景色と天気・昼夜の移り変わりを、実際の画面で紹介します。",
+        "lead": "キャラクターとペットがあいさつを交わし、周りの時間や景色、天気が移り変わる中、同じ部屋で過ごし続けます。",
         "link": "30秒のプロモーション動画を見る",
-        "caption": "実際のアプリ画面とMeloomのオリジナル音楽で構成しています。昼から夜への変化は早送りで表示しています。Meloomは開発中です。"
+        "caption": "開発中のMeloomの実際の画面です。キャラクターとペットの動きはそのまま、時間の流れを早めています。韓国・日本・台湾・アメリカ・フランスのさまざまな天気と、Meloomのオリジナル音楽を収録しています。"
       }
     },
     "zh-TW": {
@@ -315,9 +315,9 @@
       },
       "overviewVideo": {
         "title": "30 秒認識 Meloom",
-        "lead": "透過實際畫面，看看角色與寵物互相打招呼、寵物吃飯，以及五個國家的風景、天氣與日夜變化。",
+        "lead": "角色和寵物互相打招呼後，在同一個房間裡繼續生活，周圍的時間、景色與天氣不斷變換。",
         "link": "觀看 30 秒宣傳影片",
-        "caption": "使用實際 App 畫面，搭配 Meloom 原創音樂。白天到夜晚的變化為加速呈現。Meloom 仍在開發中。"
+        "caption": "畫面取自開發中的 Meloom。角色與寵物以正常速度活動，時間則加速流逝，展現韓國、日本、台灣、美國與法國的多種天氣組合，搭配 Meloom 原創音樂。"
       }
     }
   },
@@ -548,26 +548,26 @@
     ]
   },
   "overviewVideo": {
-    "src": "/assets/meloom/intro.5f43a5eecd6b.mp4",
-    "poster": "/assets/meloom/intro_poster.1532f2e10bf0.webp",
+    "src": "/assets/meloom/intro.3c0bd2ad6942.mp4",
+    "poster": "/assets/meloom/intro_poster.4bad187fe2a0.webp",
     "tracks": [
       {
-        "src": "/assets/meloom/intro_en.5d48df375373.vtt",
+        "src": "/assets/meloom/intro_en.e2a5b6b46fc6.vtt",
         "lang": "en",
         "label": "English"
       },
       {
-        "src": "/assets/meloom/intro_ko.f5dc33c99e4f.vtt",
+        "src": "/assets/meloom/intro_ko.483fa88fd440.vtt",
         "lang": "ko",
         "label": "한국어"
       },
       {
-        "src": "/assets/meloom/intro_ja.28034496c137.vtt",
+        "src": "/assets/meloom/intro_ja.5a587a1adb3b.vtt",
         "lang": "ja",
         "label": "日本語"
       },
       {
-        "src": "/assets/meloom/intro_zh-TW.269ebeebc2e4.vtt",
+        "src": "/assets/meloom/intro_zh-TW.44a01006a53e.vtt",
         "lang": "zh-TW",
         "label": "繁體中文"
       }
