@@ -13,7 +13,6 @@
   --accent: #2a55d6;
   --accent-ink: #ffffff;
   --status: #c8891a;
-  --logo-edge: #d8d2c6;
 
   /* The KEYCERTO stage stays dark in both themes, like its key art. */
   --keycerto-bg: #0b0907;
@@ -50,7 +49,6 @@
     --accent: #8fa8ff;
     --accent-ink: #12100e;
     --status: #e0a73a;
-    --logo-edge: transparent;
     --meloom-bg: #1d1b25;
     --meloom-ink: #f1ebe1;
     --meloom-muted: #bdb4a7;
@@ -72,7 +70,6 @@
   --accent: #8fa8ff;
   --accent-ink: #12100e;
   --status: #e0a73a;
-  --logo-edge: transparent;
   --meloom-bg: #1d1b25;
   --meloom-ink: #f1ebe1;
   --meloom-muted: #bdb4a7;
@@ -153,9 +150,16 @@ a:hover { color: var(--t-accent); }
   align-items: center;
   gap: 36px;
 }
-/* The approved logo always sits on white, at its own proportions. */
-.brand { flex: none; display: block; line-height: 0; padding: 3px 9px; background: #fff; border: 1px solid var(--logo-edge); border-radius: var(--radius); }
-.brand img { width: auto; height: 44px; }
+/* Each appearance shows its own approved original, unaltered: never a tile, filter or recolour. */
+.brand { flex: none; display: block; line-height: 0; }
+.brand img { width: auto; height: 48px; }
+.brand .brand-dark { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .brand .brand-light { display: none; }
+  :root:not([data-theme="light"]) .brand .brand-dark { display: block; }
+}
+:root[data-theme="dark"] .brand .brand-light { display: none; }
+:root[data-theme="dark"] .brand .brand-dark { display: block; }
 .site-nav { display: flex; gap: 4px; }
 .site-nav a { padding: 8px 12px; font-size: 15px; font-weight: 600; text-decoration: none; white-space: nowrap; color: var(--muted); }
 .site-nav a:hover { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 8px; }
@@ -187,9 +191,26 @@ a:hover { color: var(--t-accent); }
   gap: 12px 40px;
 }
 .footer-copy { margin: 0; }
-.footer-links { display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.footer-links { position: relative; display: flex; flex-wrap: wrap; gap: 6px 22px; }
 .footer-links a { text-decoration: none; }
 .footer-links a:hover { color: var(--ink); text-decoration: underline; }
+
+/* Several accounts share one footer menu. It opens upward, anchored to the footer links, so it never runs off the page. */
+.social-menu summary { display: inline-flex; align-items: baseline; gap: 6px; cursor: pointer; list-style: none; }
+.social-menu summary::-webkit-details-marker { display: none; }
+.social-menu summary::after { content: "+"; color: var(--accent); }
+.social-menu[open] summary { color: var(--ink); }
+.social-menu[open] summary::after { content: "\2212"; }
+.social-menu summary:hover { color: var(--ink); }
+.social-menu ul {
+  position: absolute; right: 0; bottom: calc(100% + 10px); z-index: 5;
+  min-width: 12rem; max-width: 100%; max-height: 60vh; overflow-y: auto;
+  margin: 0; padding: 6px; list-style: none;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius);
+  box-shadow: 0 10px 28px rgb(0 0 0 / .14);
+}
+.social-menu li a { display: block; padding: 8px 12px; border-radius: 2px; color: var(--ink); white-space: nowrap; }
+.social-menu li a:hover { background: var(--surface-2); text-decoration: none; }
 
 /* ------------------------------------------------------------- shared */
 
@@ -222,7 +243,9 @@ a:hover { color: var(--t-accent); }
 .body-copy p:last-child { margin-bottom: 0; }
 .placeholder { display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: var(--radius); background: var(--surface-2); color: var(--muted); font-size: 32px; font-weight: 700; }
 .notice { padding: 14px 16px; margin: 0 0 28px; border-left: 2px solid var(--t-accent); background: color-mix(in srgb, var(--t-ink) 6%, transparent); font-size: 14px; }
-.handle { margin-left: .45em; font-weight: 400; color: var(--muted); }
+/* Official accounts by platform name only, one short row however many there are. */
+.social-links { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 18px; }
+.social-links a { font-weight: 600; }
 
 .channels { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .channels li { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 0 20px; padding: 12px 0; border-bottom: 1px solid var(--line); }
@@ -322,16 +345,10 @@ a:hover { color: var(--t-accent); }
 .about-facts div { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 16px; padding: 11px 0; border-bottom: 1px solid var(--line); }
 .about-facts dt { color: var(--muted); font-size: 14px; }
 .about-facts dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
-.about-products { padding: 28px 0 64px; border-top: 2px solid var(--rule); }
-.about-products h2 { font-size: 20px; letter-spacing: -.01em; margin-bottom: 24px; }
-.about-products ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px 48px; }
-.about-product { display: grid; gap: 16px; align-content: start; }
-.about-art { display: block; overflow: hidden; border-radius: 2px; background: var(--surface-2); }
-.about-art img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.about-product h3 { font-size: 22px; margin-bottom: 4px; }
-.about-product h3 a { text-decoration: none; }
-.about-product p { margin: 0; }
-.about-product .muted { font-size: 14px; margin-top: 4px; }
+.about-onward { margin: 32px 0 0; }
+
+.support-social { margin-top: 4px; }
+.support-social .social-links { font-size: 17px; }
 
 /* -------------------------------------------------------------- detail */
 
@@ -379,7 +396,8 @@ a:hover { color: var(--t-accent); }
 
 .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
 .gallery img { width: 100%; border-radius: var(--radius); }
-.gallery-portrait { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 840px; }
+/* Phone screenshots keep one size however many there are, and wrap rather than squeeze. */
+.gallery-portrait { grid-template-columns: repeat(auto-fill, minmax(180px, 240px)); }
 .gallery-portrait img { aspect-ratio: 9 / 16; object-fit: cover; border: 4px solid #1a1816; border-radius: 22px; }
 .gallery a { display: block; }
 .gallery figcaption { margin-top: 10px; font-size: 14px; text-align: center; color: var(--muted); }
@@ -446,9 +464,9 @@ a:hover { color: var(--t-accent); }
 
 /* ----------------------------------------------------- product accents */
 
-.lineup-keycerto .lineup-name, .catalog-keycerto h2, .about-product.catalog-keycerto h3 { font-family: var(--serif); letter-spacing: .05em; font-weight: 600; }
-.lineup-keycerto .lineup-art, .catalog-keycerto .catalog-art, .catalog-keycerto .about-art { background: var(--keycerto-bg); }
-.lineup-meloom .lineup-art, .catalog-meloom .catalog-art, .catalog-meloom .about-art { background: #f6efdf; }
+.lineup-keycerto .lineup-name, .catalog-keycerto h2 { font-family: var(--serif); letter-spacing: .05em; font-weight: 600; }
+.lineup-keycerto .lineup-art, .catalog-keycerto .catalog-art { background: var(--keycerto-bg); }
+.lineup-meloom .lineup-art, .catalog-meloom .catalog-art { background: #f6efdf; }
 .tone-keycerto h1 { letter-spacing: .04em; font-weight: 600; }
 
 /* ---------------------------------------------------------- responsive */
@@ -479,8 +497,7 @@ a:hover { color: var(--t-accent); }
 @media (max-width: 720px) {
   :root { --gutter: 20px; }
   .header-inner { flex-wrap: wrap; gap: 0 12px; min-height: 0; padding-top: 10px; padding-bottom: 0; }
-  .brand { padding: 3px 8px; }
-  .brand img { height: 38px; }
+  .brand img { height: 42px; }
   .site-settings { gap: 8px; }
   .lang-switch { margin-left: 0; }
   .lang-switch a, .lang-switch span { padding: 7px 9px; }
@@ -509,16 +526,17 @@ a:hover { color: var(--t-accent); }
   .block { padding: 44px 0; }
   .block-split { grid-template-columns: 1fr; }
   .feature-list { grid-template-columns: 1fr; }
-  .gallery-portrait { gap: 10px; }
+  .gallery-portrait { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 10px; }
   .gallery-portrait img { border-width: 3px; border-radius: 14px; }
   .gallery figcaption { font-size: 12.5px; }
   .mode-list-pictured { gap: 24px; }
   .about-facts div { grid-template-columns: 100px minmax(0, 1fr); }
   .footer-inner { flex-direction: column; padding-top: 20px; }
+  .social-menu ul { right: auto; left: 0; }
 }
 
 @media (max-width: 370px) {
-  .brand img { height: 34px; }
+  .brand img { height: 38px; }
   .site-nav a { padding: 11px 9px; font-size: 14px; }
   .lang-switch a, .lang-switch span { padding: 7px 7px; }
   #appearance { padding: 5px 4px; }

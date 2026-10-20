@@ -7,8 +7,8 @@ from pathlib import Path
 from urllib.parse import quote
 
 
-YOUTUBE_NAME = 'Player Zero Dev'
-YOUTUBE_HANDLE = '@player0dev'
+LOGO_SIZE = (969, 627)
+SOCIAL_MENU_MIN = 2  # fewer accounts than this are linked directly; more go behind one footer menu
 
 
 def e(value):
@@ -84,6 +84,45 @@ def featured(products):
     return next((p for p in items if p.get('featured')), items[0] if items else None)
 
 
+def brand_mark(cfg):
+    """The approved mark for each theme, unaltered. Without a separate dark original, one image serves both."""
+    light = cfg.get('logoLight') or cfg['logo']
+    dark = cfg.get('logoDark')
+    size = f'width="{LOGO_SIZE[0]}" height="{LOGO_SIZE[1]}"'
+    if not dark or dark == light:
+        return f'<img src="{e(light)}" alt="" {size}>'
+    return (f'<img class="brand-light" src="{e(light)}" alt="" {size}>'
+            f'<img class="brand-dark" src="{e(dark)}" alt="" {size}>')
+
+
+def social_links(cfg):
+    """(name, url) for each official social account. `socials` is optional; a config with only `youtube` still works."""
+    entries = cfg.get('socials')
+    if entries is None:
+        entries = [{'name': 'YouTube', 'url': cfg['youtube']}] if cfg.get('youtube') else []
+    return [(item['name'], item['url']) for item in entries if item.get('name') and item.get('url')]
+
+
+def social_label(lang):
+    return text(lang, 'Social', 'SNS')
+
+
+def social_list(cfg):
+    """Platform names only: the account names and handles live on the platforms themselves."""
+    links = social_links(cfg)
+    if not links:
+        return ''
+    return '<ul class="social-links">' + ''.join(f'<li><a href="{e(url)}">{e(name)}</a></li>' for name, url in links) + '</ul>'
+
+
+def footer_social(site, lang):
+    links = social_links(site.config)
+    if len(links) < SOCIAL_MENU_MIN:
+        return ''.join(f'<a href="{e(url)}">{e(name)}</a>' for name, url in links)
+    items = ''.join(f'<li><a href="{e(url)}">{e(name)}</a></li>' for name, url in links)
+    return f'<details class="social-menu"><summary>{social_label(lang)}</summary><ul>{items}</ul></details>'
+
+
 def stylesheet_name():
     """A content-addressed filename prevents old browser/CDN CSS from styling new HTML."""
     source = Path(__file__).resolve().parents[1] / 'styles.css'
@@ -146,7 +185,7 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <a class="skip-link" href="#main">{text(lang, 'Skip to content', '본문으로 이동')}</a>
   <header class="site-header">
     <div class="header-inner">
-      <a class="brand" href="{site.url(lang)}" aria-label="{text(lang, 'Player Zero home', 'Player Zero 홈')}"><img src="{e(cfg['logo'])}" alt="" width="512" height="331"></a>
+      <a class="brand" href="{site.url(lang)}" aria-label="{text(lang, 'Player Zero home', 'Player Zero 홈')}">{brand_mark(cfg)}</a>
       <nav class="site-nav" aria-label="{text(lang, 'Main navigation', '주요 메뉴')}">{''.join(nav)}</nav>
       <div class="site-settings">
         <label class="setting-label" for="appearance">{text(lang, 'Appearance', '화면 테마')}</label>
@@ -159,10 +198,10 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <footer class="site-footer">
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Player Zero</p>
-      <nav class="footer-links" aria-label="{text(lang, 'Footer', '하단 메뉴')}"><a href="{site.url(lang, 'products')}">{text(lang, 'Products', '제품')}</a><a href="{site.url(lang, 'about')}">{text(lang, 'About', '회사 소개')}</a><a href="{site.url(lang, 'support')}">{text(lang, 'Contact', '문의')}</a><a href="{e(cfg['youtube'])}">YouTube</a><a href="{site.url(lang, 'legal')}">{e(site.t(lang, 'legal.title'))}</a></nav>
+      <nav class="footer-links" aria-label="{text(lang, 'Footer', '하단 메뉴')}"><a href="{site.url(lang, 'products')}">{text(lang, 'Products', '제품')}</a><a href="{site.url(lang, 'about')}">{text(lang, 'About', '회사 소개')}</a><a href="{site.url(lang, 'support')}">{text(lang, 'Contact', '문의')}</a><a href="{site.url(lang, 'legal')}">{e(site.t(lang, 'legal.title'))}</a>{footer_social(site, lang)}</nav>
     </div>
   </footer>
-  <script>(()=>{{const s=document.getElementById('appearance');const r=document.documentElement;s.value=r.dataset.theme||'system';s.addEventListener('change',()=>{{r.dataset.theme=s.value;try{{if(s.value==='system')localStorage.removeItem('player0-theme');else localStorage.setItem('player0-theme',s.value);}}catch{{}}}});}})();</script>
+  <script>(()=>{{const s=document.getElementById('appearance');const r=document.documentElement;s.value=r.dataset.theme||'system';s.addEventListener('change',()=>{{r.dataset.theme=s.value;try{{if(s.value==='system')localStorage.removeItem('player0-theme');else localStorage.setItem('player0-theme',s.value);}}catch{{}}}});document.querySelectorAll('.social-menu').forEach(m=>{{m.addEventListener('keydown',ev=>{{if(ev.key==='Escape'&&m.open){{m.open=false;m.querySelector('summary').focus();}}}});document.addEventListener('click',ev=>{{if(m.open&&!m.contains(ev.target))m.open=false;}});}});}})();</script>
 </body>
 </html>
 '''
@@ -202,9 +241,10 @@ def release_fact(lang):
 
 def channels(site, lang):
     cfg = site.config
+    social = social_list(cfg)
+    social_row = f'\n        <li class="channel-social"><span class="channel-label">{social_label(lang)}</span>{social}</li>' if social else ''
     return f'''<ul class="channels">
-        <li><span class="channel-label">{text(lang, 'Email', '이메일')}</span><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><span class="channel-note">{text(lang, 'Support, press and business', '제품 문의 · 취재 · 협업')}</span></li>
-        <li><span class="channel-label">YouTube</span><a href="{e(cfg['youtube'])}">{YOUTUBE_NAME}<span class="handle">{YOUTUBE_HANDLE}</span></a><span class="channel-note">{text(lang, 'Official channel', '공식 채널')}</span></li>
+        <li><span class="channel-label">{text(lang, 'Email', '이메일')}</span><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><span class="channel-note">{text(lang, 'Product questions and support', '제품 문의와 지원')}</span></li>{social_row}
       </ul>'''
 
 
@@ -456,26 +496,20 @@ def about(site, lang, shell):
     ]
     fact_rows = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in rows)
     fact_rows += f'<div><dt>{text(lang, "Email", "이메일")}</dt><dd><a href="mailto:{e(cfg["contact"])}">{e(cfg["contact"])}</a></dd></div>'
-    fact_rows += f'<div><dt>YouTube</dt><dd><a href="{e(cfg["youtube"])}">{YOUTUBE_NAME}</a> <span class="handle">{YOUTUBE_HANDLE}</span></dd></div>'
-    cards = []
-    for product in ordered(site.products):
-        copy = copy_for(site, product, lang)
-        slug, name = product['slug'], copy.get('name', product['slug'])
-        detail = site.url(lang, 'products', slug)
-        images = product.get('images', {})
-        thumb = images.get('cover') or images.get('hero')
-        art = f'<a class="about-art" href="{detail}" tabindex="-1"><img src="{e(thumb)}" alt="" width="1232" height="706" loading="lazy"></a>' if thumb else ''
-        where = ' · '.join(part for part in (platforms(site, lang, product), status(site, lang, product)) if part)
-        cards.append(f'''<li class="about-product catalog-{e(slug)}">{art}<div><h3><a href="{detail}">{e(name)}</a></h3><p>{e(summary(copy))}</p><p class="muted">{e(where)}</p></div></li>''')
+    social = social_list(cfg)
+    if social:
+        fact_rows += f'<div><dt>{social_label(lang)}</dt><dd>{social}</dd></div>'
+    # The company page says who we are; the products page is the catalog, so this only points to it.
+    onward = f'<p class="about-onward"><a class="text-link" href="{site.url(lang, "products")}">{e(site.t(lang, "about.productsLink"))}</a></p>'
     body = f'''<header class="page-intro"><h1>{e(site.t(lang, 'about.title'))}</h1><p class="lead">{e(lead)}</p></header>
-      <section class="about-body">{paragraphs(strings(site, lang, 'about', 'paragraphs') or [])}<dl class="about-facts">{fact_rows}</dl></section>
-      {f'<section class="about-products"><h2>{e(site.t(lang, "about.making"))}</h2><ul>{"".join(cards)}</ul></section>' if cards else ''}'''
+      <section class="about-body"><div class="about-text">{paragraphs(strings(site, lang, 'about', 'paragraphs') or [])}{onward}</div><dl class="about-facts">{fact_rows}</dl></section>'''
     return shell(site, lang=lang, path=site.url(lang, 'about'), title=site.t(lang, 'about.title') + ' | Player Zero', description=site.t(lang, 'about.description'), body=body, alternates={l: site.url(l, 'about') for l in site.languages})
 
 
 def support(site, lang, shell):
     cfg = site.config
-    lead = text(lang, 'Product questions, problem reports, press and business enquiries all go to one address.', '제품 문의, 문제 제보, 취재와 협업 제안은 모두 한 주소로 받습니다.')
+    social = social_list(cfg)
+    lead = text(lang, 'For questions about our games and apps, or to report a problem, write to one address.', '게임과 앱에 관한 질문과 문제 제보는 모두 한 주소로 받습니다.')
     blocks = []
     for p in ordered(site.products):
         slug = p['slug']
@@ -497,7 +531,7 @@ def support(site, lang, shell):
                  text(lang, 'A screenshot, if you can take one', '가능하다면 화면 캡처')]
     body = f'''<header class="page-intro"><h1>{text(lang, 'Contact & support', '문의 및 지원')}</h1><p class="lead">{e(lead)}</p></header>
       <section class="support-main">
-        <div class="support-mail"><p class="muted">{text(lang, 'Email', '이메일')}</p><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a><p>{text(lang, "Player Zero's official YouTube channel is", 'Player Zero의 공식 YouTube 채널은')} <a href="{e(cfg['youtube'])}">{YOUTUBE_NAME}</a>{text(lang, ' (' + YOUTUBE_HANDLE + ').', '(' + YOUTUBE_HANDLE + ')입니다.')}</p></div>
+        <div class="support-mail"><p class="muted">{text(lang, 'Email', '이메일')}</p><a href="mailto:{e(cfg['contact'])}">{e(cfg['contact'])}</a>{f'<div class="support-social"><p class="muted">{social_label(lang)}</p>{social}</div>' if social else ''}</div>
         <div class="support-grid">{''.join(blocks)}</div>
       </section>
       <section class="support-notes">
