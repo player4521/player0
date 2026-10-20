@@ -6,18 +6,18 @@
     "play": "Play"
   },
   "home": {
-    "title": "Player Zero Lab",
-    "description": "Independent games and everyday apps by Player Zero Lab. Explore KEYCERTO and Meloom.",
+    "title": "Player Zero",
+    "description": "Independent games and everyday apps by Player Zero. Explore KEYCERTO and Meloom.",
     "lead": "We make things you return to: a rhythm game played on your keyboard, and a quiet room that keeps you company through the day. Both are in development.",
     "featured": "Projects",
     "playTeaser": "Play in your browser",
     "playTeaserEmpty": "Browser playables are on the way.",
     "seeAll": "See all products",
-    "eyebrow": "Player Zero Lab",
+    "eyebrow": "Player Zero",
     "headline": "Small games and everyday apps, made with care.",
-    "aboutTitle": "About Player Zero Lab",
+    "aboutTitle": "About Player Zero",
     "aboutParagraphs": [
-      "Player Zero Lab is the public name of Player Zero. We build games and apps around one idea each, and keep working on it until it feels right in the hands.",
+      "Player Zero is an independent developer of games and everyday apps. We build games and apps around one idea each, and keep working on it until it feels right in the hands.",
       "KEYCERTO turns a keyboard into an instrument that writes letters and stories onto paper. Meloom gathers the weather, the time and your day into a small room. They are different kinds of projects, and we like it that way.",
       "Neither has a release date yet. When something is ready to share, it will appear here first."
     ],
@@ -25,7 +25,7 @@
   },
   "products": {
     "title": "Products",
-    "description": "Explore KEYCERTO and Meloom, games and everyday apps in development at Player Zero Lab.",
+    "description": "Explore KEYCERTO and Meloom, games and everyday apps in development at Player Zero.",
     "lead": "Everything Player Zero is building.",
     "groupApps": "Apps",
     "groupGames": "Games",
