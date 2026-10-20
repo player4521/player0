@@ -400,5 +400,17 @@
       }
     ]
   },
-  "video": "/assets/keycerto/gameplay.mp4"
+  "video": "/assets/keycerto/gameplay.en.e489b73cea14.mp4",
+  "videos": {
+    "en": "/assets/keycerto/gameplay.en.e489b73cea14.mp4",
+    "ko": "/assets/keycerto/gameplay.ko.89ede2eca7a9.mp4",
+    "ja": "/assets/keycerto/gameplay.ja.3e4ac554d1ad.mp4",
+    "zh-TW": "/assets/keycerto/gameplay.zh-CN.4722b127006b.mp4"
+  },
+  "videoPosters": {
+    "en": "/assets/keycerto/gameplay-poster.en.a2bbc8b18e79.webp",
+    "ko": "/assets/keycerto/gameplay-poster.ko.fa6f9e2df6b3.webp",
+    "ja": "/assets/keycerto/gameplay-poster.ja.a6c2f80e0bfe.webp",
+    "zh-TW": "/assets/keycerto/gameplay-poster.zh-CN.a3f6b72b8cce.webp"
+  }
 }
