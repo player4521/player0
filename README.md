@@ -91,8 +91,9 @@ Cloudflare Pages project `player0`, custom domain already attached.
 - Build output directory: **`dist`**
 - No Functions, no Workers, no Web Analytics.
 
-The Pages project currently builds from the `companion_app` repository. Pointing it
-at this project is a dashboard change; nothing here does deployment or DNS.
+The Pages project is connected to `player4521/player0`. Production deploys
+automatically from `main`; the working branch gets preview deployments. The
+build command is `python tool/build.py` and the output directory is `dist`.
 
 
 ## Product presentation
@@ -103,7 +104,9 @@ in the registry; generated `dist/` files are never edited by hand.
 
 Product content may additionally include `features` and `howTo` arrays of
 `{title, body}`, `modes` with the same shape, and `faq` as
-`{question, answer}` objects. `video` is an optional local video URL.
+`{question, answer}` objects. An optional `summary` is used in the compact
+home catalog and featured introduction, falling back to `tagline`.
+`video` is an optional local video URL.
 `galleries.<language>` is an array of `{src, alt, caption}` items.
 The existing privacy documents and both legacy privacy redirects are retained.
 

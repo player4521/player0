@@ -23,9 +23,8 @@
       "tagline": "Keep time with the music, and the page fills with a story.",
       "description": [
         "KEYCERTO is a rhythm game played on your keyboard. Keep time with classical melodies, lively ragtime and original pieces, and letters, reflections and short stories appear on paper as you play.",
-        "Choose how you play each song: with one key, with two keys, or by typing the English text yourself. Points you earn collect keyboard parts, completed goals unlock stage decorations, and records and certificates keep track of how you did.",
-        "You can also make your own charts in the built-in editor, then import or export them as .keycerto files.",
-        "KEYCERTO is in development for Windows PC on Steam. The release date has not been announced."
+        "Choose how you play each song: one-key, two-key, or typing, where you type the English text yourself. Points you earn collect keyboard parts, completed goals unlock stage decorations, and records and certificates keep track of how you did.",
+        "You can also make your own charts in the built-in editor, then import or export them as .keycerto files."
       ],
       "features": [
         {
@@ -79,7 +78,7 @@
       ],
       "faq": [
         {
-          "question": "Which platforms is KEYCERTO coming to?",
+          "question": "Which platforms is KEYCERTO being developed for?",
           "answer": "KEYCERTO is in development for Windows PC on Steam. The release date and price have not been announced yet."
         },
         {
@@ -93,22 +92,17 @@
         {
           "question": "Can I make my own charts?",
           "answer": "Yes. KEYCERTO has a built-in chart editor, and charts can be imported and exported as .keycerto files."
-        },
-        {
-          "question": "Where can I follow development?",
-          "answer": "On our YouTube channel, Player Zero Dev (@player0dev). You can also write to contact@player0.dev. Store links will be added to this page when they are available."
         }
       ]
     },
     "ko": {
       "name": "KEYCERTO",
       "summary": "키보드로 연주하는 리듬 게임",
-      "tagline": "박자를 따라 치면, 종이 위에 이야기가 채워집니다.",
+      "tagline": "박자에 맞춰 치면 종이 위에 이야기가 채워집니다.",
       "description": [
         "KEYCERTO는 키보드로 연주하는 리듬 게임입니다. 익숙한 클래식 선율과 경쾌한 래그타임, 오리지널 곡에 맞춰 박자를 지키면 편지와 기록, 짧은 이야기가 종이 위에 쓰여 나갑니다.",
-        "곡마다 연주 방식을 고를 수 있습니다. 한 키로, 두 키로, 또는 영문 문장을 직접 입력하며 연주하세요. 연주로 얻은 포인트로 키보드 부품을 모으고, 목표를 달성하면 무대 소품이 열리며, 기록과 증서로 연주 결과가 남습니다.",
-        "내장 편집기로 채보를 직접 만들고, .keycerto 파일로 가져오거나 내보낼 수도 있습니다.",
-        "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다. 출시일은 아직 발표되지 않았습니다."
+        "곡마다 원키, 투키, 타이핑 중 연주 방식을 고를 수 있고, 타이핑에서는 영문 문장을 직접 입력합니다. 연주로 얻은 포인트로 키보드 부품을 모으고, 목표를 달성하면 무대 소품이 열리며, 기록과 증서로 연주 결과가 남습니다.",
+        "내장 편집기로 채보를 직접 만들고, .keycerto 파일로 가져오거나 내보낼 수도 있습니다."
       ],
       "features": [
         {
@@ -162,7 +156,7 @@
       ],
       "faq": [
         {
-          "question": "어떤 플랫폼으로 출시되나요?",
+          "question": "어떤 플랫폼으로 개발 중인가요?",
           "answer": "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중입니다. 출시일과 가격은 아직 발표되지 않았습니다."
         },
         {
@@ -176,10 +170,6 @@
         {
           "question": "채보를 직접 만들 수 있나요?",
           "answer": "네. 내장 채보 편집기가 있으며, 채보를 .keycerto 파일로 가져오거나 내보낼 수 있습니다."
-        },
-        {
-          "question": "개발 소식은 어디서 볼 수 있나요?",
-          "answer": "YouTube 채널 Player Zero Dev(@player0dev)에서 보실 수 있고, contact@player0.dev로 연락하셔도 됩니다. 스토어 링크는 준비되는 대로 이 페이지에 추가하겠습니다."
         }
       ]
     }

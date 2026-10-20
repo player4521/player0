@@ -26,8 +26,7 @@
       "tagline": "A small room that keeps you company through the day.",
       "description": [
         "Meloom is a companion app that shows your day as a room. The weather outside and the local time are reflected in the scene, and on Android you can choose to bring in your calendar as well.",
-        "Drop in whenever you like: look around the room, open gifts and card packs, and build up a collection of cards.",
-        "Meloom is in development for Android and Windows. There is no release date yet."
+        "Drop in whenever you like: look around the room, open gifts and card packs, and build up a collection of cards."
       ],
       "features": [
         {
@@ -83,11 +82,10 @@
     "ko": {
       "name": "Meloom",
       "summary": "하루를 작은 방으로 보여주는 컴패니언 앱",
-      "tagline": "하루를 곁에서 함께하는 작은 방.",
+      "tagline": "하루를 함께 보내는 작은 방.",
       "description": [
         "Meloom은 하루를 하나의 방으로 보여주는 컴패니언 앱입니다. 창밖의 날씨와 현재 시각이 방의 풍경에 그대로 나타나고, Android에서는 원하면 캘린더 일정도 함께 볼 수 있습니다.",
-        "생각날 때 잠시 들러 방을 둘러보고, 선물과 카드 팩을 열며 카드를 하나씩 모아보세요.",
-        "Meloom은 Android와 Windows용으로 개발 중이며, 출시일은 아직 정해지지 않았습니다."
+        "생각날 때 잠시 들러 방을 둘러보고, 선물과 카드 팩을 열며 카드를 하나씩 모아보세요."
       ],
       "features": [
         {

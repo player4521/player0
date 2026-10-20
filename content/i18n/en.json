@@ -7,31 +7,31 @@
   },
   "home": {
     "title": "Player Zero — Games and apps",
-    "description": "Player Zero makes games and apps: KEYCERTO, a rhythm game played on the keyboard, and Meloom, a companion app that shows your day as a room.",
-    "lead": "We make games and apps. Right now that means KEYCERTO, a rhythm game you play on your keyboard, and Meloom, a companion app that shows your day as a room.",
-    "current": "Current projects",
-    "aboutTitle": "About Player Zero",
-    "about": "Player Zero is an independent developer of games and apps. Both of our projects are in development, and neither has a release date yet. News will appear here first, and you can follow development on our YouTube channel, Player Zero Dev.",
-    "aboutLink": "More about Player Zero"
+    "description": "Player Zero makes games and apps. In development: KEYCERTO, a rhythm game played on the keyboard, and Meloom, a companion app that shows your day as a room.",
+    "catalog": "Games and apps",
+    "catalogLink": "All products",
+    "aboutTitle": "Company",
+    "about": "Player Zero is an independent developer of games and apps.",
+    "aboutLink": "About Player Zero",
+    "contactTitle": "Contact"
   },
   "about": {
     "title": "About Player Zero",
     "description": "Player Zero is an independent developer of games and apps, currently making KEYCERTO and Meloom.",
     "lead": "Player Zero is an independent developer of games and apps.",
     "paragraphs": [
-      "We are currently making two projects. KEYCERTO is a rhythm game played on the keyboard, in development for Windows PC on Steam. Meloom is a companion app for Android and Windows that shows your day as a room.",
-      "They are quite different from each other. In KEYCERTO, keeping time with the music writes letters and short stories onto paper, and you can play with one key, two keys or by typing the English text yourself. In Meloom, the weather, the local time and, if you choose, your calendar appear in a small room where you can open gifts and card packs and collect cards.",
-      "Neither project has a release date yet. When there is news, it will appear on this site first. You can also follow development on our YouTube channel, Player Zero Dev (@player0dev)."
+      "KEYCERTO is a rhythm game played on the keyboard: keep time with the music, and letters and short stories appear on paper. Meloom is a companion app that shows the weather and local time in a small room, with gifts, card packs and cards to collect. On Android, it can also show your calendar, read-only, if you choose.",
+      "Each product page lists the platforms it is being developed for, its current status, how it works and answers to common questions."
     ],
     "making": "What we are making"
   },
   "products": {
     "title": "Products",
     "description": "KEYCERTO and Meloom: the game and the app Player Zero is developing, with platforms, status and how each one works.",
-    "lead": "What Player Zero is making, what each project is, and which platforms it is being developed for.",
+    "lead": "Every game and app Player Zero is making, with the platforms each one is being developed for.",
     "groupApps": "Apps",
     "groupGames": "Games",
-    "empty": "Nothing here yet."
+    "empty": "No products are listed yet."
   },
   "play": {
     "title": "Play",
