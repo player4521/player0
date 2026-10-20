@@ -56,6 +56,9 @@ an external host). The page supplies the frame, the ratio and the metadata.
 
 ## Languages
 
+Author new product copy and promotional media in English first. English is the
+canonical base for localized versions.
+
 Three language axes are deliberately independent:
 
 - **Site chrome** - `content/site.json` `languages`, strings in `content/i18n/`.
@@ -106,7 +109,11 @@ Product content may additionally include `features` and `howTo` arrays of
 `{title, body}`, `modes` with the same shape, and `faq` as
 `{question, answer}` objects. An optional `summary` is used in the compact
 home catalog and featured introduction, falling back to `tagline`.
-`video` is an optional local video URL.
+`video` is an optional local video URL and remains supported for existing products.
+An optional `videos` map provides localized URLs, for example
+`{"en": "/assets/example-en.mp4", "ko": "/assets/example-ko.mp4"}`. Pages choose
+the requested language, then `en`, then the legacy `video` URL. An optional
+`videoPosters` map uses the same language fallback before `images.hero`.
 `galleries.<language>` is an array of `{src, alt, caption}` items.
 The existing privacy documents and both legacy privacy redirects are retained.
 

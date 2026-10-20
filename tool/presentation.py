@@ -73,6 +73,12 @@ def modes_label(site, lang, product):
     return ui(site, lang, 'waysToPlay' if product.get('kind') == 'game' else 'modes')
 
 
+def video_for(product, lang):
+    """The visitor's localized video, then its English base, then the legacy video."""
+    videos = product.get('videos') or {}
+    return videos.get(lang) or videos.get('en') or product.get('video')
+
+
 def video_text(site, lang, product, key, **fmt):
     """A game's video shows gameplay; any other product's is a product video."""
     kind = 'game' if product.get('kind') == 'game' else 'app'
@@ -433,12 +439,13 @@ def project_row(site, product, lang, content):
     image = images.get('cover') or images.get('hero')
     alt = images.get('coverAlt') or images.get('heroAlt') or name
     detail = site.url(lang, 'products', slug)
+    video = video_for(product, lang)
     media = (f'<img src="{e(image)}" alt="{e(alt)}" width="1232" height="706" loading="lazy">' if image
              else f'<span class="placeholder">{e(name)}</span>')
     links = []
     if copy.get('howTo'):
         links.append((how_label(lang, product, site), detail + '#how-to'))
-    if product.get('video'):
+    if video:
         links.append((video_text(site, lang, product, 'link'), detail + '#gameplay'))
     if product.get('overviewVideo'):
         links.append((copy.get('overviewVideo', {}).get('link') or video_text(site, lang, product, 'watch'), detail + '#overview-video'))
@@ -492,11 +499,12 @@ def detail(site, product, lang, shell, content, legal_docs):
     shots = gallery(site, product, lang, name)
     modes, steps = copy.get('modes') or [], copy.get('howTo') or []
     pictured = bool(game and modes and len(shots) == len(modes))
+    video = video_for(product, lang)
 
     actions = []
     if steps:
         actions.append(button('#how-to', how))
-    if product.get('video'):
+    if video:
         actions.append(button('#gameplay', video_text(site, lang, product, 'watch'), bool(actions)))
     if product.get('overviewVideo'):
         actions.append(button('#overview-video', copy.get('overviewVideo', {}).get('link') or video_text(site, lang, product, 'watch'), True))
@@ -506,9 +514,11 @@ def detail(site, product, lang, shell, content, legal_docs):
 
     media = ''
     hero = images.get('hero')
-    if product.get('video'):
-        video = e(product['video'])
-        poster = f' poster="{e(hero)}"' if hero else ''
+    if video:
+        video = e(video)
+        posters = product.get('videoPosters') or {}
+        poster_url = posters.get(lang) or posters.get('en') or hero
+        poster = f' poster="{e(poster_url)}"' if poster_url else ''
         caption = f'<figcaption>{e(video_text(site, lang, product, "caption"))}</figcaption>' if game else ''
         media = f'''<figure class="hero-media" id="gameplay"><video controls playsinline preload="none"{poster} aria-label="{e(video_text(site, lang, product, 'label', name=name))}"><source src="{video}" type="video/mp4"><a href="{video}">{e(video_text(site, lang, product, 'open'))}</a></video>{caption}</figure>'''
     elif hero:
