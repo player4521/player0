@@ -71,6 +71,33 @@ The default language lives at the root (`/products/`), others under a prefix
 (`/ko/products/`). Adding `ja` means adding `content/i18n/ja.json` and listing it
 in `site.json`.
 
+Browser-language selection is one small inline script per page
+(`tool/language.py`), built from `site.json` `languages` and the page's own
+hreflang alternates. No cookies, no server, no network.
+
+- Only default-language (unprefixed) pages ever redirect, and only to the same
+  page's generated alternate, with query and hash kept, via `location.replace`.
+  Localized URLs such as `/ko/products/keycerto/` always stay as shared. Pages
+  without that translation and 404 pages stay put.
+- Order: `?lang=en` opt-out, then no redirect when arriving from another page
+  of this site (same-origin referrer, so browsing and English-only legal
+  fallbacks never switch language mid-visit), then a saved menu choice
+  (`localStorage` `player0-language`), then `navigator.languages` in order
+  (then `navigator.language`), else English.
+- Matching ignores case and region (`ko-KR` -> `ko`, `en-GB` -> English).
+  `zh-TW`, `zh-Hant`, `zh-HK`, `zh-MO` and plain `zh` open `zh-TW`; Simplified
+  `zh-CN`/`zh-Hans`/`zh-SG` do not, and the next browser language is tried.
+- The menu's English link always carries `?lang=en`, so English opened any way
+  (new tab, middle or modified click, context menu, blocked storage, stripped
+  referrer) stays English. Only that menu link has it: canonical, hreflang and
+  sitemap URLs stay clean, and other language links are unchanged.
+- An ordinary click on a menu link also saves that language, English included.
+  Modified and middle clicks open normally and save nothing. Saved values are
+  only accepted when they name a site language; they are never URLs.
+
+Run `node --test tool/test_language_navigation.js` after the build: it executes
+the generated script against stubbed browsers.
+
 ## Legal documents
 
 Markdown in `content/legal/<product>/<doc>.<lang>.md`. Meloom's policy is authored
