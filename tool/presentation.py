@@ -6,6 +6,8 @@ import hashlib
 from pathlib import Path
 from urllib.parse import quote
 
+from language import menu_href, selection_script
+
 
 LOGO_SIZE = (969, 627)
 SOCIAL_MENU_MIN = 2  # fewer accounts than this are linked directly; more go behind one footer menu
@@ -159,7 +161,8 @@ def footer_social(site, lang):
 
 def language_menu(site, lang, path, alternates):
     """Every site language, each in its own name, behind one compact menu. Links keep the visitor on the
-    same page where that language has it; otherwise they go to the nearest page it does have."""
+    same page where that language has it; otherwise they go to the nearest page it does have.
+    The default-language link is explicit (?lang=en) so no browser-language redirect overrides it."""
     if len(site.languages) < 2:
         return ''
     section = 'legal' if path.startswith(site.url(lang, 'legal')) else ''
@@ -169,7 +172,7 @@ def language_menu(site, lang, path, alternates):
         if code == lang:
             items.append(f'<li><span aria-current="true" lang="{e(code)}">{name}</span></li>')
         else:
-            href = alternates.get(code) or site.url(code, section)
+            href = menu_href(site, code, alternates.get(code) or site.url(code, section))
             items.append(f'<li><a href="{e(href)}" hreflang="{e(code)}" lang="{e(code)}">{name}</a></li>')
     return (f'<details class="lang-menu"><summary><span class="visually-hidden">{e(ui(site, lang, "language"))} </span>'
             f'{e(site.language_name(lang))}</summary><ul>{"".join(items)}</ul></details>')
@@ -215,6 +218,7 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <meta name="theme-color" content="#f4f2ed" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#12100e" media="(prefers-color-scheme: dark)">
   <script>(()=>{{let t='system';try{{const s=localStorage.getItem('player0-theme');if(s==='light'||s==='dark')t=s;}}catch{{}}document.documentElement.dataset.theme=t;}})();</script>
+  {selection_script(site, lang, alternates)}
   <link rel="canonical" href="{e(canonical)}">
   {alternates_html}
   <meta property="og:title" content="{e(title)}">
