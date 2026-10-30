@@ -51,7 +51,7 @@ class WebsitePrivacyTests(unittest.TestCase):
         pages = build.build_all(self.site)
         page = pages['analytics-preferences/index.html']
         self.assertIn('noindex, nofollow', page)
-        self.assertIn('/assets/analytics_preferences.js', page)
+        self.assertRegex(page, r'/assets/analytics_preferences\.js\?v=[0-9a-f]{12}')
         self.assertIn('id="analytics-exclude"', page)
         self.assertNotIn('/analytics-preferences', pages['sitemap.xml'])
         self.assertIn('Disallow: /analytics-preferences', pages['robots.txt'])
