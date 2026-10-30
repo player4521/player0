@@ -14,7 +14,7 @@
     "ja",
     "zh-TW"
   ],
-  "_comment_analytics": "Cloudflare Web Analytics is enabled in Pages and will be injected by Cloudflare on the next deployment. No manual beacon. The stats shortcut uses the official account-neutral login URL; analytics data, account IDs, site tags and account credentials are not generated into the static site.",
+  "_comment_analytics": "Cloudflare Web Analytics uses the existing automatic setup on the player0.dev zone. Keep Pages-specific analytics disabled to avoid a second collector. No manual beacon. The stats shortcut uses the official account-neutral login URL; analytics data, account IDs, site tags and credentials are not generated into the static site.",
   "redirects": [
     [
       "/privacy/",
@@ -49,7 +49,7 @@
   ],
   "analytics": {
     "provider": "cloudflare-web-analytics",
-    "injection": "cloudflare-pages",
+    "injection": "cloudflare-zone",
     "dashboardUrl": "https://dash.cloudflare.com/?to=/:account/web-analytics"
   }
 }
