@@ -96,7 +96,8 @@
     "back": "ホームに戻る"
   },
   "footer": {
-    "contact": "お問い合わせ"
+    "contact": "お問い合わせ",
+    "websitePrivacy": "ウェブサイトのプライバシー"
   },
   "ui": {
     "skipToContent": "本文へスキップ",
@@ -159,5 +160,12 @@
       "可能であれば、スクリーンショット"
     ],
     "docInLanguage": "{doc}（{language}）"
+  },
+  "websitePrivacy": {
+    "title": "ウェブサイトのプライバシーとアクセス集計",
+    "lead": "player0.devのアクセス集計についてご案内します。",
+    "description": "Player Zeroの企業ウェブサイトにおけるプライバシーとアクセス集計について。",
+    "references": "サービス提供元の情報",
+    "contact": "ウェブサイトについてのお問い合わせ"
   }
 }

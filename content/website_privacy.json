@@ -1,0 +1,114 @@
+{
+  "content": {
+    "en": {
+      "sections": [
+        {
+          "title": "Scope and purpose",
+          "paragraphs": [
+            "This notice covers the player0.dev company website. The privacy policies for our apps, including Meloom, remain separate.",
+            "We use Cloudflare Web Analytics to understand aggregate page views, referring sites, countries and popular pages, and to improve this website. Counts describe page loads and visits; they are not a verified count of unique people."
+          ]
+        },
+        {
+          "title": "How analytics works",
+          "paragraphs": [
+            "Cloudflare Web Analytics does not use cookies or localStorage to track visitors and does not build visitor profiles. Query strings, including UTM parameters, are not collected for these statistics.",
+            "The website may use localStorage to remember your language and appearance choices. Those preferences are separate from analytics and are not visitor tracking identifiers."
+          ]
+        },
+        {
+          "title": "Access to statistics",
+          "paragraphs": [
+            "We view the aggregate statistics in our Cloudflare account dashboard, which requires Cloudflare login and account permissions. We do not publish a public statistics dashboard, API or measured datasets on this website.",
+            "The /stats shortcut only redirects to the Cloudflare dashboard. Access is controlled by Cloudflare authentication and account permissions, not by keeping the shortcut secret."
+          ]
+        }
+      ]
+    },
+    "ko": {
+      "sections": [
+        {
+          "title": "적용 범위와 목적",
+          "paragraphs": [
+            "이 안내는 player0.dev 회사 웹사이트에 적용됩니다. Meloom을 포함한 앱의 개인정보처리방침은 별도 문서로 유지됩니다.",
+            "웹사이트 개선을 위해 Cloudflare Web Analytics로 페이지 조회수, 유입 사이트, 국가, 인기 페이지를 집계합니다. 집계 수치는 페이지 로드와 방문을 나타내며 실제 고유 개인 수를 확인한 값은 아닙니다."
+          ]
+        },
+        {
+          "title": "집계 방법",
+          "paragraphs": [
+            "Cloudflare Web Analytics는 방문자 추적을 위해 쿠키나 localStorage를 사용하지 않으며 방문자 프로필을 만들지 않습니다. 이 통계에는 UTM을 포함한 쿼리 문자열을 수집하지 않습니다.",
+            "웹사이트는 선택한 언어와 화면 테마를 기억하기 위해 localStorage를 사용할 수 있습니다. 이 설정은 통계 집계와 별개이며 방문자 추적 식별자로 사용하지 않습니다."
+          ]
+        },
+        {
+          "title": "통계 열람",
+          "paragraphs": [
+            "집계 통계는 Cloudflare 로그인과 계정 권한이 필요한 당사 Cloudflare 대시보드에서 열람합니다. 이 웹사이트에는 공개 통계 대시보드, API 또는 측정 데이터셋을 게시하지 않습니다.",
+            "/stats는 Cloudflare 대시보드로 이동하는 바로가기입니다. 주소를 숨겨 보호하는 방식이 아니라 Cloudflare 인증과 계정 권한으로 접근이 제한됩니다."
+          ]
+        }
+      ]
+    },
+    "ja": {
+      "sections": [
+        {
+          "title": "対象と目的",
+          "paragraphs": [
+            "この案内は企業ウェブサイトplayer0.devを対象とします。Meloomを含む各アプリのプライバシーポリシーは別の文書です。",
+            "ウェブサイトの改善のため、Cloudflare Web Analyticsでページビュー、参照元サイト、国、よく閲覧されるページを集計します。数値はページの読み込みや訪問を示すもので、実際の個人を一人ずつ確認した人数ではありません。"
+          ]
+        },
+        {
+          "title": "集計の仕組み",
+          "paragraphs": [
+            "Cloudflare Web Analyticsは訪問者の追跡にCookieやlocalStorageを使用せず、訪問者のプロファイルを作成しません。この統計ではUTMを含むクエリ文字列を収集しません。",
+            "ウェブサイトは、選んだ言語や表示テーマを記憶するためにlocalStorageを使うことがあります。この設定はアクセス集計とは別で、訪問者追跡用の識別子として使用しません。"
+          ]
+        },
+        {
+          "title": "統計へのアクセス",
+          "paragraphs": [
+            "集計統計は、Cloudflareへのログインとアカウント権限が必要な当社のCloudflareダッシュボードで閲覧します。このウェブサイトに公開の統計ダッシュボード、API、測定データセットは掲載しません。",
+            "/statsはCloudflareダッシュボードへのショートカットです。URLを秘密にするのではなく、Cloudflare認証とアカウント権限でアクセスが制限されます。"
+          ]
+        }
+      ]
+    },
+    "zh-TW": {
+      "sections": [
+        {
+          "title": "適用範圍與目的",
+          "paragraphs": [
+            "本說明適用於player0.dev公司網站。包括Meloom在內的應用程式隱私政策仍為獨立文件。",
+            "我們使用Cloudflare Web Analytics彙整頁面瀏覽次數、來源網站、國家與熱門頁面，以改善本網站。數值代表頁面載入與造訪，不是經核實的實際不重複個人人數。"
+          ]
+        },
+        {
+          "title": "統計方式",
+          "paragraphs": [
+            "Cloudflare Web Analytics不使用Cookie或localStorage追蹤訪客，也不建立訪客個人檔案。這些統計不收集包含UTM在內的查詢字串。",
+            "網站可能使用localStorage記住您選擇的語言與顯示主題。這些偏好設定與統計分開，不作為訪客追蹤識別碼。"
+          ]
+        },
+        {
+          "title": "統計存取",
+          "paragraphs": [
+            "彙總統計僅在需要Cloudflare登入與帳戶權限的本公司Cloudflare儀表板中查看。本網站不公開統計儀表板、API或量測資料集。",
+            "/stats只是前往Cloudflare儀表板的捷徑。存取限制由Cloudflare驗證與帳戶權限負責，而不是靠隱藏網址。"
+          ]
+        }
+      ]
+    }
+  },
+  "references": [
+    {
+      "label": "Cloudflare Web Analytics",
+      "url": "https://developers.cloudflare.com/web-analytics/about/"
+    },
+    {
+      "label": "Cloudflare Web Analytics FAQs",
+      "url": "https://developers.cloudflare.com/web-analytics/faq/"
+    }
+  ]
+}

@@ -53,6 +53,7 @@ class Site:
         }
         self.products = load_registry(CONTENT / "products")
         self.playables = load_registry(CONTENT / "play")
+        self.website_privacy = load_json(CONTENT / "website_privacy.json")
 
     def t(self, lang: str, dotted: str, **fmt) -> str:
         """Look up a chrome string, falling back to the default language."""
@@ -349,6 +350,19 @@ def build_404(site: Site, lang: str | None = None) -> str:
 
 
 # ----------------------------------------------------------------- collecting
+def stats_redirects(site: Site) -> list[tuple[str, str, int]]:
+    """Only the generic authenticated account selector is safe for public config."""
+    analytics = site.config.get("analytics") or {}
+    target = analytics.get("dashboardUrl") if isinstance(analytics, dict) else None
+    # Exact allowlist also rejects other hosts, HTTP, credentials and control
+    # characters. Never expose an account ID or siteTag in the public shortcut.
+    if target != "https://dash.cloudflare.com/?to=/:account/web-analytics":
+        return []
+    # Encode the query value so Pages does not interpret :account as a route placeholder.
+    destination = "https://dash.cloudflare.com/?to=%2F%3Aaccount%2Fweb-analytics"
+    return [("/stats", destination, 302), ("/stats/", destination, 302)]
+
+
 def build_all(site: Site) -> dict[str, str]:
     """Every generated text file, keyed by its path inside dist/."""
     pages: dict[str, str] = {}
@@ -364,6 +378,7 @@ def build_all(site: Site) -> dict[str, str]:
         put(site.url(lang, "support"), presentation.support(site, lang, shell))
         put(site.url(lang, "play"), build_play_index(site, lang))
         put(site.url(lang, "legal"), build_legal_index(site, lang))
+        put(site.url(lang, "website-privacy"), presentation.website_privacy(site, lang, shell))
         for product in site.products:
             put(site.url(lang, "products", product["slug"]),
                 build_product_detail(site, product, lang))
@@ -381,8 +396,10 @@ def build_all(site: Site) -> dict[str, str]:
     for lang in site.languages:
         pages[site.url(lang).lstrip("/") + "404.html"] = build_404(site, lang)
 
-    redirects = "\n".join(f"{src}  {dst}  {code}"
-                          for src, dst, code in site.config.get("redirects", []))
+    routes = [entry for entry in site.config.get("redirects", [])
+              if entry[0] not in {"/stats", "/stats/"}]
+    routes.extend(stats_redirects(site))
+    redirects = "\n".join(f"{src}  {dst}  {code}" for src, dst, code in routes)
     pages["_redirects"] = redirects + "\n" if redirects else ""
 
     urls = sorted({("/" + k[: -len("index.html")]).replace("//", "/")
@@ -393,7 +410,7 @@ def build_all(site: Site) -> dict[str, str]:
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{domain}{u}</loc></url>\n" for u in urls)
         + "</urlset>\n")
-    pages["robots.txt"] = f"User-agent: *\nAllow: /\nSitemap: {domain}/sitemap.xml\n"
+    pages["robots.txt"] = f"User-agent: *\nAllow: /\nDisallow: /stats\nSitemap: {domain}/sitemap.xml\n"
     return pages
 
 
