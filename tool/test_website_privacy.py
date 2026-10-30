@@ -47,6 +47,16 @@ class WebsitePrivacyTests(unittest.TestCase):
             if src not in {"/stats", "/stats/"}:
                 self.assertIn(f"{src}  {dst}  {code}", pages["_redirects"])
 
+    def test_opt_out_preferences_are_explicit_and_not_indexed(self):
+        pages = build.build_all(self.site)
+        page = pages['analytics-preferences/index.html']
+        self.assertIn('noindex, nofollow', page)
+        self.assertIn('/assets/analytics_preferences.js', page)
+        self.assertIn('id="analytics-exclude"', page)
+        self.assertNotIn('/analytics-preferences', pages['sitemap.xml'])
+        self.assertIn('Disallow: /analytics-preferences', pages['robots.txt'])
+        self.assertIn('Cache-Control: no-store', pages['_headers'])
+
     def test_missing_or_invalid_dashboard_never_creates_an_open_redirect(self):
         invalid = [None, "", {}, [], "https://dash.cloudflare.com/", "http://dash.cloudflare.com/?to=/:account/web-analytics",
                    "https://dash.cloudflare.com.evil.example/?to=/:account/web-analytics",
