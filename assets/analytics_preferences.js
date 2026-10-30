@@ -10,9 +10,11 @@
   function show() {
     const off = excluded();
     status.textContent = off
-      ? '이 브라우저는 방문 집계에서 제외됩니다. 새로 여는 페이지부터 적용됩니다.'
-      : '이 브라우저에는 집계 제외 설정이 없습니다.';
+      ? '집계 제외 적용 중 · 이 브라우저에서는 다시 설정할 필요가 없습니다.'
+      : '집계 제외 미적용 · 이 브라우저를 제외하려면 아래 버튼을 눌러 주세요.';
+    exclude.hidden = off;
     exclude.disabled = off;
+    include.hidden = !off;
     include.disabled = !off;
     return off;
   }
@@ -28,5 +30,12 @@
   }
   exclude.addEventListener('click', () => set(true));
   include.addEventListener('click', () => set(false));
-  try { show(); } catch (_) { fail(); }
+  function refresh() {
+    try { show(); } catch (_) {
+      exclude.disabled = true; include.disabled = true; fail();
+    }
+  }
+  window.addEventListener('pageshow', refresh);
+  window.addEventListener('focus', refresh);
+  refresh();
 })();
