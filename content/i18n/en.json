@@ -96,7 +96,8 @@
     "back": "Go to the home page"
   },
   "footer": {
-    "contact": "Contact"
+    "contact": "Contact",
+    "websitePrivacy": "Website privacy"
   },
   "ui": {
     "skipToContent": "Skip to content",
@@ -159,5 +160,12 @@
       "A screenshot, if you can take one"
     ],
     "docInLanguage": "{doc} ({language})"
+  },
+  "websitePrivacy": {
+    "title": "Website privacy and analytics",
+    "lead": "How player0.dev uses aggregate website statistics.",
+    "description": "Privacy and aggregate analytics on the Player Zero company website.",
+    "references": "Provider information",
+    "contact": "Questions about this website"
   }
 }

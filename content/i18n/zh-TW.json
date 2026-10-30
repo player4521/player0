@@ -96,7 +96,8 @@
     "back": "返回首頁"
   },
   "footer": {
-    "contact": "聯絡我們"
+    "contact": "聯絡我們",
+    "websitePrivacy": "網站隱私"
   },
   "ui": {
     "skipToContent": "跳至主要內容",
@@ -159,5 +160,12 @@
       "如果可以，請附上螢幕截圖"
     ],
     "docInLanguage": "{doc}（{language}）"
+  },
+  "websitePrivacy": {
+    "title": "網站隱私與流量統計",
+    "lead": "說明player0.dev如何彙整網站使用統計。",
+    "description": "Player Zero公司網站的隱私與彙總流量統計說明。",
+    "references": "服務供應商資訊",
+    "contact": "網站相關詢問"
   }
 }

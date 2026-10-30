@@ -1,7 +1,9 @@
 # player0.dev
 
-Player Zero product hub. Static files only - no framework, no server, no database,
-no analytics, no external fonts or CDNs. Python standard library builds it.
+Player Zero product hub. Static files only - no framework, application server,
+database or public metrics endpoint. Python standard library builds it.
+Fonts and product media are local. Cloudflare can inject its Web Analytics beacon
+at the deployment platform; the static generator does not add a second beacon.
 
 ## Commands
 
@@ -119,12 +121,42 @@ Cloudflare Pages project `player0`, custom domain already attached.
 - Framework preset: **None**
 - Build command: **`python tool/build.py`**
 - Build output directory: **`dist`**
-- No Functions, no Workers, no Web Analytics.
+- No Functions or Workers. Cloudflare Web Analytics is configured on the deployment platform.
 
 The Pages project is connected to `player4521/player0`. Production deploys
 automatically from `main`; the working branch gets preview deployments. The
 build command is `python tool/build.py` and the output directory is `dist`.
 
+
+## Website privacy and private analytics
+
+The company website notice is `content/website_privacy.json`, separate from the
+Meloom app policies. It is built at `/website-privacy/` and each site language's
+prefixed route, with a localized footer link.
+
+Cloudflare Web Analytics is enabled through the Cloudflare deployment platform's
+automatic injection. Do not add a manual beacon to templates or generated HTML:
+multiple copies can double-count measurements. There are no public analytics
+exports, metrics files, dashboard HTML or metrics APIs in this repository/site.
+Aggregate statistics are viewed in the Cloudflare account dashboard after login;
+counts are not a verified number of individual people.
+
+When `content/site.json` has `analytics.dashboardUrl`, the builder accepts
+only the official generic account-selector URL
+`https://dash.cloudflare.com/?to=/:account/web-analytics` and generates `/stats`
+and `/stats/` HTTP 302 redirects. The destination query is URL-encoded so Pages
+does not interpret `:account` as a route placeholder. Other or missing URLs
+generate neither shortcut.
+Account-specific dashboard URLs, account IDs and siteTag values stay out of public
+configuration; the signed-in owner selects the site inside Cloudflare.
+The shortcut contains no analytics data and does not grant access: Cloudflare
+login and account permissions protect the dashboard. It is not password hiding
+or security through a secret URL. `/stats` is excluded from robots and the sitemap.
+Do not put account credentials, private dashboard exports or access tokens in
+site content. The analytics dashboard URL itself is a public redirect destination.
+
+Run `python tool/test_website_privacy.py` after changing the notice or shortcut.
+Keep the existing build, link and language-navigation checks as well.
 
 ## Product presentation
 

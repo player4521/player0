@@ -96,7 +96,8 @@
     "back": "홈으로 가기"
   },
   "footer": {
-    "contact": "문의"
+    "contact": "문의",
+    "websitePrivacy": "웹사이트 개인정보"
   },
   "ui": {
     "skipToContent": "본문으로 이동",
@@ -159,5 +160,12 @@
       "가능하다면 화면 캡처"
     ],
     "docInLanguage": "{doc} ({language})"
+  },
+  "websitePrivacy": {
+    "title": "웹사이트 개인정보 및 집계 안내",
+    "lead": "player0.dev에서 웹사이트 이용 통계를 집계하는 방법을 안내합니다.",
+    "description": "Player Zero 회사 웹사이트의 개인정보 및 이용 통계 집계 안내.",
+    "references": "제공업체 안내",
+    "contact": "웹사이트 관련 문의"
   }
 }

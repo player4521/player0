@@ -248,7 +248,7 @@ def shell(site, *, lang, path, title, description, body, alternates=None, main_c
   <footer class="site-footer">
     <div class="footer-inner">
       <p class="footer-copy">© 2026 Player Zero</p>
-      <nav class="footer-links" aria-label="{e(ui(site, lang, 'footerNav'))}"><a href="{site.url(lang, 'products')}">{e(site.t(lang, 'nav.products'))}</a><a href="{site.url(lang, 'about')}">{e(site.t(lang, 'nav.about'))}</a><a href="{site.url(lang, 'support')}">{e(site.t(lang, 'nav.contact'))}</a><a href="{site.url(lang, 'legal')}">{e(site.t(lang, 'legal.title'))}</a>{footer_social(site, lang)}</nav>
+      <nav class="footer-links" aria-label="{e(ui(site, lang, 'footerNav'))}"><a href="{site.url(lang, 'products')}">{e(site.t(lang, 'nav.products'))}</a><a href="{site.url(lang, 'about')}">{e(site.t(lang, 'nav.about'))}</a><a href="{site.url(lang, 'support')}">{e(site.t(lang, 'nav.contact'))}</a><a href="{site.url(lang, 'legal')}">{e(site.t(lang, 'legal.title'))}</a><a href="{site.url(lang, 'website-privacy')}">{e(site.t(lang, 'footer.websitePrivacy'))}</a>{footer_social(site, lang)}</nav>
     </div>
   </footer>
   <script>(()=>{{const s=document.getElementById('appearance');const r=document.documentElement;s.value=r.dataset.theme||'system';s.addEventListener('change',()=>{{r.dataset.theme=s.value;try{{if(s.value==='system')localStorage.removeItem('player0-theme');else localStorage.setItem('player0-theme',s.value);}}catch{{}}}});document.querySelectorAll('.social-menu,.lang-menu').forEach(m=>{{m.addEventListener('keydown',ev=>{{if(ev.key==='Escape'&&m.open){{m.open=false;m.querySelector('summary').focus();}}}});document.addEventListener('click',ev=>{{if(m.open&&!m.contains(ev.target))m.open=false;}});}});}})();</script>
@@ -610,6 +610,24 @@ def detail(site, product, lang, shell, content, legal_docs):
       <div class="wrap">{''.join(blocks)}</div>
     </article>'''
     return shell(site, lang=lang, path=site.url(lang, 'products', slug), title=f'{name} | Player Zero', description=copy.get('tagline', name), body=body, alternates={l: site.url(l, 'products', slug) for l in site.languages}, main_class='page-wide page-product')
+
+
+def website_privacy(site, lang, shell):
+    """Company website notice, separate from every product's app policy."""
+    localized = site.website_privacy['content']
+    copy = localized.get(lang) or localized[site.default_lang]
+    sections = ''.join(f'<section><h2>{e(item["title"])}</h2>{paragraphs(item["paragraphs"])}</section>'
+                       for item in copy['sections'])
+    references = ''.join(f'<li><a href="{e(item["url"])}">{e(item["label"])}</a></li>'
+                         for item in site.website_privacy.get('references', []))
+    email = site.config['contact']
+    body = f'''<header class="page-intro"><h1>{e(site.t(lang, 'websitePrivacy.title'))}</h1><p class="lead">{e(site.t(lang, 'websitePrivacy.lead'))}</p></header>
+      <div class="prose">{sections}<section><h2>{e(site.t(lang, 'websitePrivacy.references'))}</h2><ul>{references}</ul></section>
+      <section><h2>{e(site.t(lang, 'websitePrivacy.contact'))}</h2><p><a href="mailto:{e(email)}">{e(email)}</a></p></section></div>'''
+    return shell(site, lang=lang, path=site.url(lang, 'website-privacy'),
+                 title=site.t(lang, 'websitePrivacy.title') + ' | Player Zero',
+                 description=site.t(lang, 'websitePrivacy.description'), body=body,
+                 alternates={code: site.url(code, 'website-privacy') for code in site.languages})
 
 
 # ------------------------------------------------------- about & support

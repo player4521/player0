@@ -14,7 +14,7 @@
     "ja",
     "zh-TW"
   ],
-  "_comment_analytics": "No analytics, no tracking, no external fonts or CDNs. Turning any of that on changes the privacy policy.",
+  "_comment_analytics": "Cloudflare Web Analytics is enabled in Pages and will be injected by Cloudflare on the next deployment. No manual beacon. The stats shortcut uses the official account-neutral login URL; analytics data, account IDs, site tags and account credentials are not generated into the static site.",
   "redirects": [
     [
       "/privacy/",
@@ -46,5 +46,10 @@
       "name": "TikTok",
       "url": "https://www.tiktok.com/@player0dev"
     }
-  ]
+  ],
+  "analytics": {
+    "provider": "cloudflare-web-analytics",
+    "injection": "cloudflare-pages",
+    "dashboardUrl": "https://dash.cloudflare.com/?to=/:account/web-analytics"
+  }
 }
