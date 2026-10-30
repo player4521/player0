@@ -262,6 +262,19 @@ def button(href, label, secondary=False):
     return f'<a class="{cls}" href="{e(href)}">{e(label)}</a>'
 
 
+def product_link_label(site, lang, link):
+    """A product link's localized label, then the default language or legacy label."""
+    labels = link.get('labels') or {}
+    return (labels.get(lang) or labels.get(site.default_lang) or link.get('label')
+            or link.get('platform') or ui(site, lang, 'link'))
+
+
+def primary_product_link(product):
+    """Only an explicitly registered primary link becomes the store action."""
+    return next((link for link in product.get('links', [])
+                 if link.get('primary') and link.get('url')), None)
+
+
 def eyebrow(label, number=None):
     prefix = f'<span class="section-number">{e(number)}</span>' if number else ''
     return f'<p class="eyebrow">{prefix}{e(label)}</p>'
@@ -281,14 +294,15 @@ def facts(site, lang, product):
     rows = [(site.t(lang, 'detail.platforms'), platforms(site, lang, product)),
             (site.t(lang, 'detail.status'), status(site, lang, product))]
     if product.get('status') != 'released':
-        rows.append(release_fact(lang, site))
+        rows.append(release_fact(lang, site, product))
     return '<dl class="facts">' + ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in rows if v) + '</dl>'
 
 
-def release_fact(lang, site=None):
+def release_fact(lang, site=None, product=None):
     if site is None:
         return text(lang, 'Release', '출시일'), text(lang, 'Date to be announced', '미정')
-    return ui(site, lang, 'release'), ui(site, lang, 'releaseTbd')
+    release = copy_for(site, product, lang).get('releaseWindow') if product else None
+    return ui(site, lang, 'release'), release or ui(site, lang, 'releaseTbd')
 
 
 def channels(site, lang):
@@ -325,18 +339,22 @@ def feature_stage(site, product, lang, copy):
         rows.append((modes_label(site, lang, product), ' · '.join(mode['title'] for mode in modes if mode.get('title'))))
     rows.append((site.t(lang, 'detail.platforms'), platforms(site, lang, product)))
     if product.get('status') != 'released':
-        rows.append(release_fact(lang, site))
+        rows.append(release_fact(lang, site, product))
     fact_rows = ''.join(f'<div><dt>{e(k)}</dt><dd>{e(v)}</dd></div>' for k, v in rows if v)
     lede, tagline = summary(copy), copy.get('tagline', '')
     lines = (f'<p class="feature-summary">{e(lede)}</p>' if lede else '') + (f'<p class="feature-tagline">{e(tagline)}</p>' if tagline and tagline != lede else '')
     figure = (f'<figure class="feature-art"><img src="{e(art)}" alt="{e(alt or name)}" width="{size[0]}" height="{size[1]}" fetchpriority="high"></figure>' if art else '')
+    primary = primary_product_link(product)
+    actions = button(detail, ui(site, lang, 'viewFeatured', name=name), bool(primary))
+    if primary:
+        actions = f'<div class="actions">{button(primary["url"], product_link_label(site, lang, primary))}{actions}</div>'
     return f'''<section class="feature tone tone-{e(slug)}{'' if art else ' feature-plain'}" aria-labelledby="feature-{e(slug)}">
       <div class="feature-copy">
         <p class="feature-kicker">{e(kicker)}</p>
         <h2 class="feature-name" id="feature-{e(slug)}">{e(name)}</h2>
         {lines}
         {f'<dl class="feature-facts">{fact_rows}</dl>' if fact_rows else ''}
-        {button(detail, ui(site, lang, 'viewFeatured', name=name))}
+        {actions}
       </div>
       {figure}
     </section>'''
@@ -456,7 +474,10 @@ def project_row(site, product, lang, content):
     if copy.get('faq'):
         links.append((ui(site, lang, 'faqShort'), detail + '#faq'))
     links += policy_docs(site, product, lang)
-    links += [(link.get('label', link.get('platform', ui(site, lang, 'link'))), link['url']) for link in product.get('links', [])]
+    primary = primary_product_link(product)
+    links += [(product_link_label(site, lang, link), link['url'])
+              for link in product.get('links', []) if link is not primary]
+    primary_action = button(primary['url'], product_link_label(site, lang, primary)) if primary else ''
     link_html = ''.join(f'<a class="text-link" href="{e(href)}">{e(label)}</a>' for label, href in links)
     return f'''<article class="catalog-item catalog-{e(slug)}">
       <a class="catalog-art" href="{detail}" tabindex="-1">{media}</a>
@@ -466,7 +487,7 @@ def project_row(site, product, lang, content):
         <p class="catalog-tagline">{e(copy.get('tagline', ''))}</p>
         {paragraphs(copy.get('description', [])[:2])}
         {facts(site, lang, product)}
-        <div class="actions">{button(detail, ui(site, lang, 'viewProduct', name=name))}{link_html}</div>
+        <div class="actions">{primary_action}{button(detail, ui(site, lang, 'viewProduct', name=name), bool(primary))}{link_html}</div>
       </div>
     </article>'''
 
@@ -505,15 +526,17 @@ def detail(site, product, lang, shell, content, legal_docs):
     pictured = bool(game and modes and len(shots) == len(modes))
     video = video_for(product, lang)
 
-    actions = []
+    primary = primary_product_link(product)
+    actions = [button(primary['url'], product_link_label(site, lang, primary))] if primary else []
     if steps:
-        actions.append(button('#how-to', how))
+        actions.append(button('#how-to', how, bool(actions)))
     if video:
         actions.append(button('#gameplay', video_text(site, lang, product, 'watch'), bool(actions)))
     if product.get('overviewVideo'):
         actions.append(button('#overview-video', copy.get('overviewVideo', {}).get('link') or video_text(site, lang, product, 'watch'), True))
     actions += [button(href, label, True) for label, href in docs[:1]]
-    actions += [button(link['url'], link.get('label', link.get('platform', ui(site, lang, 'link'))), True) for link in product.get('links', [])]
+    actions += [button(link['url'], product_link_label(site, lang, link), True)
+                for link in product.get('links', []) if link is not primary]
     notice = f'<p class="notice">{e(site.t(lang, "detail.fallbackNotice", language=language_label(site, lang, fallback)))}</p>' if fallback else ''
 
     media = ''
