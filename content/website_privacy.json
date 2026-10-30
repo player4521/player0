@@ -13,7 +13,8 @@
           "title": "How analytics works",
           "paragraphs": [
             "Cloudflare Web Analytics does not use cookies or localStorage to track visitors and does not build visitor profiles. Query strings, including UTM parameters, are not collected for these statistics.",
-            "The website may use localStorage to remember your language and appearance choices. Those preferences are separate from analytics and are not visitor tracking identifiers."
+            "The website may use localStorage to remember your language and appearance choices. Those preferences are separate from analytics and are not visitor tracking identifiers.",
+            "If you choose to exclude this browser from analytics, we store only that preference in a secure, first-party cookie for up to one year. It contains no individual visitor identifier. The preference applies to future page loads in this browser and can be removed on the analytics preferences page."
           ]
         },
         {
@@ -38,7 +39,8 @@
           "title": "집계 방법",
           "paragraphs": [
             "Cloudflare Web Analytics는 방문자 추적을 위해 쿠키나 localStorage를 사용하지 않으며 방문자 프로필을 만들지 않습니다. 이 통계에는 UTM을 포함한 쿼리 문자열을 수집하지 않습니다.",
-            "웹사이트는 선택한 언어와 화면 테마를 기억하기 위해 localStorage를 사용할 수 있습니다. 이 설정은 통계 집계와 별개이며 방문자 추적 식별자로 사용하지 않습니다."
+            "웹사이트는 선택한 언어와 화면 테마를 기억하기 위해 localStorage를 사용할 수 있습니다. 이 설정은 통계 집계와 별개이며 방문자 추적 식별자로 사용하지 않습니다.",
+            "방문 집계 제외를 선택하면 해당 여부만 담은 보안 쿠키를 이 사이트에 최대 1년 동안 저장합니다. 개인별 방문자 식별번호는 포함하지 않습니다. 이 브라우저에서 앞으로 여는 페이지에 적용되며 방문 집계 설정 페이지에서 해제할 수 있습니다."
           ]
         },
         {
@@ -63,7 +65,8 @@
           "title": "集計の仕組み",
           "paragraphs": [
             "Cloudflare Web Analyticsは訪問者の追跡にCookieやlocalStorageを使用せず、訪問者のプロファイルを作成しません。この統計ではUTMを含むクエリ文字列を収集しません。",
-            "ウェブサイトは、選んだ言語や表示テーマを記憶するためにlocalStorageを使うことがあります。この設定はアクセス集計とは別で、訪問者追跡用の識別子として使用しません。"
+            "ウェブサイトは、選んだ言語や表示テーマを記憶するためにlocalStorageを使うことがあります。この設定はアクセス集計とは別で、訪問者追跡用の識別子として使用しません。",
+            "このブラウザーをアクセス集計から除外することを選ぶと、その設定だけをセキュアなファーストパーティーCookieに最長1年間保存します。個人ごとの訪問者識別番号は含みません。以後このブラウザーで開くページに適用され、アクセス集計の設定ページで解除できます。"
           ]
         },
         {
@@ -88,7 +91,8 @@
           "title": "統計方式",
           "paragraphs": [
             "Cloudflare Web Analytics不使用Cookie或localStorage追蹤訪客，也不建立訪客個人檔案。這些統計不收集包含UTM在內的查詢字串。",
-            "網站可能使用localStorage記住您選擇的語言與顯示主題。這些偏好設定與統計分開，不作為訪客追蹤識別碼。"
+            "網站可能使用localStorage記住您選擇的語言與顯示主題。這些偏好設定與統計分開，不作為訪客追蹤識別碼。",
+            "若選擇將此瀏覽器排除於統計之外，我們只會以安全的第一方Cookie儲存該偏好，最長一年，不含個別訪客識別碼。設定適用於此瀏覽器之後載入的頁面，並可在造訪統計設定頁面取消。"
           ]
         },
         {

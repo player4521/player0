@@ -184,3 +184,24 @@ targets, media files, document language, canonical URLs and deployment size.
 
 Website artwork and gameplay are web derivatives of existing product media.
 The source repositories and original approved files remain unchanged.
+
+## Internal browser visits
+
+`/analytics-preferences/` is a noindex, non-sitemap utility page with explicit
+per-browser controls. It stores only `__Host-player0_analytics_opt_out=1` for up
+to one year (Secure, host-only, Path=/, SameSite=Lax). It is an opt-out flag,
+not a unique visitor ID. Nothing is stored merely by opening the page.
+
+The production zone's Configuration Rule disables RUM only on this preferences
+route or when the opt-out cookie is present, with the hostname restricted to
+player0.dev. Keep normal unmarked visitors measured. This is an account-side
+setting: deploying static files alone does not configure Cloudflare. No manual
+beacon is added and the original automatic collector/history stay intact.
+The flag affects subsequent page loads, not already-open pages or past data.
+Activate it once in each working browser and reapply after clearing cookies,
+using another browser profile, or expiry. This excludes Web Analytics, not
+Cloudflare's operational edge-request counts.
+
+Validate with `node --test tool/test_analytics_preferences.js`, the normal
+build/link/language/privacy checks, then confirm that a marked browser gets no
+injected beacon while an unmarked request still gets exactly one.

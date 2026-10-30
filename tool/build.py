@@ -20,6 +20,7 @@ import re
 import shutil
 import sys
 import presentation
+import analytics_preferences
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -396,6 +397,9 @@ def build_all(site: Site) -> dict[str, str]:
     for lang in site.languages:
         pages[site.url(lang).lstrip("/") + "404.html"] = build_404(site, lang)
 
+    put("/analytics-preferences/", analytics_preferences.render(site, shell))
+    pages["_headers"] = "/analytics-preferences/*\n  Cache-Control: no-store\n  X-Robots-Tag: noindex, nofollow\n"
+
     routes = [entry for entry in site.config.get("redirects", [])
               if entry[0] not in {"/stats", "/stats/"}]
     routes.extend(stats_redirects(site))
@@ -403,14 +407,14 @@ def build_all(site: Site) -> dict[str, str]:
     pages["_redirects"] = redirects + "\n" if redirects else ""
 
     urls = sorted({("/" + k[: -len("index.html")]).replace("//", "/")
-                   for k in pages if k.endswith("index.html")})
+                   for k in pages if k.endswith("index.html") and not k.startswith("analytics-preferences/")})
     domain = site.config["domain"].rstrip("/")
     pages["sitemap.xml"] = (
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f"  <url><loc>{domain}{u}</loc></url>\n" for u in urls)
         + "</urlset>\n")
-    pages["robots.txt"] = f"User-agent: *\nAllow: /\nDisallow: /stats\nSitemap: {domain}/sitemap.xml\n"
+    pages["robots.txt"] = f"User-agent: *\nAllow: /\nDisallow: /stats\nDisallow: /analytics-preferences\nSitemap: {domain}/sitemap.xml\n"
     return pages
 
 
