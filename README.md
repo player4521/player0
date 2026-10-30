@@ -2,8 +2,8 @@
 
 Player Zero product hub. Static files only - no framework, application server,
 database or public metrics endpoint. Python standard library builds it.
-Fonts and product media are local. Cloudflare can inject its Web Analytics beacon
-at the deployment platform; the static generator does not add a second beacon.
+Fonts and product media are local. Cloudflare injects its Web Analytics beacon
+through the existing player0.dev zone setup; the static generator does not add a second beacon.
 
 ## Commands
 
@@ -121,7 +121,8 @@ Cloudflare Pages project `player0`, custom domain already attached.
 - Framework preset: **None**
 - Build command: **`python tool/build.py`**
 - Build output directory: **`dist`**
-- No Functions or Workers. Cloudflare Web Analytics is configured on the deployment platform.
+- No Functions or Workers. Web Analytics uses the existing automatic setup on the
+  `player0.dev` zone. Keep the separate Pages-project analytics setting disabled.
 
 The Pages project is connected to `player4521/player0`. Production deploys
 automatically from `main`; the working branch gets preview deployments. The
@@ -134,8 +135,10 @@ The company website notice is `content/website_privacy.json`, separate from the
 Meloom app policies. It is built at `/website-privacy/` and each site language's
 prefixed route, with a localized footer link.
 
-Cloudflare Web Analytics is enabled through the Cloudflare deployment platform's
-automatic injection. Do not add a manual beacon to templates or generated HTML:
+Cloudflare Web Analytics uses the existing automatic injection for the
+`player0.dev` zone, preserving its collected history. The separate Pages-project
+collector is disabled; do not enable a second collector for the same site.
+Do not add a manual beacon to templates or generated HTML:
 multiple copies can double-count measurements. There are no public analytics
 exports, metrics files, dashboard HTML or metrics APIs in this repository/site.
 Aggregate statistics are viewed in the Cloudflare account dashboard after login;
