@@ -92,7 +92,7 @@
       "faq": [
         {
           "question": "Which platforms is KEYCERTO being developed for?",
-          "answer": "KEYCERTO is in development for Windows PC on Steam, with release planned for November. Check the Steam page for the latest release updates."
+          "answer": "KEYCERTO is in development for Windows PC on Steam, with release planned for December 15, 2026 (Pacific Time). Check the Steam page for the latest release updates."
         },
         {
           "question": "Can I play my own music?",
@@ -107,7 +107,7 @@
           "answer": "Points you earn by playing collect keyboard parts such as housings and keycaps. Completing goals unlocks decorations for your stage."
         }
       ],
-      "releaseWindow": "Planned for November"
+      "releaseWindow": "Planned for December 15, 2026 (Pacific Time)"
     },
     "ko": {
       "name": "KEYCERTO",
@@ -171,7 +171,7 @@
       "faq": [
         {
           "question": "어떤 플랫폼으로 개발 중인가요?",
-          "answer": "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중이며, 11월 출시 예정입니다. 최신 출시 소식은 Steam 페이지에서 확인해 주세요."
+          "answer": "KEYCERTO는 Steam을 통한 Windows PC용으로 개발 중이며, 2026년 12월 16일(한국 시간) 출시 예정입니다. 최신 출시 소식은 Steam 페이지에서 확인해 주세요."
         },
         {
           "question": "제가 만든 곡으로 플레이할 수 있나요?",
@@ -186,7 +186,7 @@
           "answer": "연주로 얻은 포인트로 하우징, 키캡 같은 키보드 부품을 모을 수 있습니다. 목표를 달성하면 무대를 꾸밀 소품이 열립니다."
         }
       ],
-      "releaseWindow": "11월 출시 예정"
+      "releaseWindow": "2026년 12월 16일(한국 시간) 출시 예정"
     },
     "ja": {
       "name": "KEYCERTO",
@@ -250,7 +250,7 @@
       "faq": [
         {
           "question": "KEYCERTOはどのプラットフォーム向けに開発されていますか？",
-          "answer": "KEYCERTOは、Steamで配信するWindows PC向けに開発中で、11月発売を予定しています。最新の発売情報はSteamページでご確認ください。"
+          "answer": "KEYCERTOは、Steamで配信するWindows PC向けに開発中で、2026年12月16日（日本時間）の発売を予定しています。最新の発売情報はSteamページでご確認ください。"
         },
         {
           "question": "自分の音楽で遊べますか？",
@@ -265,7 +265,7 @@
           "answer": "プレイで獲得したポイントで、ハウジングやキーキャップなどのキーボードパーツを集められます。目標を達成すると、ステージの飾りが解放されます。"
         }
       ],
-      "releaseWindow": "11月発売予定"
+      "releaseWindow": "2026年12月16日（日本時間）発売予定"
     },
     "zh-TW": {
       "name": "KEYCERTO",
@@ -329,7 +329,7 @@
       "faq": [
         {
           "question": "KEYCERTO 正在為哪些平台開發？",
-          "answer": "KEYCERTO 正在開發透過 Steam 推出的 Windows PC 版本，預計11月推出。最新推出資訊請見 Steam 頁面。"
+          "answer": "KEYCERTO 正在開發透過 Steam 推出的 Windows PC 版本，預計於2026年12月16日（台灣時間）推出。最新推出資訊請見 Steam 頁面。"
         },
         {
           "question": "可以用自己的音樂遊玩嗎？",
@@ -344,7 +344,7 @@
           "answer": "遊玩賺到的點數可以用來收集外殼、鍵帽等鍵盤零件。完成目標則會解鎖舞台裝飾。"
         }
       ],
-      "releaseWindow": "預計11月推出"
+      "releaseWindow": "預計於2026年12月16日（台灣時間）推出"
     }
   },
   "galleries": {
